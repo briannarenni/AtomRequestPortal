@@ -1,8 +1,15 @@
+:root {
+  --light: #f8f9fa;
+  --dark: #070707;
+  --modal-dark: #0b0e0f;
+}
+
 body {
-  margin: 0;
+  box-sizing: border-box;
+  margin: 2px;
+  padding: 5px 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
