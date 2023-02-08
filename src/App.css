@@ -1,0 +1,13 @@
+.form-note {
+  font-size: .8rem;
+  font-style: italic;
+}
+
+#dash-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dash-card {
+  margin: 2rem;
+}

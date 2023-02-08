@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import './Login.css';
 
 function Login() {
 
@@ -27,7 +26,7 @@ function Login() {
           <Button type="submit" className="w-100">Sign In</Button>
         </Form.Group>
 
-        <p className="text-center">For forgotten passwords, please speak to HR.</p>
+        <p className="text-center form-note">For forgotten passwords, please speak to HR.</p>
       </Form>
     </>
   );

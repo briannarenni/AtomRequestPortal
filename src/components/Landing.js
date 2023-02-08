@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import './Landing.css';
 
 function Landing() {
 
@@ -12,8 +11,8 @@ function Landing() {
 
       <main id="landing-container" className="p-5 d-flex justify-content-center align-content-center">
         <div className="mx-auto">
-          <Button size="lg" className="mx-3">Login to Account</Button>
-          <Button size="lg" className="mx-3">Register Employee</Button>
+          <Button size="lg" className="landing-btn mx-3">Login to Account</Button>
+          <Button size="lg" className="landing-btn mx-3">Register Employee</Button>
         </div>
       </main>
     </>
