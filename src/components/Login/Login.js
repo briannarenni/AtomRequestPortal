@@ -1,35 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, FormLabel } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import '../Login/Login.css';
+import { Form, Button } from 'react-bootstrap';
+import './Login.css';
 
 function Login() {
 
   return (
 
     <Form className="w-50 mx-auto my-3">
-      <h1 className="text-center">User Login</h1>
+      <h1 className="text-center my-4">User Login</h1>
       <Form.Group className="mb-3" controlId="formGroupEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Control type="email" placeholder="Enter email" required />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formGroupPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Enter password" />
+        <Form.Control type="password" placeholder="Enter password" required />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="rememberCheck">
-        <Form.Check label="Remember me" />
+        <Form.Check type="switch" label="Remember Me" />
       </Form.Group>
 
-      <Form.Group className="mb-3">
-        <Button type="submit">Sign in</Button>
+      <Form.Group className="mb-2">
+        <Button type="submit" className="w-100">Sign In</Button>
       </Form.Group>
 
-      <div>
-        <a href="#">Forgot Password?</a>
-      </div>
+      <p className="text-center">For forgotten passwords, please speak to management.</p>
     </Form>
   );
 }
