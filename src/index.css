@@ -1,3 +1,4 @@
+/* Global styles */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
@@ -14,3 +15,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.btn {
+  padding: 10px 20px;
+}
+
+.btn-primary {
+  border-color: dodgerblue;
+  background-color: dodgerblue;
+}
+

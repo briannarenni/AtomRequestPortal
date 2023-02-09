@@ -1,18 +1,21 @@
 import React from 'react';
 import './App.css';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-import ResetPassword from './components/ResetPassword/ResetPassword';
+import Landing from './components/Landing';
+import Login from './components/Login';
+import Register from './components/Register';
+import ResetPassword from './components/ResetPassword';
+import AppHeader from "./components/AppHeader";
+import Dashboard from './components/Dashboard';
 
-
-function App() {
+export default function App() {
   return (
     <div className="App">
-      {/* <Login /> */}
-      {/* <ResetPassword /> */}
-      <Register />
+      <Landing />
+      {/* <AppHeader /> */ }
+      {/* <Dashboard /> */ }
+      {/* <Login /> */ }
+      {/* <ResetPassword /> */ }
+      {/* <Register /> */ }
     </div>
   );
 }
-
-export default App;
