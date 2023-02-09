@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-function Register() {
+export default function Register() {
 
   return (
     <>
@@ -35,4 +35,3 @@ function Register() {
   );
 }
 
-export default Register;

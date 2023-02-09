@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 
-function Dashboard() {
+export default function Dashboard() {
 
   const employeeMenu = {
     'New Request': 'Submit a new reimbursement request',
@@ -17,25 +17,24 @@ function Dashboard() {
     'View Messages': 'View all employee queries and messages'
   };
 
-  const isManager = true;
+  const isManager = false;
   const menu = isManager ? managerMenu : employeeMenu;
 
   return (
     <>
       <h1 className="text-center m-2 p-2">{ isManager ? 'Manager Dashboard' : 'Employee Dashboard' }</h1>
-      <div id="#dash-container" className="row text-center mt-1 mx-auto">
-          { Object.entries(menu).map(([btnText, desc]) => (
-            <Card key={ btnText } className="dash-card col-md-5 p-2" >
-              <Card.Body>
-                <Card.Text className="lead">{ desc }</Card.Text>
-                <Button variant="primary">{ btnText }</Button>
-              </Card.Body>
-            </Card>
-          )) }
+      <div id="dash-container" className="row text-center mx-auto">
+        { Object.entries(menu).map(([btnText, desc]) => (
+          <Card key={ btnText } className="dash-card col-md-5 p-2" >
+            <Card.Body>
+              <Card.Text className="lead">{ desc }</Card.Text>
+              <Button variant="primary">{ btnText }</Button>
+            </Card.Body>
+          </Card>
+        )) }
       </div>
     </>
   )
 }
 
-export default Dashboard;
 

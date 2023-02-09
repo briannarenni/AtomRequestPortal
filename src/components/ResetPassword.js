@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-function ResetPassword() {
+export default function ResetPassword() {
 
   return (
     <>
@@ -26,4 +26,3 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-function Login() {
+export default function Login() {
 
   return (
     <>
@@ -31,5 +31,3 @@ function Login() {
     </>
   );
 }
-
-export default Login;
