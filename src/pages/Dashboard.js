@@ -3,7 +3,6 @@ import { Button, Card } from 'react-bootstrap';
 import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {
-
   const employeeMenu = {
     'New Request': 'Submit a new reimbursement request',
     'Check Inbox': 'Manage your messages',
@@ -15,6 +14,8 @@ export default function Dashboard() {
     'Process Requests': 'View all pending requests',
     'Check Inbox': 'Manage employee messages',
     'Request Log': 'See all submitted requests',
+    'Manage Roles': 'Update employee roles',
+    'Add New Employee': 'Register a new employee account',
     'Account Information': 'View or update account details',
   };
 

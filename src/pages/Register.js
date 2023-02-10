@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import styles from '../styles/Forms.module.css';
 
 export default function Register() {
 
   return (
     <>
-      <Button size="sm" variant="outline-primary" className="mx-4">← Back</Button>
       <h1 className="text-center">Register New Employee</h1>
       <p className="text-center mx-auto">
         <span className={ styles.formNote }>

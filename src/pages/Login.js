@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import styles from '../styles/Forms.module.css';
 
 export default function Login() {
 
   return (
     <>
-      <Button size="sm" variant="outline-primary" className="mx-4">← Back</Button>
       <h1 className="text-center">Account Login</h1>
 
       <Form className="w-50 mx-auto my-3">
@@ -19,8 +19,8 @@ export default function Login() {
           <Form.Control type="password" placeholder="Enter password" required />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="rememberCheck">
-          <Form.Check type="switch" label="Remember Me" />
+        <Form.Group id="toggle-btn" className="mb-3" controlId="rememberCheck">
+          <Form.Check type="switch" label="Remember Me"></Form.Check>
         </Form.Group>
 
         <Form.Group className="mb-2">

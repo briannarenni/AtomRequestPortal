@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-export default function ResetPassword() {
+export default function PasswordReset() {
 
   return (
     <>
@@ -19,7 +19,7 @@ export default function ResetPassword() {
         </Form.Group>
 
         <Form.Group className="mt-4">
-          <Button type="submit" id="reset-btn" className="btn w-100">Reset</Button>
+          <Button type="submit" id="reset-btn" className="btn w-100">Update Password</Button>
         </Form.Group>
       </Form>
     </>
