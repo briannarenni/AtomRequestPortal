@@ -1,31 +1,19 @@
-/* AppHeader */
-.nav-btn {
-  color: var(--bs-secondary);
-  border-color: dodgerblue;
-  border-radius: 30px 30px 30px 30px / 25px 25px 25px 25px;
+.btn {
+  padding: 10px 20px;
 }
 
-.nav-btn:hover {
-  border-color: dodgerblue;
-  background-color: dodgerblue;
+.btn-primary {
+  background-color: var(--blue);
+  border-color: var(--blue);
 }
 
-#logout-btn {
-  border-radius: 30px 30px 30px 30px / 25px 25px 25px 25px;
+.btn-outline-primary {
+  color: var(--blue) !important;
+  border-color: var(--blue);
 }
 
-/* Forms */
-.form-note {
-  font-size: .8rem;
-  font-style: italic;
-}
-
-/* Dashboard */
-#dash-container {
-  margin: 0 auto;
-  text-align: center;
-}
-
-.dash-card {
-  margin: 2rem;
+.btn-outline-primary:hover {
+  color: var(--light) !important;
+  background-color: var(--blue);
+  border-color: var(--blue);
 }

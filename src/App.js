@@ -1,21 +1,16 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Landing from './components/Landing';
-import Login from './components/Login';
-import Register from './components/Register';
-import ResetPassword from './components/ResetPassword';
-import AppHeader from "./components/AppHeader";
-import Dashboard from './components/Dashboard';
+import { localService, userService } from './modules/services';
+import { AppHeader, Landing, Login, Register } from './modules/landingPages';
+import { Dashboard, ResetPassword } from './modules/userPages';
 
 export default function App() {
   return (
     <div className="App">
-      <Landing />
-      {/* <AppHeader /> */ }
-      {/* <Dashboard /> */ }
-      {/* <Login /> */ }
-      {/* <ResetPassword /> */ }
-      {/* <Register /> */ }
+      <AppHeader />
+      <Dashboard />
+      {/* <Landing /> */}
     </div>
   );
 }

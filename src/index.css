@@ -4,6 +4,7 @@
 :root {
   --light: #f8f9fa;
   --dark: #070707;
+  --blue: dodgerblue;
   --modal-dark: #0b0e0f;
 }
 
@@ -16,12 +17,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.btn {
-  padding: 10px 20px;
-}
 
-.btn-primary {
-  border-color: dodgerblue;
-  background-color: dodgerblue;
-}
 

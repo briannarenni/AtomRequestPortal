@@ -1,34 +1,36 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {
 
   const employeeMenu = {
     'New Request': 'Submit a new reimbursement request',
-    'View Request History': 'View all of your submitted requests',
-    'Account Details': 'View account details or change password',
-    'Send Message': 'Ask a question about reimbursement'
+    'Check Inbox': 'Manage your messages',
+    'Submission History': 'See all submitted requests',
+    'Account Information': 'View or update account details',
   };
 
   const managerMenu = {
-    'Process Requests': 'View and process all pending requests',
-    'Submission Log': 'View full history or update closed requests',
-    'Account Details': 'View account details or change password',
-    'View Messages': 'View all employee queries and messages'
+    'Process Requests': 'View all pending requests',
+    'Check Inbox': 'Manage employee messages',
+    'Request Log': 'See all submitted requests',
+    'Account Information': 'View or update account details',
   };
 
-  const isManager = false;
+  const isManager = true;
   const menu = isManager ? managerMenu : employeeMenu;
 
   return (
     <>
-      <h1 className="text-center m-2 p-2">{ isManager ? 'Manager Dashboard' : 'Employee Dashboard' }</h1>
-      <div id="dash-container" className="row text-center mx-auto">
+      <h1 className="text-center my-1">{ isManager ? 'Manager Dashboard' : 'Employee Dashboard' }</h1>
+      <p className="text-center fst-italic my-3">Welcome, (username)</p>
+      <div className="${styles.cardContainer} mx-4 px-2 row text-center">
         { Object.entries(menu).map(([btnText, desc]) => (
-          <Card key={ btnText } className="dash-card col-md-5 p-2" >
+          <Card key={ btnText } className="col-sm-5 mx-auto my-3 px-3 py-4" >
             <Card.Body>
               <Card.Text className="lead">{ desc }</Card.Text>
-              <Button variant="primary">{ btnText }</Button>
+              <Button variant="primary" className="mx-auto mt-2">{ btnText }</Button>
             </Card.Body>
           </Card>
         )) }
