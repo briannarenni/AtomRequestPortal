@@ -22,7 +22,7 @@ export default function AppHeader({ isLoggedIn }) {
         { isLoggedIn && (
           <>
             <Link to="/account">
-              <Button variant="outline-primary" className={ styles.navBtn }>Account</Button>
+              <Button variant="outline-primary" className={ styles.navBtn }>Profile</Button>
             </Link>
 
             <Link to="/">

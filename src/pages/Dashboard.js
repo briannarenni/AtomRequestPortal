@@ -3,23 +3,22 @@ import { Button, Card } from 'react-bootstrap';
 import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {
+  const isManager = false;
+
   const employeeMenu = {
-    'New Request': 'Submit a new reimbursement request',
-    'Check Inbox': 'Manage your messages',
-    'Submission History': 'See all submitted requests',
-    'Account Information': 'View or update account details',
+    'Submit Request': 'New Reimbursement Request',
+    'Check Pending': 'See Pending Requests',
+    'Request History': 'See Completed Requests',
+    'Account Details': 'View User Details',
   };
 
   const managerMenu = {
-    'Process Requests': 'View all pending requests',
-    'Check Inbox': 'Manage employee messages',
-    'Request Log': 'See all submitted requests',
-    'Manage Roles': 'Update employee roles',
-    'Add New Employee': 'Register a new employee account',
-    'Account Information': 'View or update account details',
+    'Pending Requests': 'Process Pending Requests',
+    'Request Log': 'See Full Request History',
+    'Manage Roles': 'Update Employee Roles',
+    'Add New Employee': 'Register Employee Account',
   };
 
-  const isManager = true;
   const menu = isManager ? managerMenu : employeeMenu;
 
   return (
@@ -31,7 +30,7 @@ export default function Dashboard() {
           <Card key={ btnText } className="col-sm-5 mx-auto my-3 px-3 py-4" >
             <Card.Body>
               <Card.Text className="lead">{ desc }</Card.Text>
-              <Button variant="primary" className="mx-auto mt-2">{ btnText }</Button>
+              <Button size="lg" variant="primary" className="mx-auto mt-2">{ btnText }</Button>
             </Card.Body>
           </Card>
         )) }
