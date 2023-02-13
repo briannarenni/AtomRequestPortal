@@ -3,15 +3,40 @@ import { loginUser, registerUser, getUserDetails } from "./modules/ServiceModule
 
 const AuthContext = createContext();
 
-export default function AuthProvider() {
+export function AuthProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currUser, setCurrUser] = useState({});
 
-  const validateLogin = () => { }
+  const validateLogin = (username, password) => {
+    let response = loginUser(username, password);
+    if (response === 200) {
+      getUserDetails(username);
+      setCurrUser(response);
+      setIsLoggedIn(true);
+    } else {
+      return response;
+    }
+  }
 
-  const validateRegister = () => { }
+  const validateRegister = (username, password) => {
+    let response = registerUser(username, password);
+    if (response === 200) {
+      getUserDetails(username);
+      setCurrUser(response);
+      setIsLoggedIn(true);
+    } else {
+      return response;
+    }
+  }
 
   return (
-    <div>AuthContext</div>
-  )
+    <AuthContext.Provider value={ { isLoggedIn, currUser, validateLogin, validateRegister } }>
+      { props.children }
+    </AuthContext.Provider>
+  );
 }
+
+function useAuth() {
+  return useContext(AuthContext);
+}
+
