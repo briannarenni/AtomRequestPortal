@@ -1,4 +1,3 @@
-import ky from "ky";
 
 export const saveCurrUser = () => { }
 

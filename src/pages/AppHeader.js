@@ -1,9 +1,20 @@
 import React from 'react';
-import { Button, Navbar, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
 import styles from '../styles/Navbar.module.css';
+import { useNavigate } from 'react-router-dom'
+import { Button, Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
-export default function AppHeader({ isLoggedIn }) {
+export default function AppHeader() {
+  const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn, setCurrUser } = useAuth();
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    setCurrUser({});
+    setIsLoggedIn(false);
+    navigate('/');
+  }
 
   return (
     <Navbar expand="md" className="d-flex justify-content-between mx-1 mb-2 border-bottom border-bottom-secondary">
@@ -26,7 +37,7 @@ export default function AppHeader({ isLoggedIn }) {
             </Link>
 
             <Link to="/">
-              <Button variant="outline-danger" className={ styles.logoutBtn }>Logout</Button>
+              <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
             </Link>
           </>
         ) }

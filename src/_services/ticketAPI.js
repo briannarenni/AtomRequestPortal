@@ -1,42 +1,36 @@
-import ky from 'ky';
+import axios from "axios";
 
-const apiURL = 'https://requestportalapi.azurewebsites.net/';
+// const apiURL = 'https://requestportalapi.azurewebsites.net/';
+const apiURL = 'http://localhost:5256';
 
 export const submitTicket = async (userId, username, amount, category, comments = null) => {
-  const response = await ky.post(`${apiURL}/tickets/all`, {
-    json: { userId, username, amount, category, comments }
-  }).json();
+  const response = await axios.post(`${apiURL}/tickets/all`, { userId, username, amount, category, comments });
 
-  return (response.status === 200) ? response : 'Internal API Error';
-}
+  return (response.status === 200) ? response.data : 'Internal API Error';
+};
 
 export const getUserTickets = async (userId) => {
-  const response = await ky.post(`${apiURL}/tickets/${userId}`).json();
-  return response;
-}
+  const response = await axios.post(`${apiURL}/tickets/${userId}`);
+  return response.data;
+};
 
 export const getAllTickets = async () => {
-  const response = await ky.get(`${apiURL}/tickets/all`).json();
-  return response;
-}
+  const response = await axios.get(`${apiURL}/tickets/all`);
+  return response.data;
+};
 
 export const getPendingTickets = async () => {
-  const response = await ky.get(`${apiURL}/tickets/open`).json();
-  return (response.status === 200) ? response : 'Internal API Error';
-}
+  const response = await axios.get(`${apiURL}/tickets/open`);
+  return (response.status === 200) ? response.data : 'Internal API Error';
+};
 
 export const searchTickets = async (ticketId) => {
-  const response = await ky.post(`${apiURL}/tickets/${ticketId}`, {
-    json: { ticketId }
-  }).json();
+  const response = await axios.post(`${apiURL}/tickets/${ticketId}`, { ticketId });
 
-  return (response.status === 200) ? response : response;
-}
-
+  return (response.status === 200) ? response.data : response.data;
+};
 export const updateTicket = async (ticketId, newStatus) => {
-  const response = await ky.post(`${apiURL}/tickets/${ticketId}`, {
-    json: { ticketId, newStatus }
-  }).json();
+  const response = await axios.post(`${apiURL}/tickets/${ticketId}`, { ticketId, newStatus });
 
-  return (response.status === 200) ? response : 'Internal API Error';
-}
+  return (response.status === 200) ? response.data : 'Internal API Error';
+};

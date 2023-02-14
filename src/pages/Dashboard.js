@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useAuth } from '../AuthContext';
 import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {

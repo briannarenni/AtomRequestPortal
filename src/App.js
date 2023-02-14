@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import { User } from "./modules/ServiceModule";
 import { AppHeader, Landing, FAQ, Login, Register, Dashboard } from './modules/PageModule';
 import { NotFound, BackBtn } from './modules/ComponentModule';
 import { AuthProvider } from './AuthContext';
 
 export default function App() {
-  const location = useLocation();
-  const path = location.pathname;
 
   return (
     <AuthProvider>
       <div className="App">
         <AppHeader />
-        { path !== "/" && path !== "/dashboard" && <BackBtn /> }
+        <BackBtn />
         <Routes>
           <Route path="/" element={ <Landing /> } />
-          <Route path="/faq" element={ <FAQ /> }></Route>
+          <Route path="/faq" element={ <FAQ /> } />
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
           <Route path="/dashboard" element={ <Dashboard /> } />

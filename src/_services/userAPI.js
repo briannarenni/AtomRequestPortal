@@ -1,45 +1,66 @@
-import ky from 'ky';
+// const apiURL = 'https://requestportalapi.azurewebsites.net';
+import axios from "axios";
 
-const apiURL = 'https://requestportalapi.azurewebsites.net/';
+const apiURL = 'http://localhost:5256';
 
 export const loginUser = async (username, password) => {
-  const response = await ky.post(`${apiURL}/users/login`, {
-    json: { username, password }
-  }).json();
-
-  return response.status;
-}
+  try {
+    const response = await axios.post(`${apiURL}/users/login`, { username, password });
+    return response;
+  } catch (error) {
+    console.log(error.response.status);
+    console.log(error.response.data);
+    return (error.response) ? error.response.data : 'Internal API Error';
+  }
+};
 
 export const registerUser = async (username, password) => {
-  const response = await ky.post(`${apiURL}/users/register`, {
-    json: { username, password }
-  }).json();
-
-  return response.status;
-}
+  try {
+    const response = await axios.post(`${apiURL}users/register`, { username, password });
+    return response;
+  } catch (error) {
+    console.log(error.response.status);
+    console.log(error.response.data);
+    return (error.response) ? error.response.data : 'Internal API Error';
+  }
+};
 
 export const getUserDetails = async (username) => {
-  const response = await ky.post(`${apiURL}/users/${username}/details`).json();
-  return (response.status === 200) ? response : 'Internal API Error';
-}
+  try {
+    const response = await axios.post(`${apiURL}/users/${username} `, { username });
+    return (response.status === 200) ? response : 'Internal API Error';
+  } catch (error) {
+    return 'Internal API Error';
+  }
+
+};
 
 export const getEmployees = async () => {
-  const response = await ky.get(`${apiURL}/employees`).json();
-  return (response.status === 200) ? response : 'Internal API Error';
-}
+  try {
+    const response = await axios.get(`${apiURL}/employees`);
+    return (response.status === 200) ? response.data : 'Internal API Error';
+  } catch (error) {
+    return 'Internal API Error';
+  }
+
+};
 
 export const updateUserPassword = async (username, password) => {
-  const response = await ky.patch(`${apiURL}/users/${username}/update-password`, {
-    json: { password }
-  }).json();
+  try {
+    const response = await axios.patch(`${apiURL}/users/${username}/update-password`, { password });
+    return (response.status === 200) ? response.data : 'Internal API Error';
+  } catch (error) {
+    return 'Internal API Error';
+  }
 
-  return (response.status === 200) ? response : 'Internal API Error';
-}
+};
 
-export const updateUserRole = async (userId, role) => {
-  const response = await ky.post(`${apiURL}/users/${userId}/update-role`, {
-    json: { role }
-  }).json();
+export const updateUserRole = async (userId) => {
+  try {
+    const response = await axios.patch(`${apiURL}/users/${userId}/update-role`);
+    return (response.status === 200) ? response.data : 'Internal API Error';
+  } catch (error) {
+    return 'Internal API Error';
+  }
 
-  return (response.status === 200) ? response : 'Internal API Error';
 }
