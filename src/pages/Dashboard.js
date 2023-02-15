@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../_hooks/AuthContext';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Dashboard() {
         setIsManager(true);
       }
     }
-  }, [])
+  }, [currUser])
 
   const employeeMenu = {
     'Submit Request': 'New Reimbursement Request',

@@ -3,7 +3,7 @@ import styles from '../styles/Navbar.module.css';
 import { useNavigate } from 'react-router-dom'
 import { Button, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../_hooks/AuthContext';
 
 export default function AppHeader() {
   const navigate = useNavigate();

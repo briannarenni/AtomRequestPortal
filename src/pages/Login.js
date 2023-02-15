@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/Forms.module.css';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../_hooks/AuthContext';
 import { loginUser } from "../modules/ServiceModule";
 
 export default function Login() {
@@ -11,6 +11,11 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [UXMessage, setUXMessage] = useState('');
+
+  // useEffect(() => {
+  //   localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+  //   localStorage.setItem("currUser", JSON.stringify(currUser));
+  // }, [isLoggedIn, currUser])
 
   useEffect(() => {
     if (isLoggedIn) {

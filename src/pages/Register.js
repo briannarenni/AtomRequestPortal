@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from '../styles/Forms.module.css';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../_hooks/AuthContext';
 import { registerUser } from "../modules/ServiceModule";
 
 export default function Register() {
