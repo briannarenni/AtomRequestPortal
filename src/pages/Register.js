@@ -7,11 +7,15 @@ import { registerUser } from "../modules/ServiceModule";
 
 export default function Register() {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, currUser, setCurrUser } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, currUser, setCurrUser, redirection } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [UXMessage, setUXMessage] = useState('');
+
+  useEffect(() => {
+    redirection();
+  }, [])
 
   useEffect(() => {
     if (isLoggedIn) {

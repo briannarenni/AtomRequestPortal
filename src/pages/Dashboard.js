@@ -36,7 +36,7 @@ export default function Dashboard() {
   return (
     <>
       <h1 className="text-center my-1">{ isManager ? 'Manager Dashboard' : 'Employee Dashboard' }</h1>
-      <p className="text-center fst-italic my-3">Welcome, { currUser.username }</p>
+      <h5 className="text-center fst-italic my-3">Welcome back { currUser.username }</h5>
       <div className="mx-4 px-2 row text-center">
         { Object.entries(menu).map(([btnText, desc]) => (
           <Card key={ btnText } className="col-sm-5 mx-auto my-3 px-3 py-4" >
