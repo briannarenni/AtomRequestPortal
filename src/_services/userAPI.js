@@ -8,19 +8,15 @@ export const loginUser = async (username, password) => {
     const response = await axios.post(`${apiURL}/users/login`, { username, password });
     return response;
   } catch (error) {
-    console.log(error.response.status);
-    console.log(error.response.data);
     return (error.response) ? error.response.data : 'Internal API Error';
   }
 };
 
 export const registerUser = async (username, password) => {
   try {
-    const response = await axios.post(`${apiURL}users/register`, { username, password });
+    const response = await axios.post(`${apiURL}/users/register`, { username, password });
     return response;
   } catch (error) {
-    console.log(error.response.status);
-    console.log(error.response.data);
     return (error.response) ? error.response.data : 'Internal API Error';
   }
 };

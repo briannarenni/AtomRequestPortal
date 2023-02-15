@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Navbar.module.css';
 import { useNavigate } from 'react-router-dom'
 import { Button, Navbar, Nav } from 'react-bootstrap';
@@ -8,6 +8,12 @@ import { useAuth } from '../AuthContext';
 export default function AppHeader() {
   const navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn, setCurrUser } = useAuth();
+  const [btnChange, setBtnChange] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+    }, 2000);
+  }, [isLoggedIn])
 
   const handleLogout = async (event) => {
     event.preventDefault();

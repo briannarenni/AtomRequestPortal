@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Routes } from "react-router-dom";
 import './App.css';
 import { AppHeader, Landing, FAQ, Login, Register, Dashboard } from './modules/PageModule';
 import { NotFound, BackBtn } from './modules/ComponentModule';

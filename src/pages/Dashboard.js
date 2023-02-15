@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
-import styles from '../styles/Dashboard.module.css';
 
 export default function Dashboard() {
-  const isManager = false;
+  const navigate = useNavigate();
+  const { isLoggedIn, currUser } = useAuth();
+  const [isManager, setIsManager] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate('/');
+    else if (currUser !== null || currUser !== undefined) {
+      if (currUser.role === 'manager') {
+        setIsManager(true);
+      }
+    }
+  }, [])
 
   const employeeMenu = {
     'Submit Request': 'New Reimbursement Request',
@@ -25,8 +36,8 @@ export default function Dashboard() {
   return (
     <>
       <h1 className="text-center my-1">{ isManager ? 'Manager Dashboard' : 'Employee Dashboard' }</h1>
-      <p className="text-center fst-italic my-3">Welcome, (username)</p>
-      <div className="${styles.cardContainer} mx-4 px-2 row text-center">
+      <p className="text-center fst-italic my-3">Welcome, { currUser.username }</p>
+      <div className="mx-4 px-2 row text-center">
         { Object.entries(menu).map(([btnText, desc]) => (
           <Card key={ btnText } className="col-sm-5 mx-auto my-3 px-3 py-4" >
             <Card.Body>

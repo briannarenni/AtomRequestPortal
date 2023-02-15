@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Forms.module.css';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext';
 import { loginUser } from "../modules/ServiceModule";
 
-
 export default function Login() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setCurrUser } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, currUser, setCurrUser } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [UXMessage, setUXMessage] = useState('');
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/dashboard');
+    }
+  }, [isLoggedIn])
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -21,15 +26,16 @@ export default function Login() {
     }
     else {
       setCurrUser(response.data);
-      setUXMessage("Login successful. Redirecting...");
-      setIsLoggedIn(true);
+      if (currUser !== {}) {
+        setIsLoggedIn(true);
+      }
     }
   };
 
   return (
     <>
       <h1 className="text-center">Account Login</h1>
-      { UXMessage && <div className="error-message">{ UXMessage }</div> }
+      { UXMessage && <Alert variant="danger" className=" w-50 mx-auto error-message text-center">{ UXMessage }</Alert> }
 
       <Form onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
         <Form.Group className="mb-3" controlId="loginUsername">
@@ -41,6 +47,7 @@ export default function Login() {
             onChange={ (event) => setUsername(event.target.value) }
           />
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="loginPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
