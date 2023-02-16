@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Forms.module.css';
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../_hooks/AuthContext';
+import { useAuth } from '../AuthContext';
 import { loginUser } from "../modules/ServiceModule";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, currUser, setCurrUser, redirection } = useAuth();
+  const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [UXMessage, setUXMessage] = useState('');
 
   useEffect(() => {
-    redirection();
-  }, [])
-
-  useEffect(() => {
-    if (isLoggedIn) {
+    if (Object.keys(currUser).length > 0) {
+      setIsLoggedIn(true);
       navigate('/dashboard');
     }
-  }, [isLoggedIn])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currUser]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -30,9 +28,6 @@ export default function Login() {
     }
     else {
       setCurrUser(response.data);
-      if (currUser !== {}) {
-        setIsLoggedIn(true);
-      }
     }
   };
 
@@ -62,15 +57,11 @@ export default function Login() {
           />
         </Form.Group>
 
-        <Form.Group id="toggle-btn" className="mb-3" controlId="rememberCheck">
-          <Form.Check type="switch" label="Remember Me"></Form.Check>
-        </Form.Group>
-
         <Form.Group className="mb-2">
           <Button type="submit" className="w-100">Log In</Button>
         </Form.Group>
 
-        <p className={ styles.formNote }>For forgotten passwords, please speak to HR.</p>
+        <p className={ styles.formNote }>For forgotten passwords, please speak to HR for reset.</p>
       </Form>
     </>
   );

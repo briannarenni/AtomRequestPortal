@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Forms.module.css';
+import { useNavigate } from "react-router-dom";
 import { Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../_hooks/AuthContext';
+import { useAuth } from '../AuthContext';
 import { registerUser } from "../modules/ServiceModule";
 
 export default function Register() {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, currUser, setCurrUser, redirection } = useAuth();
+  const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [UXMessage, setUXMessage] = useState('');
 
   useEffect(() => {
-    redirection();
-  }, [])
-
-  useEffect(() => {
-    if (isLoggedIn) {
+    if (Object.keys(currUser).length > 0) {
+      setIsLoggedIn(true);
       navigate('/dashboard');
     }
-  }, [isLoggedIn]);
+  }, [currUser, setIsLoggedIn, navigate]);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -35,9 +32,6 @@ export default function Register() {
       setUXMessage(response);
     } else {
       setCurrUser(response.data);
-      if (currUser !== {}) {
-        setIsLoggedIn(true);
-      }
     }
   };
 

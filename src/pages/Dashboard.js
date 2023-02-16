@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../_hooks/AuthContext';
+import { useAuth } from '../AuthContext';
 
 export default function Dashboard() {
+  const { isLoggedIn, currUser, isManager } = useAuth();
   const navigate = useNavigate();
-  const { isLoggedIn, currUser } = useAuth();
-  const [isManager, setIsManager] = useState(false);
 
   useEffect(() => {
-    if (!isLoggedIn) navigate('/');
-    else if (currUser !== null || currUser !== undefined) {
-      if (currUser.role === 'manager') {
-        setIsManager(true);
-      }
+    if (!isLoggedIn) {
+      navigate('/')
     }
-  }, [currUser])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const employeeMenu = {
     'Submit Request': 'New Reimbursement Request',

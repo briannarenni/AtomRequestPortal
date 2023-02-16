@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from '../styles/Navbar.module.css';
-import { useNavigate } from 'react-router-dom'
 import { Button, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../_hooks/AuthContext';
+import { useAuth } from '../AuthContext';
 
 export default function AppHeader() {
-  const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, setCurrUser } = useAuth();
-  const [btnChange, setBtnChange] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-    }, 2000);
-  }, [isLoggedIn])
+  const { isLoggedIn, isManager, logout } = useAuth();
 
   const handleLogout = async (event) => {
     event.preventDefault();
-    setCurrUser({});
-    setIsLoggedIn(false);
-    navigate('/');
+    logout();
   }
 
   return (
@@ -31,11 +21,39 @@ export default function AppHeader() {
         <span className={ styles.logoName }>Request Portal</span>
       </Navbar.Brand>
 
+      {/*  eslint-disable-next-line */ }
       <Nav className="${styles.navContainer} justify-content-end gap-2 mx-1">
+        { !isLoggedIn && (
+          <Link to="/faq">
+            <Button variant="outline-primary" className={ styles.navBtn }>FAQ</Button>
+          </Link>
+        ) }
+        { isLoggedIn && (
+          <>
+            { !isManager && (
+              <>
+                <Link to="/faq">
+                  <Button variant="outline-primary" className={ styles.navBtn }>FAQ</Button>
+                </Link>
+                <Link to="/account">
+                  <Button variant="outline-primary" className={ styles.navBtn }>Profile</Button>
+                </Link>
+                <Link to="/">
+                  <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
+                </Link>
+              </>
+            ) }
+            { isManager && (
+              <Link to="/">
+                <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
+              </Link>
+            ) }
+          </>
+        ) }
+        {/*
         <Link to="/faq">
           <Button variant="outline-primary" className={ styles.navBtn }>FAQ</Button>
         </Link>
-
         { isLoggedIn && (
           <>
             <Link to="/account">
@@ -46,10 +64,8 @@ export default function AppHeader() {
               <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
             </Link>
           </>
-        ) }
+        ) } */}
       </Nav>
     </Navbar>
   )
 }
-
-
