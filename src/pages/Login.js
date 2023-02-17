@@ -10,7 +10,9 @@ export default function Login() {
   const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [UXMessage, setUXMessage] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (Object.keys(currUser).length > 0) {
@@ -20,41 +22,68 @@ export default function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currUser]);
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
+    const form = event.currentTarget;
     event.preventDefault();
+    event.stopPropagation();
+    setFormSubmitted(true);
+
+    if (form.checkValidity() === false) {
+      return;
+    }
+
     const response = await loginUser(username, password);
-    if (response === 'Username incorrect' || response === 'Password incorrect') {
-      setUXMessage(response);
+    if (response === 'Username incorrect') {
+      setUsernameError(response);
+      return;
+    } else if (response === 'Password incorrect') {
+      setPasswordError(response);
+      return;
     }
-    else {
-      setCurrUser(response.data);
-    }
+
+    setCurrUser(response.data);
   };
 
   return (
     <>
       <h1 className="text-center">Account Login</h1>
-      { UXMessage && <Alert variant="danger" className=" w-50 mx-auto error-message text-center">{ UXMessage }</Alert> }
-
-      <Form onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
+      <Form noValidate formSubmitted={ formSubmitted } onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
         <Form.Group className="mb-3" controlId="loginUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
+            name="username"
             placeholder="Enter username"
             required
-            onChange={ (event) => setUsername(event.target.value) }
+            isValid={ username.trim() && formSubmitted && !usernameError }
+            isInvalid={ !username.trim() && formSubmitted || usernameError }
+            onChange={ (event) => {
+              setUsername(event.target.value);
+              setUsernameError('');
+            } }
           />
+          <Form.Control.Feedback type="invalid">
+            { usernameError || "Username cannot be blank" }
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="loginPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
+            name="password"
             placeholder="Enter password"
             required
-            onChange={ (event) => setPassword(event.target.value) }
+            isValid={ password.trim() && formSubmitted && !passwordError }
+            isInvalid={ !password.trim() && formSubmitted || passwordError }
+            onChange={ (event) => {
+              setPassword(event.target.value);
+              setPasswordError('');
+            } }
           />
+          <Form.Control.Feedback type="invalid">
+            { passwordError || "Password cannot be blank" }
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-2">

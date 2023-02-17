@@ -11,7 +11,9 @@ export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [UXMessage, setUXMessage] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (Object.keys(currUser).length > 0) {
@@ -21,18 +23,27 @@ export default function Register() {
   }, [currUser, setIsLoggedIn, navigate]);
 
   const handleSubmit = async event => {
+    const form = event.currentTarget;
     event.preventDefault();
+    event.stopPropagation();
+    setFormSubmitted(true);
+
+    if (form.checkValidity() === false) {
+      return;
+    }
+
     if (password !== confirmPassword) {
-      setUXMessage("Passwords don't match. Please try again.");
-      return UXMessage;
+      setPasswordError("Passwords don't match");
+      return;
     }
 
     const response = await registerUser(username, password);
-    if (response === 'Username already exists') {
-      setUXMessage(response);
-    } else {
-      setCurrUser(response.data);
+    if (response === 'Username already registered') {
+      setUsernameError(response);
+      return;
     }
+
+    setCurrUser(response.data);
   };
 
   return (
@@ -46,29 +57,63 @@ export default function Register() {
           (ex. BrianSmith, BSmith, BSmith12)
         </span>
       </p>
-      { UXMessage && <Alert variant="danger" className=" w-50 mx-auto error-message text-center">{ UXMessage }</Alert> }
 
-      <Form onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
+      <Form noValidate formSubmitted={ formSubmitted } onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
         <Form.Group className="mb-3" controlId="registerUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="text"
-            placeholder="Enter employee username"
+          <Form.Control
+            type="text"
+            name="username"
+            placeholder="Enter username"
             required
-            onChange={ event => setUsername(event.target.value) } />
+            isValid={ username.trim() && formSubmitted && !usernameError }
+            isInvalid={ !username.trim() && formSubmitted || usernameError }
+            onChange={ (event) => {
+              setUsername(event.target.value);
+              setUsernameError('');
+            } }
+          />
+          <Form.Control.Feedback type="invalid">
+            { usernameError || "Username cannot be blank" }
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="registerPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password"
+          <Form.Control
+            type="password"
+            name="password"
             placeholder="Enter password"
             required
-            onChange={ event => setPassword(event.target.value) }
+            isValid={ password.trim() && formSubmitted && !passwordError }
+            isInvalid={ !password.trim() && formSubmitted || passwordError }
+            onChange={ (event) => {
+              setPassword(event.target.value);
+              setPasswordError('');
+            } }
           />
+          <Form.Control.Feedback type="invalid">
+            { passwordError || "Password cannot be blank" }
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="confirmPassword">
           <Form.Label>Confirm New Password</Form.Label>
-          <Form.Control type="password" placeholder="Confirm password" required onChange={ event => setConfirmPassword(event.target.value) } />
+          <Form.Control
+            type="password"
+            name="password"
+            placeholder="Enter password"
+            required
+            isValid={ password.trim() && formSubmitted && !passwordError }
+            isInvalid={ !password.trim() && formSubmitted || passwordError }
+            onChange={ (event) => {
+              setConfirmPassword(event.target.value);
+              setPasswordError('');
+            } }
+          />
+          <Form.Control.Feedback type="invalid">
+            { passwordError || "Password cannot be blank" }
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="mt-4">
