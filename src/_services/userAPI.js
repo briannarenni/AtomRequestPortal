@@ -38,17 +38,15 @@ export const getEmployees = async () => {
   } catch (error) {
     return 'Internal API Error';
   }
-
 };
 
-export const updateUserPassword = async (username, password) => {
+export const updateUserPassword = async (userId, password, confirmPassword) => {
   try {
-    const response = await axios.patch(`${apiURL}/users/${username}/update-password`, { password });
+    const response = await axios.patch(`${apiURL}/users/${userId}/password`, { userId, password, confirmPassword });
     return (response.status === 200) ? response.data : 'Internal API Error';
   } catch (error) {
     return 'Internal API Error';
   }
-
 };
 
 export const updateUserRole = async (userId) => {

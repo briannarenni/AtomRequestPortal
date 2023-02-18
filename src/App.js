@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
 import './App.css';
-import { AppHeader, Landing, FAQ, Login, Register, Dashboard } from './modules/PageModule';
-import { NotFound, BackBtn} from './modules/ComponentModule';
+import { AppHeader, Landing, FAQ, Login, Register, Dashboard, ChangePassword } from './modules/PageModule';
+import { NotFound, BackBtn } from './modules/ComponentModule';
 import { AuthProvider } from './AuthContext';
 
 export default function App() {
@@ -18,6 +18,7 @@ export default function App() {
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
           <Route path="/dashboard" element={ <Dashboard /> } />
+          <Route path="/password" element={ <ChangePassword /> } />
           <Route path="*" element={ <NotFound /> } />
         </Routes>
       </div>

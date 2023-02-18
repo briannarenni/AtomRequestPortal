@@ -11,21 +11,23 @@ export default function Dashboard() {
     if (!isLoggedIn) {
       navigate('/')
     }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const employeeMenu = {
     'Submit Request': 'New Reimbursement Request',
     'Check Pending': 'See Pending Requests',
     'Request History': 'See Completed Requests',
-    'Account Details': 'View User Details',
+    'Update Password': 'Update Account Password',
   };
 
   const managerMenu = {
     'Pending Requests': 'Process Pending Requests',
     'Request Log': 'See Full Request History',
     'Manage Roles': 'Update Employee Roles',
+    'See Employee Roster': 'See All Employees',
     'Add New Employee': 'Register Employee Account',
+    'Update Password': 'Update Account Password',
   };
 
   const menu = isManager ? managerMenu : employeeMenu;

@@ -10,13 +10,6 @@ export function AuthProvider(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoggedIn && currUser) {
-      navigate('/dashboard');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
     localStorage.setItem('currUser', JSON.stringify(currUser));
     if (currUser.role === 'manager') {

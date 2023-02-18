@@ -3,7 +3,7 @@ import styles from '../styles/Forms.module.css';
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../AuthContext';
-import { UsernameControl, PasswordControl, ConfirmPasswordControl } from '../components/FormControls';
+import { UsernameControl, PasswordControl, ConfirmPasswordControl } from '../modules/ComponentModule';
 import { registerUser } from "../modules/ServiceModule";
 
 export default function Register() {
@@ -56,8 +56,7 @@ export default function Register() {
         <span className={ styles.formNote }>
           <span className="fw-bold">HR Note: </span>
           New usernames may contain numbers, but no spaces or special chars.
-          <br />
-          (ex. BrianSmith, BSmith, BSmith12)
+          <br /> (ex. BrianSmith, BSmith, BSmith12)
         </span>
       </p>
 

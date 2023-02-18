@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Landing() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('isLoggedIn'))) {
+      navigate('/dashboard');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

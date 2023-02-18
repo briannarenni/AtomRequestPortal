@@ -4,4 +4,4 @@ export { default as Landing } from '../pages/Landing';
 export { default as Login } from '../pages/Login';
 export { default as Register } from '../pages/Register';
 export { default as Dashboard } from '../pages/Dashboard';
-export { default as PasswordReset } from '../pages/PasswordReset';
+export { default as ChangePassword } from '../pages/ChangePassword';
