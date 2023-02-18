@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 export default function PasswordReset() {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleSubmit = async event => {
+    const form = event.currentTarget;
+    event.preventDefault();
+    event.stopPropagation();
+    setFormSubmitted(true);
+
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords don't match");
+      return;
+    }
+  }
 
   return (
     <>
