@@ -1,3 +1,4 @@
+// App Models
 export class User {
   constructor(userId, username, role, numPending, numSubmitted) {
     this.userId = userId;
