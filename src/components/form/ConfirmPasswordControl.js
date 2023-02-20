@@ -1,21 +1,20 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Field, ErrorMessage } from 'formik';
+import { Form } from 'react-bootstrap';
 
-export default function ConfirmPasswordControl({ value, onChange, error, submitted }) {
+export default function ConfirmPasswordControl({ name, error, touched }) {
   return (
     <Form.Group className="mb-3" controlId="confirmedPassword">
       <Form.Label>Confirm New Password</Form.Label>
-      <Form.Control
+      <Field
+        as={ Form.Control }
         type="password"
-        placeholder="Confirm password"
-        required
-        isValid={ (value.trim() && submitted && !error) }
-        isInvalid={ (!value.trim() && submitted) || (error) }
-        onChange={ onChange }
+        name={ name }
+        placeholder="Enter password"
+        isValid={ !error && touched }
+        isInvalid={ !!error && touched }
       />
-      <Form.Control.Feedback type="invalid">
-        { error || "Password cannot be blank" }
-      </Form.Control.Feedback>
+      <ErrorMessage name={ name } component={ Form.Control.Feedback } type="invalid" />
     </Form.Group>
   );
 }

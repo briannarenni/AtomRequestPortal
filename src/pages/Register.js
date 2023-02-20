@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Form } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
 import { PageHeader } from "../components/ui";
@@ -10,12 +11,6 @@ import { registerUser } from "../data";
 export default function Register() {
   const navigate = useNavigate();
   const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (Object.keys(currUser).length > 0) {
@@ -24,76 +19,81 @@ export default function Register() {
     }
   }, [currUser, setIsLoggedIn, navigate]);
 
-  const handleRegister = async () => {
-    const response = await registerUser(username, password);
+  const initialValues = {
+    username: '',
+    password: '',
+    confirm: '',
+  };
+
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Password is required'),
+    confirm: Yup.string().required('Password confirmation is required'),
+  });
+
+  const handleLogin = async (values, { setFieldError }) => {
+    const response = await registerUser(values.username, values.password);
+
     if (response === 'Username already registered') {
-      setUsernameError(response);
+      setFieldError('username', response);
       return;
     } else {
       setCurrUser(response.data);
     }
   }
 
-  const handleSubmit = async (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
-    event.stopPropagation();
-    setFormSubmitted(true);
-
-    if (form.checkValidity() === false) {
-      return;
-    } else if (password !== confirmedPassword) {
-      setPasswordError("Passwords don't match");
+  const onSubmit = async (values, { setFieldError }) => {
+    if (values.password !== values.confirm) {
+      setFieldError('password', "Passwords don't match");
+      setFieldError('confirm', "Passwords don't match");
       return;
     }
 
-    handleRegister();
+    handleLogin();
   };
 
   return (
     <>
-      <PageHeader title="Register Employee" />
-      <p className="text-center mx-auto">
-        <span className={ styles.formNote }>
-          <span className="fw-bold">HR Note: </span>
-          New usernames may contain numbers, but no spaces or special chars.
-          <br /> (ex. BrianSmith, BSmith, BSmith12)
-        </span>
-      </p>
+      <header>
+        <PageHeader title='Register Employee' />
+        <p className={ styles.formNote }>
+          <span className={ styles.formNote }>
+            <span className="fw-bold">HR Note: </span>
+            New usernames may contain numbers, but no spaces or special chars.
+            <br /> (ex. BrianSmith, BSmith, BSmith12)
+          </span>
+        </p>
+      </header>
 
-      <Form noValidate onSubmit={ handleSubmit } className={ styles.formContainer }>
-        <UsernameControl
-          value={ username }
-          onChange={ (event) => {
-            setUsername(event.target.value);
-            setUsernameError('');
-          } }
-          error={ usernameError }
-          submitted={ formSubmitted }>
-        </UsernameControl>
+      <Formik
+        initialValues={ initialValues }
+        validationSchema={ validationSchema }
+        onSubmit={ onSubmit }
+      >
+        { ({ isValid, dirty, errors, touched}) => (
+          <Form className={ styles.formContainer }>
+            <UsernameControl
+              name='username'
+              error={ errors.username }
+              touched={ touched.username }
+            />
 
-        <PasswordControl
-          value={ password }
-          onChange={ (event) => {
-            setPassword(event.target.value);
-            setPasswordError('');
-          } }
-          error={ passwordError }
-          submitted={ formSubmitted }>
-        </PasswordControl>
+            <PasswordControl
+              name='password'
+              error={ errors.password }
+              touched={ touched.password }
+            />
 
-        <ConfirmPasswordControl
-          value={ confirmedPassword }
-          onChange={ (event) => {
-            setConfirmedPassword(event.target.value);
-            setPasswordError('');
-          } }
-          error={ passwordError }
-          submitted={ formSubmitted }>
-        </ConfirmPasswordControl>
+            <ConfirmPasswordControl
+              name='confirm'
+              error={ errors.confirm }
+              touched={ touched.confirm }
+            />
 
-        <SubmitBtn />
-      </Form>
+            <SubmitBtn btnTxt='Register' disabled={ !isValid || !dirty } />
+          </Form>
+        ) }
+      </Formik>
     </>
   );
 }

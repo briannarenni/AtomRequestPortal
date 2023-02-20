@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
-import { Form } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
 import { PageHeader } from "../components/ui";
@@ -10,11 +11,6 @@ import { loginUser } from "../data";
 export default function Login() {
   const navigate = useNavigate();
   const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     if (Object.keys(currUser).length > 0) {
@@ -24,59 +20,61 @@ export default function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currUser]);
 
-  const handleLogin = async () => {
-    const response = await loginUser(username, password);
+  const initialValues = {
+    username: '',
+    password: '',
+  };
+
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('Username cannot be blank'),
+    password: Yup.string().required('Password cannot be blank'),
+  });
+
+  const onSubmit = async (values, { setFieldError }) => {
+    const response = await loginUser(values.username, values.password);
     if (response === 'Username incorrect') {
-      setUsernameError(response);
-      return;
+      setFieldError('username', response);
     } else if (response === 'Password incorrect') {
-      setPasswordError(response);
-      return;
+      setFieldError('password', response);
     } else {
       setCurrUser(response.data);
     }
-  }
-
-  const handleSubmit = async (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
-    event.stopPropagation();
-    setFormSubmitted(true);
-
-    if (form.checkValidity() === false) {
-      return;
-    }
-
-    handleLogin();
   };
 
   return (
     <>
-      <PageHeader title='Account Login' />
-      <Form noValidate onSubmit={ handleSubmit } className={ styles.formContainer }>
-        <p className={ styles.formNote }>For forgotten passwords, please speak to HR for reset.</p>
-        <UsernameControl
-          value={ username }
-          onChange={ (event) => {
-            setUsername(event.target.value);
-            setUsernameError('');
-          } }
-          error={ usernameError }
-          submitted={ formSubmitted } >
-        </UsernameControl>
+      <header>
+        <PageHeader title='Account Login' />
+        <p className={ styles.formNote }>
+          For forgotten passwords, please speak to HR for reset.
+        </p>
+      </header>
 
-        <PasswordControl
-          value={ password }
-          onChange={ (event) => {
-            setPassword(event.target.value);
-            setPasswordError('');
-          } }
-          error={ passwordError }
-          submitted={ formSubmitted }>
-        </PasswordControl>
+      <Formik
+        initialValues={ initialValues }
+        validationSchema={ validationSchema }
+        onSubmit={ onSubmit }
+      >
+        { ({ isValid, dirty, errors, touched }) => (
+          <Form className={ styles.formContainer }>
 
-        <SubmitBtn />
-      </Form>
+            <UsernameControl
+              name='username'
+              error={ errors.username }
+              touched={ touched.username }
+            />
+
+            <PasswordControl
+              name='password'
+              error={ errors.password }
+              touched={ touched.password }
+            />
+
+            <SubmitBtn btnTxt='Login' disabled={ !isValid || !dirty } />
+          </Form>
+        ) }
+      </Formik>
     </>
   );
 }
+

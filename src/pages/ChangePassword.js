@@ -1,50 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
 import { updateUserPassword } from "../modules/ServiceModule";
 import { PageHeader } from "../components/ui";
-import { PasswordControl, ConfirmPasswordControl } from '../components/form';
+import { PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
 import { PageHeader } from "../components/ui";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
   const { isLoggedIn, currUser } = useAuth();
-  const [password, setPassword] = useState('');
-  const [confirmedPassword, setConfirmedPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [userMessage, setUserMessage] = useState('');
   const [userId, setUserId] = useState('');
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
-      return;
     }
-    setUserId(currUser.userId);
 
+    setUserId(currUser.userId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const initialValues = {
+    username: '',
+    password: '',
+    confirm: '',
+  };
+
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Password is required'),
+    confirm: Yup.string().required('Password confirmation is required'),
+  });
+
   const updatePassword = async () => {
     const response = await updateUserPassword(userId, password, confirmedPassword);
-    setUserMessage(response.data);
+
+    // setUserMessage(response.data);
   }
 
-  const handleSubmit = async event => {
-    const form = event.currentTarget;
-    event.preventDefault();
-    event.stopPropagation();
-    setFormSubmitted(true);
-
-    if (form.checkValidity() === false) {
-      return;
-    }
-
-    if (password !== confirmedPassword) {
-      setPasswordError("Passwords don't match");
+  const onSubmit = async (values, { setFieldError }) => {
+    if (values.password !== values.confirm) {
+      setFieldError('password', "Passwords don't match");
+      setFieldError('confirm', "Passwords don't match");
       return;
     }
 
@@ -53,34 +53,40 @@ export default function ChangePassword() {
 
   return (
     <>
-      <PageHeader title="Update User Password" />
-      { userMessage && (<h3>{ userMessage }</h3>) }
+      <header>
+        <PageHeader title="Update User Password" />
+        { userMessage && (<h3>{ userMessage }</h3>) }
+      </header>
 
-      <Form noValidate onSubmit={ handleSubmit } className={ styles.formContainer }>
-        <PasswordControl
-          value={ password }
-          onChange={ (event) => {
-            setPassword(event.target.value);
-            setPasswordError('');
-          } }
-          error={ passwordError }
-          submitted={ formSubmitted }>
-        </PasswordControl>
+      <Formik
+        initialValues={ initialValues }
+        validationSchema={ validationSchema }
+        onSubmit={ onSubmit }
+      >
+        { ({ isValid, dirty, errors, touched }) => (
+          <Form className={ styles.formContainer }>
+            <UsernameControl
+              name='username'
+              error={ errors.username }
+              touched={ touched.username }
+            />
 
-        <ConfirmPasswordControl
-          value={ confirmedPassword }
-          onChange={ (event) => {
-            setConfirmedPassword(event.target.value);
-            setPasswordError('');
-          } }
-          error={ passwordError }
-          submitted={ formSubmitted }>
-        </ConfirmPasswordControl>
+            <PasswordControl
+              name='password'
+              error={ errors.password }
+              touched={ touched.password }
+            />
 
-        <Form.Group className="mb-2 w-50 mx-auto">
-          <Button type="submit" className="w-100">Update</Button>
-        </Form.Group>
-      </Form>
+            <ConfirmPasswordControl
+              name='confirm'
+              error={ errors.confirm }
+              touched={ touched.confirm }
+            />
+
+            <SubmitBtn btnTxt='Save Changes' disabled={ !isValid || !dirty } />
+          </Form>
+        ) }
+      </Formik>
     </>
   );
 }

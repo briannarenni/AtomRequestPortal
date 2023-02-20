@@ -37,7 +37,7 @@ export default function Dashboard() {
     <>
       <PageHeader title={ isManager ? 'Manager Dashboard' : 'Employee Dashboard' } />
       <Alert variant="info"
-        className="text-center fw-light p-2 my-1">
+        className="text-center lead p-1 my-1">
         Hello, { currUser.username }
       </Alert>
       <div className="mx-4 my-2 px-1 row text-center">

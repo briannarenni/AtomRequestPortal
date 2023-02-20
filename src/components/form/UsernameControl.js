@@ -1,22 +1,20 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { Field, ErrorMessage } from 'formik';
 
-export default function UsernameControl({ value, onChange, error, submitted }) {
+export default function UsernameControl({ name, error, touched }) {
   return (
     <Form.Group className="mb-3" controlId="username">
       <Form.Label>Username</Form.Label>
-      <Form.Control
+      <Field
+        as={ Form.Control }
         type="text"
-        name="username"
+        name={ name }
         placeholder="Enter username"
-        required
-        isValid={ (value.trim() && submitted && !error) }
-        isInvalid={ (!value.trim() && submitted) || (error) }
-        onChange={ onChange }
+        isValid={ !error && touched }
+        isInvalid={ !!error && touched }
       />
-      <Form.Control.Feedback type="invalid">
-        { error || "Username cannot be blank" }
-      </Form.Control.Feedback>
+      <ErrorMessage name={ name } component={ Form.Control.Feedback } type="invalid" />
     </Form.Group>
   );
 }
