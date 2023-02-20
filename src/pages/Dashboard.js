@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Dashboard() {
   const { isLoggedIn, currUser, isManager } = useAuth();

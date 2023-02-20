@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/Forms.module.css';
+import styles from '../assets/styles/Forms.module.css';
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import { useAuth } from '../AuthContext';
-import { UsernameControl, PasswordControl, ConfirmPasswordControl } from '../modules/ComponentModule';
-import { registerUser } from "../modules/ServiceModule";
+import { useAuth } from '../hooks/useAuth';
+import { UsernameControl, PasswordControl, ConfirmPasswordControl } from '../components/form';
+import { registerUser } from "../data";
 
 export default function Register() {
   const navigate = useNavigate();

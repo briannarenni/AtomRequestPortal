@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import { updateUserPassword } from "../modules/ServiceModule";
-import { PasswordControl, ConfirmPasswordControl } from '../modules/ComponentModule';
+import { PasswordControl, ConfirmPasswordControl } from '../components/form';
 
 export default function ChangePassword() {
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ export default function ChangePassword() {
         </ConfirmPasswordControl>
 
         <Form.Group className="mt-4">
-          <Button type="submit" id="reset-btn" className="btn w-100">Update Password</Button>
+          <Button type="submit" className="w-100">Update Password</Button>
         </Form.Group>
       </Form>
     </>

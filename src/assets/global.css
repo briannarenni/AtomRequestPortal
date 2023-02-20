@@ -1,3 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap');
+
+:root {
+  --light: #f8f9fa;
+  --dark: #070707;
+  --light-grey: #4f4f4f;
+  --blue: dodgerblue;
+  --blue-text: rgb(25, 119, 213);
+  --modal-dark: #0b0e0f;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 2px;
+  padding: 5px 15px;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Arial', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .btn {
   padding: 10px 20px;
 }
@@ -18,7 +39,7 @@
   border-color: var(--blue);
 }
 
-.form-check-label{
+.form-check-label {
   font-style: italic;
 }
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../styles/Navbar.module.css';
+import styles from '../../assets/styles/Navbar.module.css';
 import { Button, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function AppHeader() {
   const { isLoggedIn, isManager, logout } = useAuth();

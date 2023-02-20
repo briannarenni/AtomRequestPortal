@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/Forms.module.css';
+import styles from '../assets/styles/Forms.module.css';
 import { useNavigate } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import { useAuth } from '../AuthContext';
-import { UsernameControl, PasswordControl } from '../components/FormControls';
-import { loginUser } from "../modules/ServiceModule";
+import { useAuth } from '../hooks/useAuth';
+import { UsernameControl, PasswordControl } from '../components/form';
+import { loginUser } from "../data";
 
 export default function Login() {
   const navigate = useNavigate();

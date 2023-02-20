@@ -1,24 +1,22 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import './App.css';
-import { AppHeader, Landing, FAQ, Login, Register, Dashboard, ChangePassword } from './modules/PageModule';
-import { NotFound, BackBtn } from './modules/ComponentModule';
-import { AuthProvider } from './AuthContext';
+import { Navbar, NotFound, BackBtn } from './components/ui';
+import { Landing, FAQ, Login, Register, Dashboard } from './pages';
+import { AuthProvider } from './hooks/useAuth';
 
 export default function App() {
 
   return (
     <AuthProvider>
       <div className="App">
-        <AppHeader />
+        <Navbar />
         <BackBtn />
         <Routes>
           <Route path="/" element={ <Landing /> } />
-          <Route path="/faq" element={ <FAQ /> } />
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
+          <Route path="/faq" element={ <FAQ /> } />
           <Route path="/dashboard" element={ <Dashboard /> } />
-          <Route path="/password" element={ <ChangePassword /> } />
           <Route path="*" element={ <NotFound /> } />
         </Routes>
       </div>
