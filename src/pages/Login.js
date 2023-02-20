@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../assets/styles/Forms.module.css';
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
-import { UsernameControl, PasswordControl } from '../components/form';
+import { PageHeader } from "../components/ui";
+import { UsernameControl, PasswordControl, SubmitBtn } from '../components/form';
 import { loginUser } from "../data";
 
 export default function Login() {
@@ -51,8 +52,9 @@ export default function Login() {
 
   return (
     <>
-      <h1 className="text-center">Account Login</h1>
-      <Form noValidate onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
+      <PageHeader title='Account Login' />
+      <Form noValidate onSubmit={ handleSubmit } className={ styles.formContainer }>
+        <p className={ styles.formNote }>For forgotten passwords, please speak to HR for reset.</p>
         <UsernameControl
           value={ username }
           onChange={ (event) => {
@@ -73,11 +75,7 @@ export default function Login() {
           submitted={ formSubmitted }>
         </PasswordControl>
 
-        <Form.Group className="mb-2">
-          <Button type="submit" className="w-100">Log In</Button>
-        </Form.Group>
-
-        <p className={ styles.formNote }>For forgotten passwords, please speak to HR for reset.</p>
+        <SubmitBtn />
       </Form>
     </>
   );

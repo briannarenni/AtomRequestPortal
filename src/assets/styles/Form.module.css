@@ -1,3 +1,8 @@
+.formContainer {
+  width: 45%;
+  margin: 0 auto;
+}
+
 .formNote {
   text-align: center;
   font-size: .8rem;

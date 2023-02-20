@@ -7,7 +7,7 @@
 node_modules/
 /wwwroot/node_modules
 bower_components/
-.eslintrc
+.eslintrc.json
 
 todos.md
 psd

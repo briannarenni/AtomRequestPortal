@@ -13,7 +13,7 @@ export default function BackBtn() {
 
   return (
     <Link to={ -1 }>
-      <Button size="sm" variant="outline-primary" className="mx-4 my-0">← Back</Button>
+      <Button size="sm" variant="outline-primary" className="mx-4 my-1 px-2 py-1">← Back</Button>
     </Link>
   )
 }

@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <div className="App">
+      <div className="App container-fluid">
         <Navbar />
         <BackBtn />
         <Routes>

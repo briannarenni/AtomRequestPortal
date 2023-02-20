@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../hooks/useAuth';
+import { PageHeader } from "../components/ui";
 
 export default function Dashboard() {
   const { isLoggedIn, currUser, isManager } = useAuth();
@@ -34,15 +35,20 @@ export default function Dashboard() {
 
   return (
     <>
-      <h1 className="text-center my-1">{ isManager ? 'Manager Dashboard' : 'Employee Dashboard' }</h1>
-      <h5 className="text-center fst-italic my-3">Welcome back { currUser.username }</h5>
-      <div className="mx-4 px-2 row text-center">
+      <PageHeader title={ isManager ? 'Manager Dashboard' : 'Employee Dashboard' } />
+      <Alert variant="info"
+        className="text-center fw-light p-2 my-1">
+        Hello, { currUser.username }
+      </Alert>
+      <div className="mx-4 my-2 px-1 row text-center">
         { Object.entries(menu).map(([btnText, desc]) => (
           <Card key={ btnText } className="col-sm-5 mx-auto my-3 px-3 py-4" >
-            <Card.Body>
-              <Card.Text className="lead">{ desc }</Card.Text>
-              <Button size="lg" variant="primary" className="mx-auto mt-2">{ btnText }</Button>
-            </Card.Body>
+            <Button size="lg"
+              variant="primary"
+              className="mx-auto mt-2 p-3">
+              { btnText }
+            </Button>
+            <Card.Text className="lead mt-4 mb-2">{ desc }</Card.Text>
           </Card>
         )) }
       </div>

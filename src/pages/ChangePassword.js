@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
 import { updateUserPassword } from "../modules/ServiceModule";
+import { PageHeader } from "../components/ui";
 import { PasswordControl, ConfirmPasswordControl } from '../components/form';
+import { PageHeader } from "../components/ui";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
@@ -50,11 +53,10 @@ export default function ChangePassword() {
 
   return (
     <>
-      <h1 className="text-center my-4">Reset Password</h1>
-
+      <PageHeader title="Update User Password" />
       { userMessage && (<h3>{ userMessage }</h3>) }
 
-      <Form noValidate onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
+      <Form noValidate onSubmit={ handleSubmit } className={ styles.formContainer }>
         <PasswordControl
           value={ password }
           onChange={ (event) => {
@@ -75,8 +77,8 @@ export default function ChangePassword() {
           submitted={ formSubmitted }>
         </ConfirmPasswordControl>
 
-        <Form.Group className="mt-4">
-          <Button type="submit" className="w-100">Update Password</Button>
+        <Form.Group className="mb-2 w-50 mx-auto">
+          <Button type="submit" className="w-100">Update</Button>
         </Form.Group>
       </Form>
     </>

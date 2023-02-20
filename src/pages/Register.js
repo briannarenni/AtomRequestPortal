@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../assets/styles/Forms.module.css';
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
-import { UsernameControl, PasswordControl, ConfirmPasswordControl } from '../components/form';
+import { PageHeader } from "../components/ui";
+import { UsernameControl, PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
 import { registerUser } from "../data";
 
 export default function Register() {
@@ -51,7 +52,7 @@ export default function Register() {
 
   return (
     <>
-      <h1 className="text-center">Register New Employee</h1>
+      <PageHeader title="Register Employee" />
       <p className="text-center mx-auto">
         <span className={ styles.formNote }>
           <span className="fw-bold">HR Note: </span>
@@ -60,7 +61,7 @@ export default function Register() {
         </span>
       </p>
 
-      <Form noValidate onSubmit={ handleSubmit } className="w-50 mx-auto my-3">
+      <Form noValidate onSubmit={ handleSubmit } className={ styles.formContainer }>
         <UsernameControl
           value={ username }
           onChange={ (event) => {
@@ -91,9 +92,7 @@ export default function Register() {
           submitted={ formSubmitted }>
         </ConfirmPasswordControl>
 
-        <Form.Group className="mt-4">
-          <Button type="submit" className="w-100">Register</Button>
-        </Form.Group>
+        <SubmitBtn />
       </Form>
     </>
   );
