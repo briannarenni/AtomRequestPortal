@@ -34,7 +34,7 @@ export default function Dashboard() {
   const menu = isManager ? managerMenu : employeeMenu;
 
   return (
-    <>
+    <div className='container-sm'>
       <PageHeader title={ isManager ? 'Manager Dashboard' : 'Employee Dashboard' } />
       <Alert variant="info"
         className="text-center lead p-1 my-1">
@@ -52,7 +52,7 @@ export default function Dashboard() {
           </Card>
         )) }
       </div>
-    </>
+    </div>
   )
 }
 
