@@ -3,5 +3,16 @@
 This app pairs with my [RequestAPI](https://github.com/briannarenni/RequestAPI). The original project included a console application, so I decided to upgrade the API and make a client web app to get more experience with React.
 
 ---
+## Project Dependencies
+*All licensed under the MIT License*
+
+- [react-router](https://reactrouter.com/)
+- [react-bootstrap](https://react-bootstrap.github.io/)
+- [axios](https://axios-http.com/)
+- [Formik](https://formik.org/)
+- [Yup](https://github.com/jquense/yup)
+- [Feather icons](https://feathericons.com/)
+
+---
 <small>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</small>
 

@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useNavigate } from "react-router-dom";
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
+import { validatePass } from '../utils';
 import { updateUserPassword } from "../modules/ServiceModule";
 import { PageHeader } from "../components/ui";
 import { PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
@@ -29,10 +30,9 @@ export default function ChangePassword() {
     confirm: '',
   };
 
-  const validationSchema = Yup.object().shape({
-    username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Password is required'),
-    confirm: Yup.string().required('Password confirmation is required'),
+  const schema = Yup.object().shape({
+    password: Yup.string().required('Required field'),
+    confirm: Yup.string().required('Required field'),
   });
 
   const updatePassword = async () => {
@@ -42,8 +42,14 @@ export default function ChangePassword() {
   }
 
   const onSubmit = async (values, { setFieldError }) => {
+    const { errors, validatePassword } = validatePass(values.password);
+
+    if (!validatePassword) {
+      const errorMessage = errors.join(" ");
+      setFieldError('password', errorMessage);
+    }
+
     if (values.password !== values.confirm) {
-      setFieldError('password', "Passwords don't match");
       setFieldError('confirm', "Passwords don't match");
       return;
     }
@@ -60,7 +66,7 @@ export default function ChangePassword() {
 
       <Formik
         initialValues={ initialValues }
-        validationSchema={ validationSchema }
+        validationSchema={ schema }
         onSubmit={ onSubmit }
       >
         { ({ isValid, dirty, errors, touched }) => (
