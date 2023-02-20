@@ -10,7 +10,7 @@ export default function PasswordControl({ name, error, touched }) {
 
   return (
     <Form.Group className="mb-3" controlId="password">
-      <Form.Label className="lead">Password</Form.Label>
+      <Form.Label className="fw-light">Password</Form.Label>
       <InputGroup>
         <Field
           as={ Form.Control }
@@ -34,10 +34,15 @@ export default function PasswordControl({ name, error, touched }) {
           onClick={ () => setShowPassword(!showPassword) }
           aria-label={ showPassword ? 'Hide password' : 'Show password' }>
 
-          <Image src={ showPassword ? showEye : hideEye } alt={ !showPassword ? 'Show password' : 'Hide password' } />
+          <Image src={ showPassword ? showEye : hideEye }
+            alt={ !showPassword ? 'Show password' : 'Hide password' } />
         </Button>
 
-        <ErrorMessage name={ name } component={ Form.Control.Feedback } type="invalid" className="fst-italic" />
+        <ErrorMessage
+          name={ name }
+          component={ Form.Control.Feedback }
+          type="invalid"
+          className="fst-italic" />
       </InputGroup>
 
     </Form.Group>

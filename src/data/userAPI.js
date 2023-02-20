@@ -12,9 +12,9 @@ export const loginUser = async (username, password) => {
   }
 };
 
-export const registerUser = async (username, password) => {
+export const registerUser = async (username, password, firstName, lastName) => {
   try {
-    const response = await axios.post(`${apiURL}/users/register`, { username, password });
+    const response = await axios.post(`${apiURL}/users/register`, { username, password, firstName, lastName });
     return response;
   } catch (error) {
     return (error.response) ? error.response.data : 'Internal API Error';

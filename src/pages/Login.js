@@ -26,8 +26,8 @@ export default function Login() {
   };
 
   const schema = Yup.object().shape({
-    username: Yup.string().required('Username cannot be blank'),
-    password: Yup.string().required('Password cannot be blank'),
+    username: Yup.string().required('Required field'),
+    password: Yup.string().required('Required field'),
   });
 
   const onSubmit = async (values, { setFieldError }) => {
@@ -42,7 +42,7 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div className='container-xs'>
       <header>
         <PageHeader title='Account Login' />
         <p className={ styles.formNote }>
@@ -74,7 +74,7 @@ export default function Login() {
           </Form>
         ) }
       </Formik>
-    </>
+    </div>
   );
 }
 

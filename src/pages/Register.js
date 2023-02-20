@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import styles from '../assets/styles/Form.module.css';
+import { Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { validatePass } from '../utils';
 import { PageHeader } from "../components/ui";
-import { UsernameControl, PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
+import { FNameControl, LNameControl, UsernameControl, PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
 import { registerUser } from "../data";
 
 export default function Register() {
@@ -21,12 +22,16 @@ export default function Register() {
   }, [currUser, setIsLoggedIn, navigate]);
 
   const initialValues = {
+    firstName: "",
+    lastName: "",
     username: '',
     password: '',
     confirm: '',
   };
 
   const schema = Yup.object().shape({
+    firstName: Yup.string().required('Required field'),
+    lastName: Yup.string().required('Required field'),
     username: Yup.string().required('Required field'),
     password: Yup.string().required('Required field'),
     confirm: Yup.string().required('Required field'),
@@ -45,7 +50,7 @@ export default function Register() {
       return;
     }
 
-    const response = await registerUser(values.username, values.password);
+    const response = await registerUser(values.firstName, values.lastName, values.username, values.password);
 
     if (response === 'Username already registered') {
       setFieldError('username', response);
@@ -55,9 +60,9 @@ export default function Register() {
   };
 
   return (
-    <>
+    <div className='container-xs'>
       <header>
-        <PageHeader title='Register Employee' />
+        <PageHeader title='Register Employee Account' />
       </header>
 
       <Formik
@@ -67,6 +72,25 @@ export default function Register() {
       >
         { ({ isValid, dirty, errors, touched }) => (
           <Form className={ styles.formContainer }>
+            <div className='mt-4'>
+              <Row>
+                <Col>
+                  <FNameControl
+                    name='firstName'
+                    error={ errors.firstName }
+                    touched={ touched.firstName }
+                  />
+                </Col>
+                <Col>
+                  <LNameControl
+                    name='lastName'
+                    error={ errors.lastName }
+                    touched={ touched.lastName }
+                  />
+                </Col>
+              </Row>
+            </div>
+
             <UsernameControl
               name='username'
               error={ errors.username }
@@ -96,6 +120,6 @@ export default function Register() {
           </Form>
         ) }
       </Formik>
-    </>
+    </div>
   );
 }

@@ -1,8 +1,10 @@
-// App Models
+// API Models
 export class User {
-  constructor(userId, username, role, numPending, numSubmitted) {
+  constructor(userId, username, fName, lName, role, numPending, numSubmitted) {
     this.userId = userId;
     this.username = username;
+    this.firstName = fName;
+    this.lastName = lName;
     this.role = role;
     this.numPending = numPending;
     this.numSubmitted = numSubmitted;
@@ -10,7 +12,7 @@ export class User {
 }
 
 export class Ticket {
-  constructor(ticketId, submittedOn, submittedBy, employeeName, amount, category, status) {
+  constructor(ticketId, submittedOn, submittedBy, employeeName, amount, category, status, comments) {
     this.ticketId = ticketId;
     this.submittedOn = submittedOn;
     this.submittedBy = submittedBy;
@@ -18,5 +20,6 @@ export class Ticket {
     this.amount = amount;
     this.category = category;
     this.status = status;
+    this.comments = comments;
   }
 }
