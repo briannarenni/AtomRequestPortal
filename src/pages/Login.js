@@ -25,7 +25,7 @@ export default function Login() {
     password: '',
   };
 
-  const validationSchema = Yup.object().shape({
+  const schema = Yup.object().shape({
     username: Yup.string().required('Username cannot be blank'),
     password: Yup.string().required('Password cannot be blank'),
   });
@@ -52,7 +52,7 @@ export default function Login() {
 
       <Formik
         initialValues={ initialValues }
-        validationSchema={ validationSchema }
+        validationSchema={ schema }
         onSubmit={ onSubmit }
       >
         { ({ isValid, dirty, errors, touched }) => (

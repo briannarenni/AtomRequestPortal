@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
+import { validatePass } from '../utils';
 import { PageHeader } from "../components/ui";
 import { UsernameControl, PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
 import { registerUser } from "../data";
@@ -25,52 +26,46 @@ export default function Register() {
     confirm: '',
   };
 
-  const validationSchema = Yup.object().shape({
-    username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Password is required'),
-    confirm: Yup.string().required('Password confirmation is required'),
+  const schema = Yup.object().shape({
+    username: Yup.string().required('Required field'),
+    password: Yup.string().required('Required field'),
+    confirm: Yup.string().required('Required field'),
   });
 
-  const handleLogin = async (values, { setFieldError }) => {
-    const response = await registerUser(values.username, values.password);
-
-    if (response === 'Username already registered') {
-      setFieldError('username', response);
-      return;
-    } else {
-      setCurrUser(response.data);
-    }
-  }
-
   const onSubmit = async (values, { setFieldError }) => {
+    const { errors, validatePassword } = validatePass(values.password);
+
+    if (!validatePassword) {
+      const errorMessage = errors.join(" ");
+      setFieldError('password', errorMessage);
+    }
+
     if (values.password !== values.confirm) {
-      setFieldError('password', "Passwords don't match");
       setFieldError('confirm', "Passwords don't match");
       return;
     }
 
-    handleLogin();
+    const response = await registerUser(values.username, values.password);
+
+    if (response === 'Username already registered') {
+      setFieldError('username', response);
+    } else {
+      setCurrUser(response.data);
+    }
   };
 
   return (
     <>
       <header>
         <PageHeader title='Register Employee' />
-        <p className={ styles.formNote }>
-          <span className={ styles.formNote }>
-            <span className="fw-bold">HR Note: </span>
-            New usernames may contain numbers, but no spaces or special chars.
-            <br /> (ex. BrianSmith, BSmith, BSmith12)
-          </span>
-        </p>
       </header>
 
       <Formik
         initialValues={ initialValues }
-        validationSchema={ validationSchema }
+        validationSchema={ schema }
         onSubmit={ onSubmit }
       >
-        { ({ isValid, dirty, errors, touched}) => (
+        { ({ isValid, dirty, errors, touched }) => (
           <Form className={ styles.formContainer }>
             <UsernameControl
               name='username'
@@ -90,7 +85,14 @@ export default function Register() {
               touched={ touched.confirm }
             />
 
-            <SubmitBtn btnTxt='Register' disabled={ !isValid || !dirty } />
+            <SubmitBtn btnTxt='Register Account' disabled={ !isValid || !dirty } />
+
+            <div className={ styles.formNote }>
+              <p>Username may contain numbers, but no spaces or special chars.
+                <br />
+                Password must be at least 8 characters.
+              </p>
+            </div>
           </Form>
         ) }
       </Formik>

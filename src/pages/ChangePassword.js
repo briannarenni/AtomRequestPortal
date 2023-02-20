@@ -35,12 +35,6 @@ export default function ChangePassword() {
     confirm: Yup.string().required('Required field'),
   });
 
-  const updatePassword = async () => {
-    const response = await updateUserPassword(userId, password, confirmedPassword);
-
-    // setUserMessage(response.data);
-  }
-
   const onSubmit = async (values, { setFieldError }) => {
     const { errors, validatePassword } = validatePass(values.password);
 
@@ -54,7 +48,9 @@ export default function ChangePassword() {
       return;
     }
 
-    updatePassword();
+    const response = await updateUserPassword(userId, password, confirmedPassword);
+
+    // setUserMessage(response.data);
   }
 
   return (
