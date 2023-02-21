@@ -12,6 +12,7 @@ This app pairs with my [RequestAPI](https://github.com/briannarenni/RequestAPI).
 - [Formik](https://formik.org/)
 - [Yup](https://github.com/jquense/yup)
 - [Feather icons](https://feathericons.com/)
+- [SVG Repo](https://www.svgrepo.com)
 
 ---
 <small>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</small>
