@@ -6,25 +6,25 @@ export default function validatePass(password) {
     return spaceRegex.test(password);
   };
 
-  const checkSpecialChars = (password) => {
-    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-    return specialCharRegex.test(password);
-  };
-
   const checkMinLength = (password) => {
     return password.length >= 7;
   };
 
-  if (!checkMinLength(password)) {
-    errors.push("❌ Must be at least 7 characters long");
-  }
+  const checkSpecialChars = (password) => {
+    const specialCharRegex = /[^A-Za-z0-9]/;
+    return specialCharRegex.test(password);
+  };
 
   if (checkSpaces(password)) {
     errors.push("❌ No spaces allowed");
   }
 
-  if (checkSpecialChars(password)) {
-    errors.push("❌ No special characters allowed");
+  if (!checkMinLength(password)) {
+    errors.push("❌ Must be at least 7 characters long");
+  }
+
+  if (!checkSpecialChars(password)) {
+    errors.push("❌ Must have at least 1 special character");
   }
 
   return {

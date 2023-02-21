@@ -32,22 +32,24 @@ export default function Register() {
   const schema = Yup.object().shape({
     firstName: Yup.string().required('Required field'),
     lastName: Yup.string().required('Required field'),
-    username: Yup.string().required('Required field'),
+    username: Yup.string()
+      .required('Required field')
+      .matches(/^[a-zA-Z0-9_]+(?!.*\s).*$/, '❌ No special characters allowed'),
     password: Yup.string().required('Required field'),
     confirm: Yup.string().required('Required field'),
   });
 
   const onSubmit = async (values, { setFieldError }) => {
+    if (values.password !== values.confirm) {
+      setFieldError('confirm', "Passwords don't match");
+      return;
+    }
+
     const { errors, validatePassword } = validatePass(values.password);
 
     if (!validatePassword) {
       const errorMessage = errors.join(" ");
       setFieldError('password', errorMessage);
-    }
-
-    if (values.password !== values.confirm) {
-      setFieldError('confirm', "Passwords don't match");
-      return;
     }
 
     const response = await registerUser(values.firstName, values.lastName, values.username, values.password);

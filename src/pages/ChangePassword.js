@@ -36,16 +36,16 @@ export default function ChangePassword() {
   });
 
   const onSubmit = async (values, { setFieldError }) => {
+    if (values.password !== values.confirm) {
+      setFieldError('confirm', "Passwords don't match");
+      return;
+    }
+
     const { errors, validatePassword } = validatePass(values.password);
 
     if (!validatePassword) {
       const errorMessage = errors.join(" ");
       setFieldError('password', errorMessage);
-    }
-
-    if (values.password !== values.confirm) {
-      setFieldError('confirm', "Passwords don't match");
-      return;
     }
 
     const response = await updateUserPassword(userId, password, confirmedPassword);
