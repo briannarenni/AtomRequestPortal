@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { Field, ErrorMessage } from 'formik';
 import { Form, InputGroup, Button, Image } from 'react-bootstrap';
-import showEye from '../../assets/show-eye.svg';
-import hideEye from '../../assets/hide-eye.svg';
+import showEye from '../../assets/icons/show-eye.svg';
+import hideEye from '../../assets/icons/hide-eye.svg';
 
 export default function ConfirmPasswordControl({ name, error, touched }) {
   const [showPassword, setShowPassword] = useState(false);

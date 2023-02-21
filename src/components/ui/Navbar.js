@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../../assets/styles/Navbar.module.css';
-import { Button, Navbar, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import {Navbar, Nav, Image } from 'react-bootstrap';
 import { useAuth } from '../../hooks/useAuth';
+import { FAQBtn, ProfileBtn, LogoutBtn } from "../btn";
+import logo from '../../assets/logo.svg';
 
 export default function AppHeader() {
   const { isLoggedIn, isManager, logout } = useAuth();
@@ -13,58 +13,31 @@ export default function AppHeader() {
   }
 
   return (
-    <Navbar expand="md" className="d-flex justify-content-between mx-1 mb-2 border-bottom border-bottom-secondary">
+    <Navbar expand="md" className="d-flex justify-content-between mx-1 mb-1 border-bottom border-bottom-secondary">
       <Navbar.Brand href="/dashboard" className="fst-italic fw-bold fs-6">
-        <img
-          src="https://seeklogo.com/images/A/Aaperture_Science__Portal_-logo-84EA44F1CB-seeklogo.com.png"
-          alt="logo" height="60" className="me-2" />
-        <span className={ styles.logoName }>Request Portal</span>
+        <Image src={ logo } alt={ 'Logo' } width={ 40 } height={ 40 } />
+        <span className="logoName">AtomPortal</span>
       </Navbar.Brand>
 
       {/*  eslint-disable-next-line */ }
-      <Nav className="${styles.navContainer} justify-content-end gap-2 mx-1">
-        { !isLoggedIn && (
-          <Link to="/faq">
-            <Button variant="outline-primary" className={ styles.navBtn }>FAQ</Button>
-          </Link>
-        ) }
+      <Nav className="justify-content-end gap-2 mx-1">
+        { !isLoggedIn && <FAQBtn /> }
+
         { isLoggedIn && (
           <>
             { !isManager && (
               <>
-                <Link to="/faq">
-                  <Button variant="outline-primary" className={ styles.navBtn }>FAQ</Button>
-                </Link>
-                <Link to="/account">
-                  <Button variant="outline-primary" className={ styles.navBtn }>Profile</Button>
-                </Link>
-                <Link to="/">
-                  <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
-                </Link>
+                <FAQBtn />
+
+                <ProfileBtn />
+                <LogoutBtn handler={ handleLogout } />
               </>
             ) }
             { isManager && (
-              <Link to="/">
-                <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
-              </Link>
+              <LogoutBtn handler={ handleLogout } />
             ) }
           </>
         ) }
-        {/*
-        <Link to="/faq">
-          <Button variant="outline-primary" className={ styles.navBtn }>FAQ</Button>
-        </Link>
-        { isLoggedIn && (
-          <>
-            <Link to="/account">
-              <Button variant="outline-primary" className={ styles.navBtn }>Profile</Button>
-            </Link>
-
-            <Link to="/">
-              <Button variant="outline-danger" onClick={ handleLogout } className={ styles.logoutBtn }>Logout</Button>
-            </Link>
-          </>
-        ) } */}
       </Nav>
     </Navbar>
   )

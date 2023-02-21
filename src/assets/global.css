@@ -1,12 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
 :root {
   --light: #f8f9fa;
   --dark: #070707;
   --light-grey: #4f4f4f;
   --blue: dodgerblue;
-  --blue-text: rgb(25, 119, 213);
+  --blue-text: #357fee;
+  --blue-new: rgba(90, 111, 243, 0.799);
+  --red-secondary: rgb(252, 56, 56);
+  --banner-success-bkg: #6ffa6760;
+  --banner-success-bdr: #6efa67a8;
+  --banner-error-bkg: rgba(255, 0, 0, 0.581);
+  --banner-error-bdr: red;
   --modal-dark: #0b0e0f;
 }
 
@@ -23,20 +30,46 @@ body {
   padding: 10px 20px;
 }
 
+.logoName {
+  font-family: 'Chakra Petch', sans-serif;
+  margin-left: 10px;
+  letter-spacing: 1px;
+}
+
 .btn-primary {
   background-color: var(--blue);
   border-color: var(--blue);
 }
 
-.btn-outline-primary {
-  color: var(--blue-text) !important;
+
+.btn-outline-primary:hover {
+
+}
+
+.btn-outline-primary:active {
+  color: var(--light) !important;
+  background-color: var(--blue-bkg);
   border-color: var(--blue);
 }
 
-.btn-outline-primary:hover {
+.btn-back {
+  color: var(--blue-text) !important;
+  font-family: 'Raleway';
+  font-style: normal;
+  border-color: none !important;
+  background-color: none !important;
+}
+
+.btn-back:hover {
   color: var(--light) !important;
-  background-color: var(--blue);
-  border-color: var(--blue);
+    border-color: var(--blue);
+    background-color: var(--blue) !important;
+}
+
+.btn-back:active {
+  color: var(--light) !important;
+  background-color: var(--blue-new) !important;
+  border-color: var(--blue--text) !important;
 }
 
 .form-control::placeholder {

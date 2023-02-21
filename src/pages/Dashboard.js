@@ -1,8 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from '../assets/styles/Banner.module.css';
 import { Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../hooks/useAuth';
-import { PageHeader } from "../components/ui";
+import { PageHeader } from '../components/ui';
+import { MessageIcon } from '../components/icon';
 
 export default function Dashboard() {
   const { isLoggedIn, currUser, isManager } = useAuth();
@@ -19,7 +21,7 @@ export default function Dashboard() {
     'Submit Request': 'New Reimbursement Request',
     'Check Pending': 'See Pending Requests',
     'Request History': 'See Completed Requests',
-    'Update Password': 'Update Account Password',
+    'User Details': 'See User Profile Details',
   };
 
   const managerMenu = {
@@ -28,21 +30,24 @@ export default function Dashboard() {
     'Manage Roles': 'Update Employee Roles',
     'See Employee Roster': 'See All Employees',
     'Add New Employee': 'Register Employee Account',
-    'Update Password': 'Update Account Password',
+    'User Details': 'See User Profile Details',
   };
 
   const menu = isManager ? managerMenu : employeeMenu;
 
   return (
     <div className='container-sm'>
+
       <PageHeader title={ isManager ? 'Manager Dashboard' : 'Employee Dashboard' } />
-      <Alert variant="info"
-        className="text-center lead p-1 my-1">
-        Hello, { currUser.username }
+
+      <Alert variant="none" className={ styles.bannerSuccess }>
+        <MessageIcon />
+        <span className="mx-1">Hello, { currUser.firstName } { currUser.lastName }</span>
       </Alert>
+
       <div className="mx-4 my-2 px-1 row text-center">
         { Object.entries(menu).map(([btnText, desc]) => (
-          <Card key={ btnText } className="col-sm-5 mx-auto my-3 px-3 py-4" >
+          <Card key={ btnText } className="col-sm-5 mx-auto my-2 px-3 py-4" >
             <Button size="lg"
               variant="primary"
               className="mx-auto mt-2 p-3">

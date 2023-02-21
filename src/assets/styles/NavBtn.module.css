@@ -1,0 +1,40 @@
+.navBtn {
+  font-size: .9rem;
+  max-width: 150px;
+  color: var(--blue-new) !important;
+  border-width: 1.5px;
+  border-color: transparent !important;
+  border-radius: 35px 20px;
+}
+
+.navBtn:hover {
+  color: var(--light) !important;
+  background-color: var(--blue) !important;
+}
+
+.navBtn:active {
+  color: var(--light) !important;
+  background-color: var(--blue-new) !important;
+  border-color: var(--blue--text) !important;
+}
+
+.logoutBtn {
+  font-size: .9rem;
+  max-width: 150px;
+  border: none;
+}
+
+.logoutBtn:hover {
+  font-size: .9rem;
+  max-width: 150px;
+  border-width: 1px;
+  border-radius: 35px 20px;
+}
+
+.logoutBtn:active {
+  font-size: .9rem;
+  max-width: 150px;
+  border-width: 1px;
+  border-radius: 35px 20px;
+  background-color: var(--red-secondary) !important;
+}
