@@ -16,15 +16,15 @@ export default function validatePass(password) {
   };
 
   if (checkSpaces(password)) {
-    errors.push("❌ No spaces allowed");
+    errors.push('❌ No spaces allowed');
   }
 
   if (!checkMinLength(password)) {
-    errors.push("❌ Must be at least 7 characters long");
+    errors.push('❌ Must be at least 7 characters long');
   }
 
   if (!checkSpecialChars(password)) {
-    errors.push("❌ Must have at least 1 special character");
+    errors.push('❌ Must have at least 1 special character');
   }
 
   return {

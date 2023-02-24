@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import styles from '../assets/styles/Form.module.css';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+
+import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
 import { validatePass } from '../utils';
-import { PageHeader } from "../components/ui";
-import { FNameControl, LNameControl, UsernameControl, PasswordControl, ConfirmPasswordControl, SubmitBtn } from '../components/form';
-import { registerUser } from "../data";
+import { PageHeader } from '../components/ui';
+import * as Control from '../components/form';
+import { registerUser } from '../data';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,8 +23,8 @@ export default function Register() {
   }, [currUser, setIsLoggedIn, navigate]);
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    firstName: '',
+    lastName: '',
     username: '',
     password: '',
     confirm: '',
@@ -33,94 +34,109 @@ export default function Register() {
     firstName: Yup.string().required('Required field'),
     lastName: Yup.string().required('Required field'),
     username: Yup.string()
-      .required('Required field')
+      .required('❌ Required')
       .matches(/^[a-zA-Z0-9_]+(?!.*\s).*$/, '❌ No special characters allowed'),
-    password: Yup.string().required('Required field'),
-    confirm: Yup.string().required('Required field'),
+    password: Yup.string().required('❌ Required'),
+    confirm: Yup.string().required('❌ Required'),
   });
 
   const onSubmit = async (values, { setFieldError }) => {
     if (values.password !== values.confirm) {
-      setFieldError('confirm', "Passwords don't match");
+      setFieldError('password', '❌ Passwords must match');
+      setFieldError('confirm', '❌ Passwords must match');
       return;
     }
 
     const { errors, validatePassword } = validatePass(values.password);
 
     if (!validatePassword) {
-      const errorMessage = errors.join(" ");
+      const errorMessage = errors.join(' ');
       setFieldError('password', errorMessage);
+      return;
     }
 
-    const response = await registerUser(values.firstName, values.lastName, values.username, values.password);
+    const response = await registerUser(
+      values.firstName,
+      values.lastName,
+      values.username,
+      values.password
+    );
 
     if (response === 'Username already registered') {
       setFieldError('username', response);
+      return;
     } else {
       setCurrUser(response.data);
     }
   };
 
   return (
-    <div className='container-xs'>
+    <div className="container-xs">
       <header>
-        <PageHeader title='Register Employee Account' />
+        <PageHeader title="Register Employee Account" />
       </header>
 
       <Formik
-        initialValues={ initialValues }
-        validationSchema={ schema }
-        onSubmit={ onSubmit }
-      >
-        { ({ isValid, dirty, errors, touched }) => (
-          <Form className={ styles.formContainer }>
-            <div className='mt-4'>
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={onSubmit}>
+        {({ errors, touched }) => (
+          <Form className={styles.formContainer}>
+            <div className="mt-4">
               <Row>
                 <Col>
-                  <FNameControl
-                    name='firstName'
-                    error={ errors.firstName }
-                    touched={ touched.firstName }
+                  <Control.FirstName
+                    name="firstName"
+                    error={errors.firstName}
+                    touched={touched.firstName}
                   />
                 </Col>
                 <Col>
-                  <LNameControl
-                    name='lastName'
-                    error={ errors.lastName }
-                    touched={ touched.lastName }
+                  <Control.LastName
+                    name="lastName"
+                    error={errors.lastName}
+                    touched={touched.lastName}
                   />
                 </Col>
               </Row>
             </div>
 
-            <UsernameControl
-              name='username'
-              error={ errors.username }
-              touched={ touched.username }
+            <Control.Username
+              name="username"
+              error={errors.username}
+              touched={touched.username}
             />
 
-            <PasswordControl
-              name='password'
-              error={ errors.password }
-              touched={ touched.password }
+            <Row>
+              <Col>
+                <Control.Password
+                  name="password"
+                  error={errors.password}
+                  touched={touched.password}
+                />
+              </Col>
+              <Col>
+                <Control.ConfirmPassword
+                  name="confirm"
+                  error={errors.confirm}
+                  touched={touched.confirm}
+                />
+              </Col>
+            </Row>
+
+            <Control.SubmitBtn
+              btnTxt="Register Account"
             />
 
-            <ConfirmPasswordControl
-              name='confirm'
-              error={ errors.confirm }
-              touched={ touched.confirm }
-            />
-
-            <SubmitBtn btnTxt='Register Account' disabled={ !isValid || !dirty } />
-
-            <div className={ styles.formNote }>
-              <p>Username may contain numbers, but no spaces or special chars.
+            <div className={styles.formNote}>
+              <p>
+                Username may contain numbers, but no spaces or special chars.
                 <br />
                 Password must be at least 8 characters.
               </p>
             </div>
           </Form>
-        ) }
+        )}
       </Formik>
     </div>
   );

@@ -1,5 +1,5 @@
-export { FNameControl, LNameControl } from './NameControls';
-export { default as UsernameControl } from './UsernameControl';
-export { default as PasswordControl } from './PasswordControl';
-export { default as ConfirmPasswordControl } from './ConfirmPasswordControl';
+export { FirstName, LastName } from './NameControls';
+export { default as Username } from './UsernameControl';
+export { default as Password } from './PasswordControl';
+export { default as ConfirmPassword } from './ConfirmPasswordControl';
 export { default as SubmitBtn } from './SubmitBtn';

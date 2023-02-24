@@ -11,11 +11,16 @@ function UXAlert(props) {
 
   return (
     <>
-      { message &&
-        <Alert variant="danger" dismissible show={ show } onClose={ handleClose } className="w-50 mx-auto text-center">
-          { message }
+      {message && (
+        <Alert
+          variant="danger"
+          dismissible
+          show={show}
+          onClose={handleClose}
+          className="w-50 mx-auto text-center">
+          {message}
         </Alert>
-      }
+      )}
     </>
   );
 }

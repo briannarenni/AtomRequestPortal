@@ -1,18 +1,27 @@
-// API Models
 export class User {
-  constructor(userId, username, fName, lName, role, numPending, numSubmitted) {
+  constructor(userId, username, fName, lName, role, dept, numPending, numSubmitted) {
     this.userId = userId;
     this.username = username;
     this.firstName = fName;
     this.lastName = lName;
     this.role = role;
+    this.dept = dept;
     this.numPending = numPending;
     this.numSubmitted = numSubmitted;
   }
 }
 
 export class Ticket {
-  constructor(ticketId, submittedOn, submittedBy, employeeName, amount, category, status, comments) {
+  constructor(
+    ticketId,
+    submittedOn,
+    submittedBy,
+    employeeName,
+    amount,
+    category,
+    status,
+    comments
+  ) {
     this.ticketId = ticketId;
     this.submittedOn = submittedOn;
     this.submittedBy = submittedBy;

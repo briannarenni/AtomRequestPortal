@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
-import { PageHeader } from "../components/ui";
-import { UsernameControl, PasswordControl, SubmitBtn } from '../components/form';
-import { loginUser } from "../data";
+import { PageHeader } from '../components/ui';
+import { Username, Password, SubmitBtn } from '../components/form';
+import { loginUser } from '../data';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,55 +27,55 @@ export default function Login() {
   };
 
   const schema = Yup.object().shape({
-    username: Yup.string().required('Required field'),
-    password: Yup.string().required('Required field'),
+    username: Yup.string().required('❌ Required'),
+    password: Yup.string().required('❌ Required'),
   });
 
   const onSubmit = async (values, { setFieldError }) => {
     const response = await loginUser(values.username, values.password);
     if (response === 'Username incorrect') {
       setFieldError('username', response);
+      return;
     } else if (response === 'Password incorrect') {
       setFieldError('password', response);
+      return;
     } else {
       setCurrUser(response.data);
     }
   };
 
   return (
-    <div className='container-xs'>
+    <div className="container-xs">
       <header>
-        <PageHeader title='Account Login' />
-        <p className={ styles.formNote }>
-          For forgotten passwords, please speak to HR for reset.
-        </p>
+        <PageHeader title="Account Login" />
+        <p className={styles.formNote}>For forgotten passwords, please speak to HR for reset.</p>
       </header>
 
       <Formik
-        initialValues={ initialValues }
-        validationSchema={ schema }
-        onSubmit={ onSubmit }
-      >
-        { ({ isValid, dirty, errors, touched }) => (
-          <Form className={ styles.formContainer }>
-
-            <UsernameControl
-              name='username'
-              error={ errors.username }
-              touched={ touched.username }
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={onSubmit}>
+        {({ isValid, dirty, errors, touched }) => (
+          <Form className={styles.formContainer}>
+            <Username
+              name="username"
+              error={errors.username}
+              touched={touched.username}
             />
 
-            <PasswordControl
-              name='password'
-              error={ errors.password }
-              touched={ touched.password }
+            <Password
+              name="password"
+              error={errors.password}
+              touched={touched.password}
             />
 
-            <SubmitBtn btnTxt='Login' disabled={ !isValid || !dirty } />
+            <SubmitBtn
+              btnTxt="Login"
+              disabled={!isValid || !dirty}
+            />
           </Form>
-        ) }
+        )}
       </Formik>
     </div>
   );
 }
-

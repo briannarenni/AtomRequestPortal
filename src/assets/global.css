@@ -42,9 +42,7 @@ body {
 }
 
 
-.btn-outline-primary:hover {
-
-}
+.btn-outline-primary:hover {}
 
 .btn-outline-primary:active {
   color: var(--light) !important;
@@ -56,14 +54,12 @@ body {
   color: var(--blue-text) !important;
   font-family: 'Raleway';
   font-style: normal;
-  border-color: none !important;
-  background-color: none !important;
 }
 
 .btn-back:hover {
   color: var(--light) !important;
-    border-color: var(--blue);
-    background-color: var(--blue) !important;
+  border-color: var(--blue);
+  background-color: var(--blue) !important;
 }
 
 .btn-back:active {
@@ -76,6 +72,3 @@ body {
   font-size: .9em !important;
 }
 
-/* .form-control {
-  border-color: var(--blue) !important;
-} */

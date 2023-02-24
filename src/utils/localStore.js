@@ -1,7 +1,7 @@
 export default function localStore() {
-  const saveCurrUser = () => { }
+  const saveCurrUser = () => {};
 
-  const getCurrUser = () => { }
+  const getCurrUser = () => {};
 
-  const saveUserTickets = () => { }
+  const saveUserTickets = () => {};
 }

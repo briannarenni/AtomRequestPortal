@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // const apiURL = 'https://requestportalapi.azurewebsites.net/';
 const apiURL = 'http://localhost:5256';
@@ -10,7 +10,7 @@ export const getAllTickets = async () => {
 
 export const getPendingTickets = async () => {
   const response = await axios.get(`${apiURL}/tickets/open`);
-  return (response.status === 200) ? response.data : 'Internal API Error';
+  return response.status === 200 ? response.data : 'Internal API Error';
 };
 
 export const getUserTickets = async (userId) => {
@@ -19,16 +19,22 @@ export const getUserTickets = async (userId) => {
 };
 
 export const submitTicket = async (userId, username, amount, category, comments = null) => {
-  const response = await axios.post(`${apiURL}/tickets/submit`, { userId, username, amount, category, comments });
-  return (response.status === 200) ? response.data : 'Internal API Error';
+  const response = await axios.post(`${apiURL}/tickets/submit`, {
+    userId,
+    username,
+    amount,
+    category,
+    comments,
+  });
+  return response.status === 200 ? response.data : 'Internal API Error';
 };
 
 export const searchTickets = async (ticketId) => {
   const response = await axios.post(`${apiURL}/tickets/${ticketId}`, { ticketId });
-  return (response.status === 200) ? response.data : response.data;
+  return response.status === 200 ? response.data : response.data;
 };
 
 export const updateTicket = async (ticketId, newStatus) => {
   const response = await axios.post(`${apiURL}/tickets/${ticketId}`, { ticketId, newStatus });
-  return (response.status === 200) ? response.data : 'Internal API Error';
+  return response.status === 200 ? response.data : 'Internal API Error';
 };

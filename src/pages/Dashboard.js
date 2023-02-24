@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from '../assets/styles/Banner.module.css';
 import { Button, Card, Alert } from 'react-bootstrap';
+
+import styles from '../assets/styles/Banner.module.css';
 import { useAuth } from '../hooks/useAuth';
 import { PageHeader } from '../components/ui';
 import { MessageIcon } from '../components/icon';
@@ -12,10 +13,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/')
+      navigate('/');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const employeeMenu = {
     'Submit Request': 'New Reimbursement Request',
@@ -36,29 +37,33 @@ export default function Dashboard() {
   const menu = isManager ? managerMenu : employeeMenu;
 
   return (
-    <div className='container-sm'>
+    <div className="container-xs">
+      <PageHeader title={isManager ? 'Manager Dashboard' : 'Employee Dashboard'} />
 
-      <PageHeader title={ isManager ? 'Manager Dashboard' : 'Employee Dashboard' } />
-
-      <Alert variant="none" className={ styles.bannerSuccess }>
+      <Alert
+        variant="none"
+        className={styles.bannerSuccess}>
         <MessageIcon />
-        <span className="mx-1">Hello, { currUser.firstName } { currUser.lastName }</span>
+        <span className="mx-1">
+          Hello, {currUser.firstName} {currUser.lastName}
+        </span>
       </Alert>
 
       <div className="mx-4 my-2 px-1 row text-center">
-        { Object.entries(menu).map(([btnText, desc]) => (
-          <Card key={ btnText } className="col-sm-5 mx-auto my-2 px-3 py-4" >
-            <Button size="lg"
+        {Object.entries(menu).map(([btnText, desc]) => (
+          <Card
+            key={btnText}
+            className="col-sm-5 mx-auto my-2 px-3 py-4">
+            <Button
+              size="lg"
               variant="primary"
               className="mx-auto mt-2 p-3">
-              { btnText }
+              {btnText}
             </Button>
-            <Card.Text className="lead mt-4 mb-2">{ desc }</Card.Text>
+            <Card.Text className="lead mt-4 mb-2">{desc}</Card.Text>
           </Card>
-        )) }
+        ))}
       </div>
     </div>
-  )
+  );
 }
-
-
