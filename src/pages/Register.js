@@ -124,9 +124,7 @@ export default function Register() {
               </Col>
             </Row>
 
-            <Control.SubmitBtn
-              btnTxt="Register Account"
-            />
+            <Control.SubmitBtn btnTxt="Register Account" />
 
             <div className={styles.formNote}>
               <p>
