@@ -22,7 +22,7 @@ export default function Dashboard() {
     'Submit Request': 'New Reimbursement Request',
     'Check Pending': 'See Pending Requests',
     'Request History': 'See Completed Requests',
-    'User Details': 'See User Profile Details',
+    'User Details': 'Show Account Details',
   };
 
   const managerMenu = {
@@ -31,7 +31,7 @@ export default function Dashboard() {
     'Manage Roles': 'Update Employee Roles',
     'See Employee Roster': 'See All Employees',
     'Add New Employee': 'Register Employee Account',
-    'User Details': 'See User Profile Details',
+    'User Details': 'Show Account Details',
   };
 
   const menu = isManager ? managerMenu : employeeMenu;

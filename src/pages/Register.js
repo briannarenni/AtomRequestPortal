@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { isEmpty, startCase } from 'lodash';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,14 +14,14 @@ import { registerUser } from '../data';
 
 export default function Register() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
+  const { dispatch, currUser } = useAuth();
 
   useEffect(() => {
-    if (Object.keys(currUser).length > 0) {
-      setIsLoggedIn(true);
+    if (!isEmpty(currUser)) {
+      dispatch({ type: 'SET_IS_LOGGED_IN', payload: true });
       navigate('/dashboard');
     }
-  }, [currUser, setIsLoggedIn, navigate]);
+  }, [currUser, dispatch, navigate]);
 
   const initialValues = {
     firstName: '',
@@ -31,8 +32,8 @@ export default function Register() {
   };
 
   const schema = Yup.object().shape({
-    firstName: Yup.string().required('Required field'),
-    lastName: Yup.string().required('Required field'),
+    firstName: Yup.string().required('❌ Required'),
+    lastName: Yup.string().required('❌ Required'),
     username: Yup.string()
       .required('❌ Required')
       .matches(/^[a-zA-Z0-9_]+(?!.*\s).*$/, '❌ No special characters allowed'),
@@ -52,7 +53,6 @@ export default function Register() {
     if (!validatePassword) {
       const errorMessage = errors.join(' ');
       setFieldError('password', errorMessage);
-      return;
     }
 
     const response = await registerUser(
@@ -64,9 +64,8 @@ export default function Register() {
 
     if (response === 'Username already registered') {
       setFieldError('username', response);
-      return;
     } else {
-      setCurrUser(response.data);
+      dispatch({ type: 'SET_CURR_USER', payload: response.data });
     }
   };
 

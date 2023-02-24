@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import isEmpty from 'lodash/isEmpty';
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
@@ -11,15 +12,14 @@ import { loginUser } from '../data';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, currUser, setCurrUser } = useAuth();
+  const { dispatch, currUser } = useAuth();
 
   useEffect(() => {
-    if (Object.keys(currUser).length > 0) {
-      setIsLoggedIn(true);
+    if (!isEmpty(currUser)) {
+      dispatch({ type: 'SET_IS_LOGGED_IN', payload: true });
       navigate('/dashboard');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currUser]);
+  }, [currUser, dispatch, navigate]);
 
   const initialValues = {
     username: '',
@@ -35,12 +35,10 @@ export default function Login() {
     const response = await loginUser(values.username, values.password);
     if (response === 'Username incorrect') {
       setFieldError('username', response);
-      return;
     } else if (response === 'Password incorrect') {
       setFieldError('password', response);
-      return;
     } else {
-      setCurrUser(response.data);
+      dispatch({ type: 'SET_CURR_USER', payload: response.data });
     }
   };
 
