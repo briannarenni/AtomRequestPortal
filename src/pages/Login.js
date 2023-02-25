@@ -6,13 +6,14 @@ import * as Yup from 'yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
+import { useUserAPI } from '../hooks/useUserAPI';
 import { PageHeader } from '../components/ui';
 import { Username, Password, SubmitBtn } from '../components/form';
-import { loginUser } from '../data';
 
 export default function Login() {
   const navigate = useNavigate();
   const { dispatch, currUser } = useAuth();
+  const { isLoading, error, loginUser } = useUserAPI();
 
   useEffect(() => {
     if (!isEmpty(currUser)) {
@@ -31,16 +32,17 @@ export default function Login() {
     password: Yup.string().required('❌ Required'),
   });
 
-  const onSubmit = async (values, { setFieldError }) => {
-    const response = await loginUser(values.username, values.password);
-    if (response === 'Username incorrect') {
-      setFieldError('username', response);
-    } else if (response === 'Password incorrect') {
-      setFieldError('password', response);
-    } else {
-      dispatch({ type: 'SET_CURR_USER', payload: response.data });
-    }
-  };
+
+   const onSubmit = async (values, { setFieldError }) => {
+     const response = await loginUser(values.username, values.password);
+     if (response === 'Username incorrect') {
+       setFieldError('username', response);
+     } else if (response === 'Password incorrect') {
+       setFieldError('password', response);
+     } else {
+       dispatch({ type: 'SET_CURR_USER', payload: response.data });
+     }
+   };
 
   return (
     <div className="container-xs">

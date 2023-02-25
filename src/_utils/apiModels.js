@@ -1,4 +1,4 @@
-export class User {
+export class UserModel {
   constructor(userId, username, fName, lName, role, dept, numPending, numSubmitted) {
     this.userId = userId;
     this.username = username;
@@ -11,7 +11,7 @@ export class User {
   }
 }
 
-export class Ticket {
+export class TicketModel {
   constructor(
     ticketId,
     submittedOn,

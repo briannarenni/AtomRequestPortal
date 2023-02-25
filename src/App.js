@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { AuthProvider } from './hooks/useAuth';
+import { AuthProvider } from './hooks';
 import { Navbar, NotFound } from './components/ui';
 import { BackBtn } from './components/btn/';
 import { Landing, FAQ, Login, Register, Dashboard } from './pages';

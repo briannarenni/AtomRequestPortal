@@ -5,26 +5,27 @@ import * as Yup from 'yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
-import { validatePass } from '../utils';
+import { useUserAPI } from '../hooks/useUserAPI';
+import { validatePass } from '../_utils';
 import { PageHeader } from '../components/ui';
 import { Password, ConfirmPassword, SubmitBtn } from '../components/form';
 
 export default function ChangePassword() {
   const navigate = useNavigate();
-  const { isLoggedIn, currUser } = useAuth();
   const [userId, setUserId] = useState('');
+  const { isLoggedIn, currUser } = useAuth();
+  const { isLoading, error, updateUserPassword } = useUserAPI();
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
+    } else {
+      setUserId(currUser.userId);
     }
-
-    setUserId(currUser.userId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const initialValues = {
-    username: '',
     password: '',
     confirm: '',
   };
@@ -33,6 +34,12 @@ export default function ChangePassword() {
     password: Yup.string().required('❌ Required'),
     confirm: Yup.string().required('❌ Required'),
   });
+
+  const updatePassword = async (values) => {
+    const response = await updateUserPassword(userId, values.password, values.confirm);
+    console.log(response);
+    // setUserMessage(response.data);
+  };
 
   const onSubmit = async (values, { setFieldError }) => {
     if (values.password !== values.confirm) {
@@ -45,11 +52,9 @@ export default function ChangePassword() {
     if (!validatePassword) {
       const errorMessage = errors.join(' ');
       setFieldError('password', errorMessage);
+    } else {
+      await updatePassword(values);
     }
-
-    const response = await updateUserPassword(userId, password, confirmedPassword);
-
-    // setUserMessage(response.data);
   };
 
   return (
@@ -65,11 +70,7 @@ export default function ChangePassword() {
         onSubmit={onSubmit}>
         {({ isValid, dirty, errors, touched }) => (
           <Form className={styles.formContainer}>
-            <Username
-              name="username"
-              error={errors.username}
-              touched={touched.username}
-            />
+            {/* show/hide readonly currPassword field? */}
 
             <Password
               name="password"

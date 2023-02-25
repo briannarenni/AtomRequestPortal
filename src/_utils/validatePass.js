@@ -1,4 +1,4 @@
-export default function validatePass(password) {
+export function validatePass(password) {
   let errors = [];
 
   const checkSpaces = (password) => {

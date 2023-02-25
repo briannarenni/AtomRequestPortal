@@ -8,8 +8,8 @@ import { PageHeader } from '../components/ui';
 import { MessageIcon } from '../components/icon';
 
 export default function Dashboard() {
-  const { isLoggedIn, currUser, isManager } = useAuth();
   const navigate = useNavigate();
+  const { isLoggedIn, currUser, isManager } = useAuth();
 
   useEffect(() => {
     if (!isLoggedIn) {

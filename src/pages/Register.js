@@ -7,14 +7,15 @@ import * as Yup from 'yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth } from '../hooks/useAuth';
-import { validatePass } from '../utils';
+import { useUserAPI } from '../hooks/useUserAPI';
+import { validatePass } from '../_utils';
 import { PageHeader } from '../components/ui';
 import * as Control from '../components/form';
-import { registerUser } from '../data';
 
 export default function Register() {
   const navigate = useNavigate();
   const { dispatch, currUser } = useAuth();
+  const { isLoading, error, registerUser } = useUserAPI();
 
   useEffect(() => {
     if (!isEmpty(currUser)) {
@@ -41,6 +42,21 @@ export default function Register() {
     confirm: Yup.string().required('❌ Required'),
   });
 
+  const sendRegistration = async (values, { setFieldError }) => {
+    const response = await registerUser(
+      startCase(values.firstName),
+      startCase(values.lastName),
+      startCase(values.username),
+      startCase(values.password)
+    );
+
+    if (response === 'Username already registered') {
+      setFieldError('username', response);
+    } else {
+      dispatch({ type: 'SET_CURR_USER', payload: response.data });
+    }
+  };
+
   const onSubmit = async (values, { setFieldError }) => {
     if (values.password !== values.confirm) {
       setFieldError('password', '❌ Passwords must match');
@@ -55,18 +71,7 @@ export default function Register() {
       setFieldError('password', errorMessage);
     }
 
-    const response = await registerUser(
-      values.firstName,
-      values.lastName,
-      values.username,
-      values.password
-    );
-
-    if (response === 'Username already registered') {
-      setFieldError('username', response);
-    } else {
-      dispatch({ type: 'SET_CURR_USER', payload: response.data });
-    }
+    await sendRegistration(values, { setFieldError });
   };
 
   return (
