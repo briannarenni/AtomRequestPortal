@@ -1,19 +1,35 @@
 import React, { useEffect } from 'react';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+import { Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../assets/styles/Form.module.css';
-import { useAuth } from '../hooks/useAuth';
-import { useUserAPI } from '../hooks/useUserAPI';
+import { useAuth, useUserAPI } from '../hooks';
+import { loginSchema, loginDefaults } from '../_data/schemas';
 import { PageHeader } from '../components/ui';
 import { Username, Password, SubmitBtn } from '../components/form';
 
 export default function Login() {
   const navigate = useNavigate();
   const { dispatch, currUser } = useAuth();
-  const { isLoading, error, loginUser } = useUserAPI();
+  const { isLoading, loginUser } = useUserAPI();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+    mode: 'onBlur',
+    defaultValues: { loginDefaults },
+  });
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   useEffect(() => {
     if (!isEmpty(currUser)) {
@@ -22,27 +38,24 @@ export default function Login() {
     }
   }, [currUser, dispatch, navigate]);
 
-  const initialValues = {
-    username: '',
-    password: '',
+  const onSubmit = async (data) => {
+    clearErrors();
+
+    const response = await loginUser(data.username, data.password);
+    if (response === 'Username incorrect') {
+      setError('username', {
+        type: 'manual',
+        message: '❌ Username incorrect',
+      });
+    } else if (response === 'Password incorrect') {
+      setError('password', {
+        type: 'manual',
+        message: '❌ Password incorrect',
+      });
+    } else {
+      dispatch({ type: 'SET_CURR_USER', payload: response.data });
+    }
   };
-
-  const schema = Yup.object().shape({
-    username: Yup.string().required('❌ Required'),
-    password: Yup.string().required('❌ Required'),
-  });
-
-
-   const onSubmit = async (values, { setFieldError }) => {
-     const response = await loginUser(values.username, values.password);
-     if (response === 'Username incorrect') {
-       setFieldError('username', response);
-     } else if (response === 'Password incorrect') {
-       setFieldError('password', response);
-     } else {
-       dispatch({ type: 'SET_CURR_USER', payload: response.data });
-     }
-   };
 
   return (
     <div className="container-xs">
@@ -51,31 +64,27 @@ export default function Login() {
         <p className={styles.formNote}>For forgotten passwords, please speak to HR for reset.</p>
       </header>
 
-      <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={onSubmit}>
-        {({ isValid, dirty, errors, touched }) => (
-          <Form className={styles.formContainer}>
-            <Username
-              name="username"
-              error={errors.username}
-              touched={touched.username}
-            />
+      <Form
+        formNoValidate
+        className={styles.formContainer}
+        onSubmit={handleSubmit(onSubmit)}>
+        <Username
+          name="username"
+          errors={errors}
+          register={register}
+        />
 
-            <Password
-              name="password"
-              error={errors.password}
-              touched={touched.password}
-            />
+        <Password
+          name="password"
+          errors={errors}
+          register={register}
+        />
 
-            <SubmitBtn
-              btnTxt="Login"
-              disabled={!isValid || !dirty}
-            />
-          </Form>
-        )}
-      </Formik>
+        <SubmitBtn
+          btnTxt="Login"
+          disabled={isLoading}
+        />
+      </Form>
     </div>
   );
 }

@@ -1,53 +1,57 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, ErrorMessage } from 'formik';
+import { ErrorMessage } from '@hookform/error-message';
 
-export function FirstName({ name, error, touched }) {
+export function FirstName({ register, name, errors, ...props }) {
+  const hasError = errors && errors[name];
+
   return (
     <Form.Group
-      className="mb-3"
-      controlId="firstName">
+      controlId={name}
+      className="my-2">
       <Form.Label className="fw-light">First Name</Form.Label>
-      <Field
-        as={Form.Control}
+      <Form.Control
         type="text"
-        name="firstName"
+        name={name}
         placeholder="Enter first name"
-        isValid={!error && touched}
-        isInvalid={error && touched}
+        {...register('firstName')}
+        isInvalid={hasError}
+        {...props}
       />
 
-      <ErrorMessage
-        name={name}
-        component={Form.Control.Feedback}
-        type="invalid"
-        className="fst-italic"
-      />
+      <div className="small fst-italic my-1">
+        <ErrorMessage
+          errors={errors}
+          name={name}
+        />
+      </div>
     </Form.Group>
   );
 }
 
-export function LastName({ name, error, touched }) {
+export function LastName({ register, name, errors, ...props }) {
+  const hasError = errors && errors[name];
+
   return (
     <Form.Group
-      className="mb-3"
-      controlId="lastName">
+      controlId={name}
+      className="my-2">
       <Form.Label className="fw-light">Last Name</Form.Label>
-      <Field
-        as={Form.Control}
+      <Form.Control
         type="text"
-        name="lastName"
+        name={name}
         placeholder="Enter last name"
-        isValid={!error && touched}
-        isInvalid={error && touched}
+        {...register('lastName')}
+        isInvalid={hasError}
+        {...props}
       />
 
-      <ErrorMessage
-        name={name}
-        component={Form.Control.Feedback}
-        type="invalid"
-        className="fst-italic"
-      />
+      <div className="small fst-italic my-1">
+        <ErrorMessage
+          errors={errors}
+          name={name}
+        />
+      </div>
     </Form.Group>
   );
 }

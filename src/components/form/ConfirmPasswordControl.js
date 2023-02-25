@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
-import { Field, ErrorMessage } from 'formik';
 import { Form, InputGroup, Button, Image } from 'react-bootstrap';
+import { ErrorMessage } from '@hookform/error-message';
 import clsx from 'clsx';
 
 import showEye from '../../assets/icons/show-eye.svg';
 import hideEye from '../../assets/icons/hide-eye.svg';
 
-export default function ConfirmPasswordControl({ name, error, touched }) {
+export default function PasswordControl({ register, name, errors, ...props }) {
+  const hasError = errors && errors[name];
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Form.Group
-      className="mb-3"
-      controlId="password">
+      controlId="password"
+      className="my-2">
       <Form.Label className="fw-light">Confirm Password</Form.Label>
       <InputGroup>
-        <Field
-          as={Form.Control}
+        <Form.Control
           type={showPassword ? 'text' : 'password'}
-          name="confirm"
-          placeholder="Confirm password"
+          name={name}
+          placeholder="Enter password"
+          {...register('confirm')}
+          isInvalid={hasError}
+          {...props}
           className={clsx({
-            'is-valid': !error && touched,
-            'is-invalid': error && touched,
             'rounded-start': true,
           })}
         />
@@ -30,8 +31,8 @@ export default function ConfirmPasswordControl({ name, error, touched }) {
         <Button
           variant="none"
           className={clsx('bg-light border', {
-            'border-danger': !!error && touched,
-            'border-success': !error && touched,
+            'border-danger': hasError,
+            'border-success': !hasError,
             'rounded-end': true,
           })}
           onClick={() => setShowPassword(!showPassword)}
@@ -41,14 +42,14 @@ export default function ConfirmPasswordControl({ name, error, touched }) {
             alt={!showPassword ? 'Show password' : 'Hide password'}
           />
         </Button>
-
-        <ErrorMessage
-          name={name}
-          component={Form.Control.Feedback}
-          type="invalid"
-          className="fst-italic"
-        />
       </InputGroup>
+
+      <div className=" small fst-italic my-1">
+        <ErrorMessage
+          errors={errors}
+          name={name}
+        />
+      </div>
     </Form.Group>
   );
 }

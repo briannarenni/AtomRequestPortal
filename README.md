@@ -7,12 +7,10 @@ This app pairs with my [RequestAPI](https://github.com/briannarenni/RequestAPI).
 ## 📍Next in Roadmap
 
 - ✅ Move passwords to their own DB table
-- ✅ Clean up app code before moving on
+- ✅ Refactor from Formik to react-hook-form
 - Implement Employee Menu options
 
 ### ❗️Current Bugs :
-
-- Register form can only be submitted with submit button and not Enter key
 
 ---
 
@@ -23,8 +21,8 @@ _All licensed under the MIT License_
 - [react-router](https://reactrouter.com/)
 - [react-bootstrap](https://react-bootstrap.github.io/)
 - [axios](https://axios-http.com/)
-- [Formik](https://formik.org/)
 - [Yup](https://github.com/jquense/yup)
+- [react-hook-form](https://github.com/react-hook-form/react-hook-form)
 - [Feather icons](https://feathericons.com/)
 - [SVG Repo](https://www.svgrepo.com)
 

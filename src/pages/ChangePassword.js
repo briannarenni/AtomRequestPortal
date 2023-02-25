@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 
 import styles from '../assets/styles/Form.module.css';
-import { useAuth } from '../hooks/useAuth';
-import { useUserAPI } from '../hooks/useUserAPI';
-import { validatePass } from '../_utils';
+import { useAuth, useUserAPI } from '../hooks';
+import { validatePass, pwUpdateSchema } from '../_utils';
 import { PageHeader } from '../components/ui';
 import { Password, ConfirmPassword, SubmitBtn } from '../components/form';
 
@@ -30,10 +29,6 @@ export default function ChangePassword() {
     confirm: '',
   };
 
-  const schema = Yup.object().shape({
-    password: Yup.string().required('❌ Required'),
-    confirm: Yup.string().required('❌ Required'),
-  });
 
   const updatePassword = async (values) => {
     const response = await updateUserPassword(userId, values.password, values.confirm);
