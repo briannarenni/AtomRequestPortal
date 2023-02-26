@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, Alert } from 'react-bootstrap';
 
-import styles from '../assets/styles/Banner.module.css';
 import { useAuth } from '../hooks/useAuth';
-import { PageHeader } from '../components/ui';
-import { MessageIcon } from '../components/icon';
+import { PageHeader, BannerSuccess } from '../components/ui';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -38,19 +36,13 @@ export default function Dashboard() {
 
   return (
     <div className="container-xs">
-      <PageHeader title={isManager ? 'Manager Dashboard' : 'Employee Dashboard'} />
+      <header className=" mx-auto">
+        <PageHeader title={isManager ? 'Manager Dashboard' : 'Employee Dashboard'} />
+        <BannerSuccess content={`Hello, ${currUser.firstName} ${currUser.lastName}`} />
+      </header>
 
-      <Alert
-        variant="none"
-        className={styles.bannerSuccess}>
-        <MessageIcon />
-        <span className="mx-1">
-          Hello, {currUser.firstName} {currUser.lastName}
-        </span>
-      </Alert>
-
-      <div className="mx-4 my-2 px-1 row text-center">
-        {Object.entries(menu).map(([btnText, desc]) => (
+      <main className="mx-4 my-2 px-1 row text-center">
+        {Object.entries(menu).map(([btnText, btnCaption]) => (
           <Card
             key={btnText}
             className="col-sm-5 mx-auto my-2 px-3 py-4">
@@ -60,10 +52,10 @@ export default function Dashboard() {
               className="mx-auto mt-2 p-3">
               {btnText}
             </Button>
-            <Card.Text className="lead mt-4 mb-2">{desc}</Card.Text>
+            <Card.Text className="lead mt-4 mb-2">{btnCaption}</Card.Text>
           </Card>
         ))}
-      </div>
+      </main>
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { isEmpty, startCase } from 'lodash';
 import { useNavigate } from 'react-router-dom';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Alert, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
 import { registerSchema, registerDefaults } from '../_data/schemas';
-import { PageHeader } from '../components/ui';
+import { PageHeader, BannerNote } from '../components/ui';
 import * as Control from '../components/form';
 
 export default function Register() {
@@ -65,12 +65,6 @@ export default function Register() {
     <div className="container-xs">
       <header>
         <PageHeader title="Register Employee Account" />
-        <p className={styles.formNote}>
-          <strong>Usernames:</strong> may contain numbers, no spaces or special characters.
-          <br />
-          <strong>Passwords:</strong> No spaces, must be at least 7 characters and have at least 1
-          special character.
-        </p>
       </header>
 
       <Form
@@ -101,6 +95,7 @@ export default function Register() {
           errors={errors}
           register={register}
         />
+        <p className={styles.formNote}>May contain numbers, but no spaces or special characters.</p>
 
         <Row>
           <Col>
@@ -117,6 +112,9 @@ export default function Register() {
               register={register}
             />
           </Col>
+          <p className={styles.formNote}>
+            Must be min. 7 characters with at least 1 special char, may not contain spaces.
+          </p>
         </Row>
 
         <Control.SubmitBtn

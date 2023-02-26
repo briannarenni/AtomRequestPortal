@@ -1,12 +1,22 @@
+/* * use .bannerSuccessful if needed */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
 
-.bannerSuccess {
+.bannerSignin {
   font: italic 300 1.1em 'Noto Sans KR', sans-serif;
-  background-color: var(--banner-success-bkg);
-  border-color: var(--banner-success-bdr);
-  border-radius: 15px;
-  max-width: 30%;
+  text-align: center;
+  max-width: 80%;
   margin: 0 auto;
   padding: 8px;
+  border-radius: 15px;
+  background-color: var(--banner-success-bkg);
+  border-color: var(--banner-success-bdr);
+}
+
+.bannerNote {
+  font: italic 300 small 'Noto Sans KR', sans-serif;
   text-align: center;
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: 15px;
 }

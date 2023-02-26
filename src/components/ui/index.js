@@ -1,4 +1,5 @@
 export { default as AppNav } from './AppNav';
 export { default as NotFound } from './NotFound';
-export { default as UXAlert } from './UXAlert';
+export { default as BannerNote } from './BannerNote';
+export { default as BannerSuccess } from './BannerSuccess';
 export { default as PageHeader } from './PageHeader';

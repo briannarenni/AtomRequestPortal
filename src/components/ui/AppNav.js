@@ -23,8 +23,8 @@ export default function AppHeader() {
         <Image
           src={logo}
           alt={'Logo'}
-          width={40}
-          height={40}
+          width={45}
+          height={45}
         />
         <span className="logoName">AtomPortal</span>
       </Navbar.Brand>

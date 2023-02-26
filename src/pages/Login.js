@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
 import { loginSchema, loginDefaults } from '../_data/schemas';
-import { PageHeader } from '../components/ui';
+import { PageHeader, BannerNote } from '../components/ui';
 import { Username, Password, SubmitBtn } from '../components/form';
 
 export default function Login() {
@@ -59,9 +59,11 @@ export default function Login() {
 
   return (
     <div className="container-xs">
-      <header>
+      <header className=" mx-auto">
         <PageHeader title="Account Login" />
-        <p className={styles.formNote}>For forgotten passwords, please speak to HR for reset.</p>
+        <BannerNote
+          note={'For forgotten passwords, please speak to your supervisor or HR for reset.'}
+        />
       </header>
 
       <Form
