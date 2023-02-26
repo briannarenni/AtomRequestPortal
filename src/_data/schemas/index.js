@@ -1,3 +1,3 @@
 export { loginSchema, loginDefaults } from './loginSchema';
-export { registerSchema, registerDefaults } from './registerSchema';
+export { registerSchema, registerDefaults, depts } from './registerSchema';
 export { updatePassSchema, updatePassDefaults } from './updatePassSchema';

@@ -18,7 +18,7 @@ export function useUserAPI() {
     }
   };
 
-  const registerUser = async (firstName, lastName, username, password) => {
+  const registerUser = async (firstName, lastName, username, password, dept) => {
     try {
       setIsLoading(true);
       const response = await axios.post(Users.register, {
@@ -26,6 +26,7 @@ export function useUserAPI() {
         lastName,
         username,
         password,
+        dept
       });
       setIsLoading(false);
       return response;

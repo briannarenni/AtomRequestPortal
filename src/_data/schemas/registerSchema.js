@@ -1,5 +1,23 @@
 import * as yup from 'yup';
 
+export const registerDefaults = {
+  firstName: '',
+  lastName: '',
+  username: '',
+  password: '',
+  confirm: '',
+  dept: ''
+};
+
+export const depts = [
+  { value: 'Client PR', label: 'Client PR' },
+  { value: 'Events', label: 'Events' },
+  { value: 'Digital Media', label: 'Digital Media' },
+  { value: 'Field Ops', label: 'Field Ops' },
+  { value: 'Field Marketing', label: 'Field Marketing' },
+  { value: 'Scout & Outreach', label: 'Scout and Outreach' }
+];
+
 export const registerSchema = yup.object().shape({
   firstName: yup.string().required('❌ Required'),
   lastName: yup.string().required('❌ Required'),
@@ -19,13 +37,5 @@ export const registerSchema = yup.object().shape({
     .min(7, '❌ Password must be at least 7 characters long')
     .oneOf([yup.ref('password'), null], '❌ Passwords must match')
     .matches(/^[^\s]+$/, '❌ No spaces allowed')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Must contain at least 1 special character'),
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Must contain at least 1 special character')
 });
-
-export const registerDefaults = {
-  firstName: '',
-  lastName: '',
-  username: '',
-  password: '',
-  confirm: '',
-};

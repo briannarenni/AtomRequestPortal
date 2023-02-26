@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { isEmpty, startCase } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { Form, Row, Col } from 'react-bootstrap';
@@ -7,29 +7,26 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
-import { registerSchema, registerDefaults } from '../_data/schemas';
-import { PageHeader} from '../components/ui';
+import { depts, registerSchema, registerDefaults } from '../_data/schemas';
+import { PageHeader } from '../components/ui';
 import * as Control from '../components/form';
 
 export default function Register() {
   const navigate = useNavigate();
   const { dispatch, currUser } = useAuth();
   const { isLoading, registerUser } = useUserAPI();
+  const [selectedDept, setSelectedDept] = useState('');
   const {
     register,
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields }
   } = useForm({
     resolver: yupResolver(registerSchema),
     mode: 'onBlur',
-    defaultValues: { ...registerDefaults },
+    defaultValues: { ...registerDefaults, dept: selectedDept }
   });
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   useEffect(() => {
     if (!isEmpty(currUser)) {
@@ -38,18 +35,24 @@ export default function Register() {
     }
   }, [currUser, dispatch, navigate]);
 
+  const handleDeptSelect = (selectedOption) => {
+    setSelectedDept(selectedOption.value);
+    console.log('selectedDept:', selectedOption.value);
+  };
+
   const sendRegistration = async (data) => {
     const response = await registerUser(
-      startCase(data.firstName),
-      startCase(data.lastName),
-      startCase(data.username),
-      startCase(data.password)
+      data.firstName,
+      data.lastName,
+      data.username,
+      data.password,
+      data.dept
     );
 
     if (response === 'Username already registered') {
       setError('username', {
         type: 'manual',
-        message: '❌ Username already registered',
+        message: '❌ Username already registered'
       });
     } else {
       dispatch({ type: 'SET_CURR_USER', payload: response.data });
@@ -57,8 +60,21 @@ export default function Register() {
   };
 
   const onSubmit = async (data) => {
-    clearErrors();
-    await sendRegistration(data);
+    data.firstName = startCase(data.firstName);
+    data.lastName = startCase(data.lastName);
+    data.dept = selectedDept;
+
+    if (isEmpty(data.dept)) {
+      setError('dept', {
+        type: 'manual',
+        message: '❌ Required'
+      });
+      return;
+    } else {
+      console.log(data);
+      clearErrors();
+      await sendRegistration(data);
+    }
   };
 
   return (
@@ -92,12 +108,23 @@ export default function Register() {
           </Row>
         </div>
 
+        <Control.DeptSelect
+          name="dept"
+          value={selectedDept}
+          options={depts}
+          onChange={handleDeptSelect}
+          errors={errors}
+          register={register}
+          formState={{ dirtyFields }}
+        />
+
         <Control.Username
           name="username"
           errors={errors}
           register={register}
           formState={{ dirtyFields }}
         />
+
         <p className={styles.formNote}>May contain numbers, but no spaces or special characters.</p>
 
         <Row>

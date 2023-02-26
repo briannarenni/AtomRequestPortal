@@ -1,5 +1,10 @@
 import * as yup from 'yup';
 
+export const updatePassDefaults = {
+  password: '',
+  confirm: ''
+};
+
 export const updatePassSchema = yup.object().shape({
   password: yup
     .string()
@@ -13,10 +18,5 @@ export const updatePassSchema = yup.object().shape({
     .min(7, '❌ Password must be at least 7 characters long')
     .oneOf([yup.ref('password'), null], '❌ Passwords must match')
     .matches(/^[^\s]+$/, '❌ No spaces allowed')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Contains at least 1 special character'),
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Contains at least 1 special character')
 });
-
-export const updatePassDefaults = {
-  password: '',
-  confirm: '',
-};
