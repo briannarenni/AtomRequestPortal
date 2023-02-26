@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { isEmpty, startCase } from 'lodash';
 import { useNavigate } from 'react-router-dom';
-import { Form, Alert, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
 import { registerSchema, registerDefaults } from '../_data/schemas';
-import { PageHeader, BannerNote } from '../components/ui';
+import { PageHeader} from '../components/ui';
 import * as Control from '../components/form';
 
 export default function Register() {
@@ -20,11 +20,11 @@ export default function Register() {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm({
     resolver: yupResolver(registerSchema),
     mode: 'onBlur',
-    defaultValues: { registerDefaults },
+    defaultValues: { ...registerDefaults },
   });
 
   useEffect(() => {
@@ -78,6 +78,7 @@ export default function Register() {
                 name="firstName"
                 errors={errors}
                 register={register}
+                formState={{ dirtyFields }}
               />
             </Col>
             <Col>
@@ -85,6 +86,7 @@ export default function Register() {
                 name="lastName"
                 errors={errors}
                 register={register}
+                formState={{ dirtyFields }}
               />
             </Col>
           </Row>
@@ -94,6 +96,7 @@ export default function Register() {
           name="username"
           errors={errors}
           register={register}
+          formState={{ dirtyFields }}
         />
         <p className={styles.formNote}>May contain numbers, but no spaces or special characters.</p>
 
@@ -103,6 +106,7 @@ export default function Register() {
               name="password"
               errors={errors}
               register={register}
+              formState={{ dirtyFields }}
             />
           </Col>
           <Col>
@@ -110,6 +114,7 @@ export default function Register() {
               name="confirm"
               errors={errors}
               register={register}
+              formState={{ dirtyFields }}
             />
           </Col>
           <p className={styles.formNote}>

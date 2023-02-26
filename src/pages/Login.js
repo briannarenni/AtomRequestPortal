@@ -20,11 +20,11 @@ export default function Login() {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'onBlur',
-    defaultValues: { loginDefaults },
+    defaultValues: { ...loginDefaults },
   });
 
   useEffect(() => {
@@ -74,12 +74,14 @@ export default function Login() {
           name="username"
           errors={errors}
           register={register}
+          formState={{ dirtyFields }}
         />
 
         <Password
           name="password"
           errors={errors}
           register={register}
+          formState={{ dirtyFields }}
         />
 
         <SubmitBtn

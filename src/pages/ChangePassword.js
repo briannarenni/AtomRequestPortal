@@ -1,55 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form } from 'formik';
-// import * as Yup from 'yup';
+import { Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
-import { validatePass, pwUpdateSchema } from '../_utils';
+import { updatePassSchema, updatePassDefaults } from '../_data/schemas';
 import { PageHeader } from '../components/ui';
 import { Password, ConfirmPassword, SubmitBtn } from '../components/form';
 
 export default function ChangePassword() {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState('');
   const { isLoggedIn, currUser } = useAuth();
-  const { isLoading, error, updateUserPassword } = useUserAPI();
+  const { isLoading, updateUserPassword } = useUserAPI();
+
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    formState: { errors, dirtyFields },
+  } = useForm({
+    resolver: yupResolver(updatePassSchema),
+    mode: 'onBlur',
+    defaultValues: { ...updatePassDefaults },
+  });
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
-    } else {
+    }
+  }, [isLoggedIn, navigate]);
+
+  useEffect(() => {
+    if (!isEmpty(currUser)) {
       setUserId(currUser.userId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const initialValues = {
-    password: '',
-    confirm: '',
-  };
-
+  }, [currUser]);
 
   const updatePassword = async (values) => {
     const response = await updateUserPassword(userId, values.password, values.confirm);
     console.log(response);
-    // setUserMessage(response.data);
   };
 
-  const onSubmit = async (values, { setFieldError }) => {
-    if (values.password !== values.confirm) {
-      setFieldError('confirm', "❌ Passwords don't match");
-      return;
-    }
-
-    const { errors, validatePassword } = validatePass(values.password);
-
-    if (!validatePassword) {
-      const errorMessage = errors.join(' ');
-      setFieldError('password', errorMessage);
-    } else {
-      await updatePassword(values);
-    }
+  const onSubmit = async (data) => {
+    clearErrors();
+    await updatePassword(data);
   };
 
   return (
@@ -59,33 +55,33 @@ export default function ChangePassword() {
         {userMessage && <h3>{userMessage}</h3>}
       </header>
 
-      <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={onSubmit}>
-        {({ isValid, dirty, errors, touched }) => (
-          <Form className={styles.formContainer}>
-            {/* show/hide readonly currPassword field? */}
+      <Form
+        formNoValidate
+        className={styles.formContainer}
+        onSubmit={handleSubmit(onSubmit)}>
+        <Password
+          name="password"
+          errors={errors}
+          register={register}
+          formState={{ dirtyFields }}
+        />
 
-            <Password
-              name="password"
-              error={errors.password}
-              touched={touched.password}
-            />
+        {/* show/hide readonly currPassword field? */}
 
-            <ConfirmPassword
-              name="confirm"
-              error={errors.confirm}
-              touched={touched.confirm}
-            />
-
-            <SubmitBtn
-              btnTxt="Save Changes"
-              disabled={!isValid || !dirty}
-            />
-          </Form>
-        )}
-      </Formik>
+        <ConfirmPassword
+          name="confirm"
+          errors={errors}
+          register={register}
+          formState={{ dirtyFields }}
+        />
+        <p className={styles.formNote}>
+          Must be min. 7 characters with at least 1 special char, may not contain spaces.
+        </p>
+        <SubmitBtn
+          btnTxt="Save Changes"
+          disabled={!isValid || !dirty}
+        />
+      </Form>
     </>
   );
 }

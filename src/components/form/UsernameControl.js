@@ -2,8 +2,10 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 
-export default function UsernameControl({ register, name, errors, ...props }) {
+export default function UsernameControl({ register, name, errors, formState, ...props }) {
   const hasError = errors && errors[name];
+  const isDirty = formState.dirtyFields.hasOwnProperty(name);
+  const isValid = !hasError && isDirty;
 
   return (
     <>
@@ -17,6 +19,7 @@ export default function UsernameControl({ register, name, errors, ...props }) {
           placeholder="Enter username"
           {...register('username')}
           isInvalid={hasError}
+          isValid={isValid}
           {...props}
         />
         <div className="small fst-italic my-1">

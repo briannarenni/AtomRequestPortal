@@ -2,8 +2,10 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 
-export function FirstName({ register, name, errors, ...props }) {
+export function FirstName({ register, name, errors, formState, ...props }) {
   const hasError = errors && errors[name];
+  const isDirty = formState.dirtyFields.hasOwnProperty(name);
+  const isValid = !hasError && isDirty;
 
   return (
     <Form.Group
@@ -16,6 +18,7 @@ export function FirstName({ register, name, errors, ...props }) {
         placeholder="Enter first name"
         {...register('firstName')}
         isInvalid={hasError}
+        isValid={isValid}
         {...props}
       />
 
@@ -29,8 +32,10 @@ export function FirstName({ register, name, errors, ...props }) {
   );
 }
 
-export function LastName({ register, name, errors, ...props }) {
+export function LastName({ register, name, errors, formState, ...props }) {
   const hasError = errors && errors[name];
+  const isDirty = formState.dirtyFields.hasOwnProperty(name);
+  const isValid = !hasError && isDirty;
 
   return (
     <Form.Group
@@ -43,6 +48,7 @@ export function LastName({ register, name, errors, ...props }) {
         placeholder="Enter last name"
         {...register('lastName')}
         isInvalid={hasError}
+        isValid={isValid}
         {...props}
       />
 

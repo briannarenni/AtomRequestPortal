@@ -12,14 +12,14 @@ export const registerSchema = yup.object().shape({
     .required('❌ Required')
     .min(7, '❌ Password must be at least 7 characters long')
     .matches(/^[^\s]+$/, '❌ No spaces allowed')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Contains at least 1 special character'),
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Must contain at least 1 special character'),
   confirm: yup
     .string()
     .required('❌ Required')
     .min(7, '❌ Password must be at least 7 characters long')
     .oneOf([yup.ref('password'), null], '❌ Passwords must match')
     .matches(/^[^\s]+$/, '❌ No spaces allowed')
-    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Contains at least 1 special character'),
+    .matches(/[!@#$%^&*(),.?":{}|<>]/, '❌ Must contain at least 1 special character'),
 });
 
 export const registerDefaults = {
