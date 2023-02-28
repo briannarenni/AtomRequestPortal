@@ -55,7 +55,7 @@ export function useUserAPI() {
       const response = await axios.patch(Users.updatePassword(userId), {
         userId,
         password,
-        confirmPassword,
+        confirmPassword
       });
       setIsLoading(false);
       return response.status === 200 ? response.data : 'Internal API Error';
@@ -96,6 +96,6 @@ export function useUserAPI() {
     getUserDetails,
     updateUserPassword,
     updateUserRole,
-    getEmployees,
+    getEmployees
   };
 }

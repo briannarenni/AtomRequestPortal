@@ -6,10 +6,11 @@ import clsx from 'clsx';
 import showEye from '../../assets/icons/show-eye.svg';
 import hideEye from '../../assets/icons/hide-eye.svg';
 
-export default function PasswordControl({ register, name, errors, formState, ...props }) {
+export default function ConfirmPasswordControl(props) {
+  const { register, name, errors, formState } = props;
   const hasError = errors && errors[name];
   const isDirty = formState.dirtyFields.hasOwnProperty(name);
-  const isValid = !hasError;
+  const isValid = !hasError && isDirty;
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -27,7 +28,7 @@ export default function PasswordControl({ register, name, errors, formState, ...
           isValid={isValid}
           {...props}
           className={clsx({
-            'rounded-start': true,
+            'rounded-start': true
           })}
         />
 
@@ -36,7 +37,7 @@ export default function PasswordControl({ register, name, errors, formState, ...
           className={clsx('bg-light border', {
             'border-danger': hasError,
             'border-success': !hasError,
-            'rounded-end': true,
+            'rounded-end': true
           })}
           onClick={() => setShowPassword(!showPassword)}
           aria-label={showPassword ? 'Hide password' : 'Show password'}

@@ -2,7 +2,9 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 
-export default function UsernameControl({ register, name, errors, formState, ...props }) {
+export default function UsernameControl(props) {
+  const { register, name, errors, formState } = props;
+
   const hasError = errors && errors[name];
   const isDirty = formState.dirtyFields.hasOwnProperty(name);
   const isValid = !hasError && isDirty;

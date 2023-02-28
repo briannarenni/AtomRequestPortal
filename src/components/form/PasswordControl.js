@@ -6,7 +6,8 @@ import clsx from 'clsx';
 import showEye from '../../assets/icons/show-eye.svg';
 import hideEye from '../../assets/icons/hide-eye.svg';
 
-export default function PasswordControl({ register, name, errors, formState, ...props }) {
+export default function PasswordControl(props) {
+  const { register, name, errors, formState} = props;
   const hasError = errors && errors[name];
   const isDirty = formState.dirtyFields.hasOwnProperty(name);
   const isValid = !hasError && isDirty;
