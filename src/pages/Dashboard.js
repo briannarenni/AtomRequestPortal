@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Card, Alert } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 import { useAuth } from '../hooks/useAuth';
 import { PageHeader, BannerSuccess } from '../components/ui';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { isLoggedIn, currUser, isManager } = useAuth();
+  const { isLoggedIn, fullName, isManager } = useAuth();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -20,7 +20,7 @@ export default function Dashboard() {
     'Submit Request': 'New Reimbursement Request',
     'Check Pending': 'See Pending Requests',
     'Request History': 'See Completed Requests',
-    'User Details': 'Show Account Details',
+    'Change Password': 'Change Account Password'
   };
 
   const managerMenu = {
@@ -29,7 +29,7 @@ export default function Dashboard() {
     'Manage Roles': 'Update Employee Roles',
     'See Employee Roster': 'See All Employees',
     'Add New Employee': 'Register Employee Account',
-    'User Details': 'Show Account Details',
+    'Change Password': 'Change Account Password'
   };
 
   const menu = isManager ? managerMenu : employeeMenu;
@@ -38,7 +38,7 @@ export default function Dashboard() {
     <div className="container-xs">
       <header className=" mx-auto">
         <PageHeader title={isManager ? 'Manager Dashboard' : 'Employee Dashboard'} />
-        <BannerSuccess content={`Hello, ${currUser.firstName} ${currUser.lastName}`} />
+        <BannerSuccess content={`Hello, ${fullName}`} />
       </header>
 
       <main className="mx-4 my-2 px-1 row text-center">

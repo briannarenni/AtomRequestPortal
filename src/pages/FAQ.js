@@ -26,15 +26,15 @@ export default function FAQ() {
 
           <dl className="row w-75 mx-auto">
             <dt className="col-sm-2">Travel</dt>
-            <dd className="col-sm-10">i.e. flight ticket or car rental</dd>
+            <dd className="col-sm">i.e. flight ticket or car rental</dd>
             <dt className="col-sm-2">Lodging</dt>
-            <dd className="col-sm-9">i.e. hotel stay</dd>
+            <dd className="col-sm">i.e. hotel stay</dd>
             <dt className="col-sm-2">Food</dt>
-            <dd className="col-sm-9">
+            <dd className="col-sm">
               not including room service, which is covered under the hotel bill
             </dd>
             <dt className="col-sm-2">Other</dt>
-            <dd className="col-sm-9">
+            <dd className="col-sm">
               i.e. conference registration fees, office supplies, or parking expenses
             </dd>
             <small className="fst-italic">

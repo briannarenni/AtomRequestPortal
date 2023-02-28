@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 const initialState = {
   isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')) || false,
-  currUser: JSON.parse(localStorage.getItem('currUser')) || {},
+  currUser: JSON.parse(localStorage.getItem('currUser')) || {}
 };
 
 function reducer(state, action) {
@@ -22,8 +22,8 @@ function reducer(state, action) {
 export function AuthProvider(props) {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const isManager = state.currUser.role === 'manager';
+  const fullName = `${state.currUser.firstName} ${state.currUser.lastName}`;
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', JSON.stringify(state.isLoggedIn));
@@ -39,7 +39,7 @@ export function AuthProvider(props) {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, isManager, logout, dispatch }}>
+    <AuthContext.Provider value={{ ...state, isManager, fullName, logout, dispatch }}>
       {props.children}
     </AuthContext.Provider>
   );

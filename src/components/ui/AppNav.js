@@ -2,7 +2,8 @@ import React from 'react';
 import { Navbar, Nav, Image } from 'react-bootstrap';
 
 import { useAuth } from '../../hooks/useAuth';
-import { FAQBtn, ProfileBtn, LogoutBtn } from '../btn';
+import { FAQBtn, LogoutBtn } from '../btn';
+import { ProfileModal } from '../modal';
 import logo from '../../assets/logo.svg';
 
 export default function AppHeader() {
@@ -37,9 +38,10 @@ export default function AppHeader() {
           <>
             {!isManager && (
               <>
+                <ProfileModal />
+
                 <FAQBtn />
 
-                <ProfileBtn />
                 <LogoutBtn handler={handleLogout} />
               </>
             )}
