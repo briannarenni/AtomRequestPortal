@@ -17,19 +17,18 @@ export default function Dashboard() {
   }, []);
 
   const employeeMenu = {
-    'Submit Request': 'New Reimbursement Request',
-    'Check Pending': 'See Pending Requests',
-    'Request History': 'See Completed Requests',
-    'Change Password': 'Change Account Password'
+    'Submit New Request': '/submit-request',
+    'Check Pending Requests': '/pending-requests',
+    'View All Submissions': '/submissions',
+    'Update Password': '/update-password'
   };
 
   const managerMenu = {
-    'Pending Requests': 'Process Pending Requests',
-    'Request Log': 'See Full Request History',
-    'Manage Roles': 'Update Employee Roles',
-    'See Employee Roster': 'See All Employees',
-    'Add New Employee': 'Register Employee Account',
-    'Change Password': 'Change Account Password'
+    'Process Pending Requests': '/pending-requests',
+    'View Full Request History': '/all-requests',
+    'Manage Roles': '/user-roles',
+    'See Employee Roster': '/employees',
+    'Update Password': '/update-password'
   };
 
   const menu = isManager ? managerMenu : employeeMenu;
@@ -42,17 +41,19 @@ export default function Dashboard() {
       </header>
 
       <main className="mx-4 my-2 px-1 row text-center">
-        {Object.entries(menu).map(([btnText, btnCaption]) => (
+        {Object.entries(menu).map(([btnText, pageURL]) => (
           <Card
             key={btnText}
             className="col-sm-5 mx-auto my-2 px-3 py-4">
-            <Button
-              size="lg"
-              variant="primary"
-              className="mx-auto mt-2 p-3">
-              {btnText}
-            </Button>
-            <Card.Text className="lead mt-4 mb-2">{btnCaption}</Card.Text>
+            <Link to={pageURL}>
+              <Button
+                size="lg"
+                variant="primary"
+                className="mx-auto mt-2 p-3">
+                {btnText}
+              </Button>
+            </Link>{' '}
+            {/* <Card.Text className="lead mt-4 mb-2">{btnCaption}</Card.Text> */}
           </Card>
         ))}
       </main>

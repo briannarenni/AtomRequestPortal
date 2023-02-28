@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './hooks';
 import { AppNav, NotFound } from './components/ui';
 import { BackBtn } from './components/btn/';
-import { Landing, FAQ, Login, Register, Dashboard } from './pages';
+import { Landing, FAQ, Login, Register, Dashboard, PassUpdate} from './pages';
 
 export default function App() {
   return (
@@ -31,6 +31,10 @@ export default function App() {
           <Route
             path="/dashboard"
             element={<Dashboard />}
+          />
+          <Route
+            path="/update-password"
+            element={<PassUpdate />}
           />
           <Route
             path="*"

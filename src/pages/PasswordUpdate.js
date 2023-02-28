@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -10,7 +11,7 @@ import { updatePassSchema, updatePassDefaults } from '../_data/schemas';
 import { PageHeader } from '../components/ui';
 import { Password, ConfirmPassword, SubmitBtn } from '../components/form';
 
-export default function ChangePassword() {
+export default function PasswordUpdateForm() {
   const navigate = useNavigate();
   const { isLoggedIn, currUser } = useAuth();
   const { isLoading, updateUserPassword } = useUserAPI();
@@ -18,12 +19,13 @@ export default function ChangePassword() {
   const {
     register,
     handleSubmit,
+    setError,
     clearErrors,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields }
   } = useForm({
     resolver: yupResolver(updatePassSchema),
     mode: 'onBlur',
-    defaultValues: { ...updatePassDefaults },
+    defaultValues: { ...updatePassDefaults }
   });
 
   useEffect(() => {
@@ -32,14 +34,8 @@ export default function ChangePassword() {
     }
   }, [isLoggedIn, navigate]);
 
-  useEffect(() => {
-    if (!isEmpty(currUser)) {
-      setUserId(currUser.userId);
-    }
-  }, [currUser]);
-
   const updatePassword = async (values) => {
-    const response = await updateUserPassword(userId, values.password, values.confirm);
+    const response = await updateUserPassword(currUser.userId, values.password, values.confirm);
     console.log(response);
   };
 
@@ -52,7 +48,7 @@ export default function ChangePassword() {
     <>
       <header>
         <PageHeader title="Update User Password" />
-        {userMessage && <h3>{userMessage}</h3>}
+        {/* {userMessage && <h3>{userMessage}</h3>} */}
       </header>
 
       <Form
@@ -78,8 +74,8 @@ export default function ChangePassword() {
           Must be min. 7 characters with at least 1 special char, may not contain spaces.
         </p>
         <SubmitBtn
-          btnTxt="Save Changes"
-          disabled={!isValid || !dirty}
+          btnTxt="Update Password"
+          disabled={isLoading}
         />
       </Form>
     </>
