@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-import { Tickets, handleAPIError } from '../_data/endpoints';
+import { Tickets, handleAPIError } from '../data';
 
 export function useTicketAPI() {
   const [isLoading, setIsLoading] = useState(false);

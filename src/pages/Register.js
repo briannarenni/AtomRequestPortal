@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
-import { depts, registerSchema, registerDefaults } from '../_data/schemas';
+import { depts, registerSchema, registerDefaults } from '../data/schemas';
 import { PageHeader } from '../components/ui';
 import * as Control from '../components/form';
 

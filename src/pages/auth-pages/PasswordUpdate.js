@@ -1,25 +1,21 @@
-import React, { useEffect } from 'react';
-import { isEmpty } from 'lodash';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import styles from '../assets/styles/Form.module.css';
-import { useAuth, useUserAPI } from '../hooks';
-import { updatePassSchema, updatePassDefaults } from '../_data/schemas';
-import { PageHeader } from '../components/ui';
-import { Password, ConfirmPassword, SubmitBtn } from '../components/form';
+import styles from '../../assets/styles/Form.module.css';
+import { useAuth, useUserAPI } from '../../hooks';
+import { updatePassSchema, updatePassDefaults } from '../../data/schemas';
+import { PageHeader } from '../../components/ui';
+import { Password, ConfirmPassword, SubmitBtn } from '../../components/form';
 
 export default function PasswordUpdateForm() {
-  const navigate = useNavigate();
-  const { isLoggedIn, currUser } = useAuth();
+  const { currUser } = useAuth();
   const { isLoading, updateUserPassword } = useUserAPI();
 
   const {
     register,
     handleSubmit,
-    setError,
     clearErrors,
     formState: { errors, dirtyFields }
   } = useForm({
@@ -27,12 +23,6 @@ export default function PasswordUpdateForm() {
     mode: 'onBlur',
     defaultValues: { ...updatePassDefaults }
   });
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn, navigate]);
 
   const updatePassword = async (values) => {
     const response = await updateUserPassword(currUser.userId, values.password, values.confirm);

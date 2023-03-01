@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-import { Users, handleAPIError } from '../_data/endpoints';
+import { Users, handleAPIError } from '../data';
 
 export function useUserAPI() {
   const [isLoading, setIsLoading] = useState(false);

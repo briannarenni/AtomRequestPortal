@@ -19,7 +19,7 @@ export default function AppHeader() {
       expand="md"
       className="d-flex justify-content-between mx-1 mb-1 border-bottom border-bottom-secondary">
       <Navbar.Brand
-        href="/dashboard"
+        href="/"
         className="fst-italic fw-bold fs-6">
         <Image
           src={logo}
@@ -27,7 +27,7 @@ export default function AppHeader() {
           width={45}
           height={45}
         />
-        <span className="logoName">AtomPortal</span>
+        <span className="logoName">ATOM Studios</span>
       </Navbar.Brand>
 
       {/*  eslint-disable-next-line */}

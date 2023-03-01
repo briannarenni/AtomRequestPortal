@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
 import { AuthProvider } from './hooks';
-import { AppNav, NotFound } from './components/ui';
+import { appRoutes } from './data/';
+import { AppNav } from './components/ui';
 import { BackBtn } from './components/btn/';
-import { Landing, FAQ, Login, Register, Dashboard, PassUpdate} from './pages';
 
 export default function App() {
   return (
@@ -12,34 +13,13 @@ export default function App() {
         <AppNav />
         <BackBtn />
         <Routes>
-          <Route
-            path="/"
-            element={<Landing />}
-          />
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/register"
-            element={<Register />}
-          />
-          <Route
-            path="/faq"
-            element={<FAQ />}
-          />
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/update-password"
-            element={<PassUpdate />}
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
+          {appRoutes.map(({ path, element }) => (
+            <Route
+              key={path}
+              path={path}
+              element={element}
+            />
+          ))}
         </Routes>
       </div>
     </AuthProvider>
