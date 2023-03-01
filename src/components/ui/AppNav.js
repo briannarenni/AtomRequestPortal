@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar, Nav, Image } from 'react-bootstrap';
 
 import { useAuth } from '../../hooks/useAuth';
-import { FAQBtn, LogoutBtn } from '../btn';
+import { FAQBtn, LoginBtn, LogoutBtn } from '../btn';
 import { ProfileModal } from '../modal';
 import logo from '../../assets/logo.svg';
 
@@ -32,7 +32,12 @@ export default function AppHeader() {
 
       {/*  eslint-disable-next-line */}
       <Nav className="justify-content-end gap-2 mx-1">
-        {!isLoggedIn && <FAQBtn />}
+        {!isLoggedIn && (
+          <>
+            <FAQBtn />
+            <LoginBtn />
+          </>
+        )}
 
         {isLoggedIn && (
           <>

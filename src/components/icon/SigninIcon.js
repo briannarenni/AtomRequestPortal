@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default function LoginIcon() {
+export default function SigninIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="35"
-      height="35"
-      viewBox="0 0 35 35"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"

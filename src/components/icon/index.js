@@ -4,5 +4,5 @@ export { default as UserIcon } from './LogoutIcon';
 export { default as LogoutIcon } from './UserIcon';
 export { default as MessageIcon } from './MessageIcon';
 export { default as NoteIcon } from './NoteIcon';
-export { default as LoginIcon } from './LoginIcon';
+export { default as SigninIcon } from './SigninIcon';
 export { default as RegisterIcon } from './RegisterIcon';

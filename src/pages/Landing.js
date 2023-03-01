@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { LoginIcon, RegisterIcon } from '../components/icon';
+import { SigninIcon, RegisterIcon } from '../components/icon';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Landing() {
             <Button
               size="lg"
               className="landing-btn m-3 p-4">
-              <LoginIcon />
+              <SigninIcon />
               Login to Account
             </Button>
           </Link>
