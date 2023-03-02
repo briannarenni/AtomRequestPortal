@@ -1,19 +1,20 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { AuthProvider } from './hooks';
-import { appRoutes } from './data/';
+import { AuthProvider, useAuthRoute } from './hooks';
 import { AppNav } from './components/ui';
 import { BackBtn } from './components/btn/';
 
 export default function App() {
+  const { getRoutes } = useAuthRoute();
+
   return (
     <AuthProvider>
       <div className="App container-fluid">
         <AppNav />
         <BackBtn />
         <Routes>
-          {appRoutes.map(({ path, element }) => (
+          {getRoutes().map(({ path, element }) => (
             <Route
               key={path}
               path={path}

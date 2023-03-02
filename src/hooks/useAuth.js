@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useContext, createContext } from 'react';
+import React, { useReducer, useMemo, useEffect, useContext, createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -22,19 +22,26 @@ function reducer(state, action) {
 export function AuthProvider(props) {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const isManager = state.currUser.role === 'manager';
-  const fullName = `${state.currUser.firstName} ${state.currUser.lastName}`;
+  const isManager = useMemo(() => state.currUser.role === 'manager', [state.currUser.role]);
+  const fullName = useMemo(
+    () => `${state.currUser.firstName} ${state.currUser.lastName}`,
+    [state.currUser.firstName, state.currUser.lastName]
+  );
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', JSON.stringify(state.isLoggedIn));
-    localStorage.setItem('currUser', JSON.stringify(state.currUser));
-  }, [state.isLoggedIn, state.currUser]);
+  }, [state.isLoggedIn]);
 
+  useEffect(() => {
+    localStorage.setItem('currUser', JSON.stringify(state.currUser));
+  }, [state.currUser]);
+
+  // const login = () => {}
   const logout = () => {
-    dispatch({ type: 'SET_IS_LOGGED_IN', payload: false });
-    dispatch({ type: 'SET_CURR_USER', payload: {} });
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currUser');
+    dispatch({ type: 'SET_IS_LOGGED_IN', payload: false });
+    dispatch({ type: 'SET_CURR_USER', payload: {} });
     navigate('/');
   };
 

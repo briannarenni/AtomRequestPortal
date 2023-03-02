@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { isEmpty } from 'lodash';
-import { useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
@@ -20,11 +20,11 @@ export default function Login() {
     handleSubmit,
     setError,
     clearErrors,
-    formState: { errors, dirtyFields },
+    formState: { errors, dirtyFields }
   } = useForm({
     resolver: yupResolver(loginSchema),
     mode: 'onBlur',
-    defaultValues: { ...loginDefaults },
+    defaultValues: { ...loginDefaults }
   });
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Login() {
       dispatch({ type: 'SET_IS_LOGGED_IN', payload: true });
       navigate('/dashboard');
     }
-  }, [currUser, dispatch, navigate]);
+  }, [currUser, dispatch]);
 
   const onSubmit = async (data) => {
     clearErrors();
@@ -45,12 +45,12 @@ export default function Login() {
     if (response === 'Username incorrect') {
       setError('username', {
         type: 'manual',
-        message: '❌ Username incorrect',
+        message: '❌ Username incorrect'
       });
     } else if (response === 'Password incorrect') {
       setError('password', {
         type: 'manual',
-        message: '❌ Password incorrect',
+        message: '❌ Password incorrect'
       });
     } else {
       dispatch({ type: 'SET_CURR_USER', payload: response.data });

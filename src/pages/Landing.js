@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { SigninIcon, RegisterIcon } from '../components/icon';
 
 export default function Landing() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem('isLoggedIn'))) {
-      navigate('/dashboard');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className="container-xs">
       <header>
-        <h1 className="text-center">Reimbursement Request Portal</h1>
+        <h1 className="display-5 mt-2 text-center">Reimbursement Request Portal</h1>
       </header>
       <main
         id="landing-container"
@@ -28,7 +19,7 @@ export default function Landing() {
               size="lg"
               className="landing-btn m-3 p-4">
               <SigninIcon />
-              Login to Account
+              Login Existing Account
             </Button>
           </Link>
           <Link to="/register">
@@ -36,7 +27,7 @@ export default function Landing() {
               size="lg"
               className="landing-btn m-3 p-4">
               <RegisterIcon />
-              Register Employee
+              Register Employee Account
             </Button>
           </Link>
         </div>

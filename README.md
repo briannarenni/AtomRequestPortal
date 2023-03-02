@@ -4,13 +4,12 @@ This app pairs with my [RequestAPI](https://github.com/briannarenni/RequestAPI).
 
 ---
 
-## 📍Next in Roadmap
+## 📍Current Progress
 
+- Implement Employee Menu options
 - ✅ Move passwords to their own DB table
 - ✅ Refactor from Formik to react-hook-form
-- Implement Employee Menu options
-
-### ❗️Current Bugs :
+- ✅ Route refactoring
 
 ---
 
@@ -28,4 +27,5 @@ _All licensed under the MIT License_
 
 ---
 
+<small>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</small>
 <small>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</small>

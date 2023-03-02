@@ -1,32 +1,24 @@
-import React, { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 
 import { useAuth } from '../hooks/useAuth';
 import { PageHeader, BannerSuccess } from '../components/ui';
 
 export default function Dashboard() {
-  const navigate = useNavigate();
-  const { isLoggedIn, fullName, isManager } = useAuth();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { fullName, isManager } = useAuth();
 
   const employeeMenu = {
     'Submit New Request': 'submit-request',
-    'Pending Requests': 'pending-requests',
-    'Submission History': 'submissions/',
+    'Pending Requests': 'view-pending',
+    'Submission History': 'submissions',
     'Update Password': 'update-password'
   };
 
   const managerMenu = {
     'Employee Roster': 'employee-roster',
-    'Process Pending Requests': 'pending-requests/all',
-    'Submission Log': 'submissions/all',
+    'Process Pending Requests': 'view-pending/process',
+    'Submission Log': 'submissions',
     'Manage Users': 'manage-users',
     'Update Password': 'update-password'
   };

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { isEmpty, startCase } from 'lodash';
-import { useNavigate } from 'react-router-dom';
 import { Form, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
@@ -33,7 +33,7 @@ export default function Register() {
       dispatch({ type: 'SET_IS_LOGGED_IN', payload: true });
       navigate('/dashboard');
     }
-  }, [currUser, dispatch, navigate]);
+  }, [currUser, dispatch]);
 
   const handleDeptSelect = (selectedOption) => {
     setSelectedDept(selectedOption.value);
