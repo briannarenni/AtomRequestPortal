@@ -66,71 +66,71 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '*',
-      element: <NotFound />
-    },
-    {
       path: '/dashboard/submit-request',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        // <AuthRoute isProtected>
+        //   <SubmitRequest />
+        // </AuthRoute>
       )
-      // unfinished element: <SubmitRequest />
     },
     {
       path: '/dashboard/view-pending/:userId',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        //     <AuthRoute isProtected>
+        //       <PendingRequests />
+        // </AuthRoute>
       )
-      // unfinished element: <PendingRequests />
     },
     {
       path: '/dashboard/submissions/:userId',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        // <AuthRoute isProtected>
+        // <SubmissionHistory />
+        // </AuthRoute>
       )
-      // unfinished element: <SubmissionHistory />
     },
     {
       path: '/dashboard/employee-roster',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        // <AuthRoute isProtected>
+        //   <EmployeeRoster />
+        // </AuthRoute>
       )
-      // unfinished element: <EmployeeRoster />
     },
     {
       path: '/dashboard/process-pending',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        // <AuthRoute isProtected>
+        //   <ProcessPending />
+        // </AuthRoute>
       )
-      // unfinished element: <ProcessPending />
     },
     {
       path: '/dashboard/submissions/all',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        // <AuthRoute isProtected>
+        //    <SubmissionLog />
+        // </AuthRoute>
       )
-      // unfinished element: <SubmissionLog />
     },
     {
       path: '/dashboard/manage-users',
       element: (
-        <AuthRoute isProtected>
-          <p className="text-center lead">🚧Under Construction🚧</p>
-        </AuthRoute>
+        <p className="text-center lead">🚧Under Construction🚧</p>
+        // <AuthRoute isProtected>
+        //    <ManageUsers />
+        // </AuthRoute>
       )
-      // unfinished element: <ManageUsers />
+    },
+    {
+      path: '*',
+      element: <NotFound />
     }
   ];
 

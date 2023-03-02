@@ -22,6 +22,7 @@ function reducer(state, action) {
 export function AuthProvider(props) {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const isManager = useMemo(() => state.currUser.role === 'manager', [state.currUser.role]);
   const fullName = useMemo(
     () => `${state.currUser.firstName} ${state.currUser.lastName}`,

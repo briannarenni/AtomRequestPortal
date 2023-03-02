@@ -1,2 +1,2 @@
-export * from './apiModels';
+export * from './models';
 export * from './endpoints';

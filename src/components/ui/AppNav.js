@@ -6,7 +6,7 @@ import { FAQBtn, LoginBtn, LogoutBtn } from '../btn';
 import { ProfileModal } from '../modal';
 import logo from '../../assets/logo.svg';
 
-export default function AppHeader() {
+export default function AppNav() {
   const { isLoggedIn, isManager, logout } = useAuth();
 
   const handleLogout = async (event) => {
