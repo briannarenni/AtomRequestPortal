@@ -166,7 +166,7 @@ export default function Register() {
 
         <Control.SubmitBtn
           btnTxt="Register Account"
-          disabled={isLoading}
+          isLoading={isLoading}
         />
       </Form>
     </div>

@@ -3,10 +3,10 @@ import { Table } from 'react-bootstrap';
 
 import { useAuth, useTicketAPI } from '../../hooks';
 import { Ticket } from '../../data';
-import { PageHeader, BannerSuccess, BannerError } from '../../components/ui';
+import { PageHeader, BannerSuccess, BannerError, Loading } from '../../components/ui';
 
 export default function EmpHistory() {
-  const { currUser} = useAuth();
+  const { currUser } = useAuth();
   const { isLoading, getUserTickets } = useTicketAPI();
   const [tickets, setTickets] = useState([]);
   const [ticketCount, setTicketCount] = useState(currUser.totalTickets);
@@ -46,6 +46,8 @@ export default function EmpHistory() {
           <div className="mt-3">
             <BannerError content={`No tickets found for ${currUser.fullName}`} />
           </div>
+        ) : isLoading ? (
+          <Loading />
         ) : (
           <>
             <BannerSuccess content={`Tickets submitted by: ${currUser.fullName}`} />

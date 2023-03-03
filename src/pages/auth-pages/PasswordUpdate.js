@@ -65,7 +65,7 @@ export default function PasswordUpdateForm() {
         </p>
         <SubmitBtn
           btnTxt="Update Password"
-          disabled={isLoading}
+          isLoading={isLoading}
         />
       </Form>
     </>

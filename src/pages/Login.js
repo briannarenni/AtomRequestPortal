@@ -101,7 +101,7 @@ export default function Login() {
 
         <SubmitBtn
           btnTxt="Login"
-          disabled={isLoading}
+          isLoading={isLoading}
         />
       </Form>
     </div>
