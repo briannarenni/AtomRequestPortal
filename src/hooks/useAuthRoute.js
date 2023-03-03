@@ -5,6 +5,7 @@ import { isEmpty } from 'lodash';
 import { AuthProvider } from './useAuth';
 import { Landing, FAQ, Login, Register, NotFound } from '../pages';
 import { Dashboard, PasswordUpdate, EmpHistory } from '../pages/auth-pages';
+import { PageHeader } from '../components/ui';
 
 export function useAuthRoute() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ export function useAuthRoute() {
   }
 
   const getRoutes = () => [
+    // Placeholder: <PageHeader title={'🚧Under Construction🚧'} />
     {
       path: '/',
       element: <Landing />
@@ -68,7 +70,7 @@ export function useAuthRoute() {
     {
       path: '/dashboard/submit-request',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
+        <PageHeader title={'🚧Under Construction🚧'} />
         // <AuthRoute isProtected>
         //   <SubmitRequest />
         // </AuthRoute>
@@ -77,7 +79,7 @@ export function useAuthRoute() {
     {
       path: '/dashboard/view-pending/:userId',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
+        <PageHeader title={'🚧Under Construction🚧'} />
         //     <AuthRoute isProtected>
         //       <PendingRequests />
         // </AuthRoute>
@@ -95,7 +97,7 @@ export function useAuthRoute() {
     {
       path: '/dashboard/employee-roster',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
+        <PageHeader title={'🚧Under Construction🚧'} />
         // <AuthRoute isProtected>
         //   <EmployeeRoster />
         // </AuthRoute>
@@ -104,7 +106,7 @@ export function useAuthRoute() {
     {
       path: '/dashboard/process-pending',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
+        <PageHeader title={'🚧Under Construction🚧'} />
         // <AuthRoute isProtected>
         //   <ProcessPending />
         // </AuthRoute>
@@ -113,7 +115,7 @@ export function useAuthRoute() {
     {
       path: '/dashboard/submissions/all',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
+        <PageHeader title={'🚧Under Construction🚧'} />
         // <AuthRoute isProtected>
         //    <SubmissionLog />
         // </AuthRoute>
@@ -122,7 +124,7 @@ export function useAuthRoute() {
     {
       path: '/dashboard/manage-users',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
+        <PageHeader title={'🚧Under Construction🚧'} />
         // <AuthRoute isProtected>
         //    <ManageUsers />
         // </AuthRoute>

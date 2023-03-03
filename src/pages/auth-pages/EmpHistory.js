@@ -42,12 +42,11 @@ export default function EmpHistory() {
       </header>
 
       <main>
+        {isLoading && <Loading />}
         {ticketCount === 0 ? (
           <div className="mt-3">
             <BannerError content={`No tickets found for ${currUser.fullName}`} />
           </div>
-        ) : isLoading ? (
-          <Loading />
         ) : (
           <>
             <BannerSuccess content={`Tickets submitted by: ${currUser.fullName}`} />
