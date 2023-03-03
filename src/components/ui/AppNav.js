@@ -19,7 +19,7 @@ export default function AppNav() {
       expand="md"
       className="d-flex justify-content-between mx-1 mb-1 border-bottom border-bottom-secondary">
       <Navbar.Brand
-        href="/"
+        href="/dashboard"
         className="fst-italic fw-bold fs-6">
         <Image
           src={logo}

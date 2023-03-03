@@ -12,7 +12,7 @@
   --red-secondary: rgb(252, 56, 56);
   --banner-success-bkg: #6ffa6760;
   --banner-success-bdr: #6efa67a8;
-  --banner-error-bkg: rgba(255, 0, 0, 0.581);
+  --banner-error-bkg: #ff000074;
   --banner-error-bdr: red;
   --modal-dark: #0b0e0f;
 }

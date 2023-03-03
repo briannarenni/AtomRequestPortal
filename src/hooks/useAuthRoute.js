@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import { AuthProvider } from './useAuth';
-import { Landing, FAQ, Login, Register, Dashboard, NotFound } from '../pages';
-import { PasswordUpdate } from '../pages/auth-pages';
+import { Landing, FAQ, Login, Register, NotFound } from '../pages';
+import { Dashboard, PasswordUpdate, EmpHistory } from '../pages/auth-pages';
 
 export function useAuthRoute() {
   const navigate = useNavigate();
@@ -86,10 +86,10 @@ export function useAuthRoute() {
     {
       path: '/dashboard/submissions/:userId',
       element: (
-        <p className="text-center lead">🚧Under Construction🚧</p>
-        // <AuthRoute isProtected>
-        // <SubmissionHistory />
-        // </AuthRoute>
+        <AuthRoute>
+          <EmpHistory isProtected />
+          {/* <ShowHistory /> */}
+        </AuthRoute>
       )
     },
     {

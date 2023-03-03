@@ -1,17 +1,19 @@
-export class UserModel {
-  constructor(userId, username, fName, lName, role, dept, numPending, numSubmitted) {
+import { startCase } from 'lodash';
+import { format } from 'date-fns';
+
+export class User {
+  constructor(userId, username, firstName, lastName, role, dept, numPending, numTickets) {
     this.userId = userId;
     this.username = username;
-    this.firstName = fName;
-    this.lastName = lName;
-    this.role = role;
+    this.fullName = `${firstName} ${lastName}`;
+    this.role = (role);
     this.dept = dept;
-    this.numPending = numPending;
-    this.numSubmitted = numSubmitted;
+    this.pendingTickets = numPending;
+    this.totalTickets = numTickets;
   }
 }
 
-export class TicketModel {
+export class Ticket {
   constructor(
     ticketId,
     submittedOn,
@@ -23,12 +25,12 @@ export class TicketModel {
     comments
   ) {
     this.ticketId = ticketId;
-    this.submittedOn = submittedOn;
+    this.submittedOn = format(new Date(submittedOn), 'MMM dd, yyyy');
     this.submittedBy = submittedBy;
     this.employeeName = employeeName;
-    this.amount = amount;
+    this.amount = `$${Number(amount).toFixed(2)}`;
     this.category = category;
-    this.status = status;
+    this.status = startCase(status);
     this.comments = comments;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, ModalTitle } from 'react-bootstrap';
+import { startCase } from 'lodash';
 
 import styles from '../../assets/styles/NavBtn.module.css';
 import { useAuth } from '../../hooks/useAuth';
@@ -34,17 +35,19 @@ export default function ProfileModal() {
           <ModalTitle></ModalTitle>
         </Modal.Header>
         <Modal.Body>
-          <h1 className="display-6 text-center">{fullName}</h1>
-          <h2 className="lead text-center">{currUser.dept}</h2>
-          <div className='px-3 mx-auto'>
+          <h1 className="display-6 text-center">{currUser.fullName}</h1>
+          <h2 className="lead text-center">
+            {currUser.dept} {startCase(currUser.role)}
+          </h2>
+          <div className="px-3 mx-auto">
             <strong>User ID:</strong>
             <p className="lead">{currUser.userId}</p>
             <strong>Username:</strong>
             <p className="lead">{currUser.username}</p>
             <strong>Pending Tickets:</strong>
-            <p className="lead">{currUser.numPending}</p>
+            <p className="lead">{currUser.pendingTickets}</p>
             <strong>Total Requests Submitted:</strong>
-            <p className="lead">{currUser.numTickets}</p>
+            <p className="lead">{currUser.totalTickets}</p>
           </div>
         </Modal.Body>
         {/* <Modal.Footer>

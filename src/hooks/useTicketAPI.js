@@ -6,6 +6,18 @@ import { Tickets, handleAPIError } from '../data';
 export function useTicketAPI() {
   const [isLoading, setIsLoading] = useState(false);
 
+  const getUserTickets = async (userId) => {
+    try {
+      setIsLoading(true);
+      const response = await axios.post(Tickets.getUserTickets(userId), { userId });
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      setIsLoading(false);
+      return error.response ? error.response.data : 'Internal API Error';
+    }
+  };
+
   const getAllTickets = async () => {
     try {
       setIsLoading(true);
@@ -26,19 +38,7 @@ export function useTicketAPI() {
       return response.data;
     } catch (error) {
       setIsLoading(false);
-      return handleAPIError(error);
-    }
-  };
-
-  const getUserTickets = async (userId) => {
-    try {
-      setIsLoading(true);
-      const response = await axios.post(Tickets.getUserTickets(userId));
-      setIsLoading(false);
-      return response.data;
-    } catch (error) {
-      setIsLoading(false);
-      return handleAPIError(error);
+      return error.response ? error.response.data : 'Internal API Error';
     }
   };
 
@@ -50,13 +50,13 @@ export function useTicketAPI() {
         username,
         amount,
         category,
-        comments,
+        comments
       });
       setIsLoading(false);
       return response.data;
     } catch (error) {
       setIsLoading(false);
-      return handleAPIError(error);
+      return error.response ? error.response.data : 'Internal API Error';
     }
   };
 
@@ -68,7 +68,7 @@ export function useTicketAPI() {
       return response.data;
     } catch (error) {
       setIsLoading(false);
-      return handleAPIError(error);
+      return error.response ? error.response.data : 'Internal API Error';
     }
   };
 
@@ -77,13 +77,13 @@ export function useTicketAPI() {
       setIsLoading(true);
       const response = await axios.post(Tickets.updateTicket(ticketId), {
         ticketId,
-        newStatus,
+        newStatus
       });
       setIsLoading(false);
       return response.data;
     } catch (error) {
       setIsLoading(false);
-      return handleAPIError(error);
+      return error.response ? error.response.data : 'Internal API Error';
     }
   };
 
@@ -94,6 +94,6 @@ export function useTicketAPI() {
     getUserTickets,
     submitTicket,
     searchTickets,
-    updateTicket,
+    updateTicket
   };
 }

@@ -24,10 +24,6 @@ export function AuthProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const isManager = useMemo(() => state.currUser.role === 'manager', [state.currUser.role]);
-  const fullName = useMemo(
-    () => `${state.currUser.firstName} ${state.currUser.lastName}`,
-    [state.currUser.firstName, state.currUser.lastName]
-  );
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', JSON.stringify(state.isLoggedIn));
@@ -47,7 +43,7 @@ export function AuthProvider(props) {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, isManager, fullName, logout, dispatch }}>
+    <AuthContext.Provider value={{ ...state, isManager, logout, dispatch }}>
       {props.children}
     </AuthContext.Provider>
   );

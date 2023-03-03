@@ -9,7 +9,7 @@ export default function BannerSuccess({ content }) {
     <>
       <Alert
         variant="none"
-        className={styles.bannerGreen}>
+        className={styles.bannerError}>
         <MessageIcon />
         <span className="mx-1">{content}</span>
       </Alert>

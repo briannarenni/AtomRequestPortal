@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 
-import { useAuth } from '../hooks/useAuth';
-import { PageHeader, BannerSuccess } from '../components/ui';
+import { useAuth } from '../../hooks/useAuth';
+import { PageHeader, BannerSuccess } from '../../components/ui';
 
 export default function Dashboard() {
-  const { currUser, fullName, isManager } = useAuth();
+  const { currUser, isManager } = useAuth();
 
   const employeeMenu = [
     {
@@ -21,7 +21,7 @@ export default function Dashboard() {
     },
     {
       title: 'See a log of your submissions',
-      btnText: 'Submission Log',
+      btnText: 'Submission History',
       link: `submissions/${currUser.userId}`
     },
     {
@@ -43,8 +43,8 @@ export default function Dashboard() {
       link: 'view-pending/process'
     },
     {
-      title: 'View complete submission history',
-      btnText: 'Submission History',
+      title: 'View complete submission log',
+      btnText: 'Submission Log',
       link: 'submissions'
     },
     {
@@ -63,9 +63,9 @@ export default function Dashboard() {
 
   return (
     <div className="container-xs">
-      <header className=" mx-auto">
+      <header className="mx-auto">
         <PageHeader title={isManager ? 'Manager Dashboard' : 'Employee Dashboard'} />
-        <BannerSuccess content={`Hello, ${fullName}`} />
+        <BannerSuccess content={`Hello, ${currUser.fullName}`} />
       </header>
 
       <main className="mx-4 my-3 px-1 row text-center">

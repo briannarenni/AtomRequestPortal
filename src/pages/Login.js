@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
 import { loginSchema, loginDefaults } from '../data/schemas';
+import { User } from '../data';
 import { PageHeader, BannerNote } from '../components/ui';
 import { Username, Password, SubmitBtn } from '../components/form';
 
@@ -53,7 +54,21 @@ export default function Login() {
         message: '❌ Password incorrect'
       });
     } else {
-      dispatch({ type: 'SET_CURR_USER', payload: response.data });
+      const { userId, username, firstName, lastName, role, dept, numPending, numTickets } =
+        response.data;
+
+      const user = new User(
+        userId,
+        username,
+        firstName,
+        lastName,
+        role,
+        dept,
+        numPending,
+        numTickets
+      );
+
+      dispatch({ type: 'SET_CURR_USER', payload: user });
     }
   };
 

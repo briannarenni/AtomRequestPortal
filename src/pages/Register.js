@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from '../assets/styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
+import { User } from '../data';
 import { depts, registerSchema, registerDefaults } from '../data/schemas';
 import { PageHeader } from '../components/ui';
 import * as Control from '../components/form';
@@ -55,7 +56,21 @@ export default function Register() {
         message: '❌ Username already registered'
       });
     } else {
-      dispatch({ type: 'SET_CURR_USER', payload: response.data });
+      const { userId, username, firstName, lastName, role, dept, numPending, numTickets } =
+        response.data;
+
+      const user = new User(
+        userId,
+        username,
+        firstName,
+        lastName,
+        role,
+        dept,
+        numPending,
+        numTickets
+      );
+
+      dispatch({ type: 'SET_CURR_USER', payload: user });
     }
   };
 
