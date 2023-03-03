@@ -15,11 +15,10 @@ export default function BackBtn() {
   return (
     <Link to={-1}>
       <Button
-        size="md"
         variant="back"
-        className="mx-2 my-1 px-3 py-1">
+        className="mx-1 px-2 py-2">
         <BackIcon />
-        <div className="d-inline-block fs-5">BACK</div>
+        <p className="d-inline-block fs-5 mb-0">BACK</p>
       </Button>
     </Link>
   );

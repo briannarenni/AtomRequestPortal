@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 
 import { AuthProvider, useAuthRoute } from './hooks';
 import { AppNav } from './components/ui';
-import { BackBtn } from './components/btn/';
 
 export default function App() {
   const { getRoutes } = useAuthRoute();
@@ -12,7 +11,6 @@ export default function App() {
     <AuthProvider>
       <div className="App container-fluid">
         <AppNav />
-        <BackBtn />
         <Routes>
           {getRoutes().map(({ path, element }) => (
             <Route

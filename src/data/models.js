@@ -6,7 +6,7 @@ export class User {
     this.userId = userId;
     this.username = username;
     this.fullName = `${firstName} ${lastName}`;
-    this.role = (role);
+    this.role = role;
     this.dept = dept;
     this.pendingTickets = numPending;
     this.totalTickets = numTickets;
