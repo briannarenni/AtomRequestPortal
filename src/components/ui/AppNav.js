@@ -30,7 +30,6 @@ export default function AppNav() {
         <span className="logoName">ATOM Studios</span>
       </Navbar.Brand>
 
-      {/*  eslint-disable-next-line */}
       <Nav className="justify-content-end gap-2 mx-1">
         {!isLoggedIn && (
           <>
