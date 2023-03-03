@@ -7,7 +7,7 @@ import { Ticket } from '../../data';
 import { CommentsModal } from '../../components/modal';
 import { PageHeader, BannerSuccess, BannerError, Loading } from '../../components/ui';
 
-export default function EmpHistory() {
+export default function EmpPending() {
   const { currUser } = useAuth();
   const { isLoading, getUserTickets } = useTicketAPI();
   const [tickets, setTickets] = useState([]);
@@ -21,7 +21,17 @@ export default function EmpHistory() {
 
   async function fetchUserTickets() {
     const fetchedTickets = await getUserTickets(currUser.userId);
-    const tickets = fetchedTickets.map(
+    const filteredTickets = filterPending(fetchedTickets);
+    console.log(filteredTickets);
+    setTickets(filteredTickets);
+  }
+
+  function filterPending(ticketsArr) {
+    const filteredTickets = ticketsArr.filter(
+      (ticket) => ticket.submittedBy === currUser.userId && ticket.status === 'pending'
+    );
+
+    const mappedTickets = filteredTickets.map(
       (ticket) =>
         new Ticket(
           ticket.ticketId,
@@ -34,24 +44,25 @@ export default function EmpHistory() {
           ticket.comments
         )
     );
-    setTickets(tickets);
+
+    return mappedTickets;
   }
 
   return (
     <div className="container-xs">
       <header className="mx-auto">
-        <PageHeader title={'Submission History'} />
+        <PageHeader title={'Pending Requests'} />
       </header>
 
       <main>
         {isLoading && <Loading />}
         {ticketCount === 0 ? (
           <div className="mt-3">
-            <BannerError content={`No requests found for ${currUser.fullName}`} />
+            <BannerError content={`No pending requests found for ${currUser.fullName}`} />
           </div>
         ) : (
           <>
-            <BannerSuccess content={`Requests submitted by: ${currUser.fullName}`} />
+            <BannerSuccess content={`Open requests submitted by: ${currUser.fullName}`} />
 
             <Table
               className="text-center mt-4"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal, Button, ModalTitle } from 'react-bootstrap';
 import { startCase } from 'lodash';
 
@@ -7,7 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { UserIcon } from '../icon';
 
 export default function ProfileModal() {
-  const { currUser, fullName } = useAuth();
+  const { currUser } = useAuth();
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);

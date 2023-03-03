@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 
 import { AuthProvider } from './useAuth';
 import { Landing, FAQ, Login, Register, NotFound } from '../pages';
-import { Dashboard, PasswordUpdate, EmpHistory } from '../pages/auth-pages';
+import { Dashboard, PasswordUpdate, EmpHistory, EmpPending } from '../pages/auth-pages';
 import { PageHeader } from '../components/ui';
 
 export function useAuthRoute() {
@@ -79,10 +79,10 @@ export function useAuthRoute() {
     {
       path: '/dashboard/view-pending/:userId',
       element: (
-        <PageHeader title={'🚧Under Construction🚧'} />
-        //     <AuthRoute isProtected>
-        //       <PendingRequests />
-        // </AuthRoute>
+        // <PageHeader title={'🚧Under Construction🚧'} />
+        <AuthRoute>
+          <EmpPending isProtected />
+        </AuthRoute>
       )
     },
     {
