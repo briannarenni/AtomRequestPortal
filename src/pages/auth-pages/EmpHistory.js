@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
-import { isEmpty } from 'lodash';
 
 import { useAuth, useTicketAPI } from '../../hooks';
 import { Ticket } from '../../data';
-import { CommentsModal } from '../../components/modal';
-import { PageHeader, BannerSuccess, BannerError, Loading } from '../../components/ui';
+import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '../../components/ui';
 
 export default function EmpHistory() {
   const { currUser } = useAuth();
@@ -52,43 +49,7 @@ export default function EmpHistory() {
         ) : (
           <>
             <BannerSuccess content={`Requests submitted by: ${currUser.fullName}`} />
-
-            <Table
-              className="text-center mt-4"
-              responsive
-              striped
-              bordered
-              hover>
-              <thead>
-                <tr>
-                  <th>Ticket ID</th>
-                  <th>Submission Date</th>
-                  <th>Ticket Status</th>
-                  <th>Requested Amount</th>
-                  <th>Expense Category</th>
-                  <th>Comments</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tickets.map((ticket) => (
-                  <tr key={ticket.ticketId}>
-                    <td>{ticket.ticketId}</td>
-                    <td>{ticket.submittedOn}</td>
-                    <td>{ticket.status}</td>
-                    <td>{ticket.amount}</td>
-                    <td>{ticket.category}</td>
-                    <td>
-                      {!isEmpty(ticket.comments) && (
-                        <CommentsModal
-                          ticketId={ticket.ticketId}
-                          text={ticket.comments}
-                        />
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+            <TicketTable tickets={tickets} />
           </>
         )}
       </main>
