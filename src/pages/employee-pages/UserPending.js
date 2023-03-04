@@ -25,7 +25,7 @@ export default function EmpPending() {
 
   function filterPending(ticketsArr) {
     const filteredTickets = ticketsArr.filter(
-      (ticket) => ticket.submittedBy === currUser.userId && ticket.status === 'pending'
+      (ticket) => ticket.userId === currUser.userId && ticket.status === 'pending'
     );
 
     const mappedTickets = filteredTickets.map(
@@ -33,7 +33,7 @@ export default function EmpPending() {
         new Ticket(
           ticket.ticketId,
           ticket.submittedOn,
-          ticket.submittedBy,
+          ticket.userId,
           ticket.employeeName,
           ticket.amount,
           ticket.category,

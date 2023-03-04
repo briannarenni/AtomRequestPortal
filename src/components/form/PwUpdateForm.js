@@ -22,8 +22,8 @@ export default function PwUpdateForm() {
     defaultValues: { ...updatePassDefaults }
   });
 
-  const updatePassword = async (values) => {
-    const response = await updateUserPassword(currUser.userId, values.password, values.confirm);
+  const updatePassword = async (data) => {
+    const response = await updateUserPassword(currUser.userId, data.password, data.confirm);
     console.log(response);
   };
 

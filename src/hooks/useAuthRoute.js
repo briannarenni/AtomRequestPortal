@@ -74,25 +74,19 @@ export function useAuthRoute() {
     {
       path: '/dashboard/submit-request',
       element: (
-        <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute isProtected>
-        //   <SubmitRequest />
-        // </AuthRoute>
+        <AuthRoute>
+          <SubmitRequest isProtected />
+        </AuthRoute>
       )
     },
     {
       path: '/dashboard/view-pending/:userId',
       element: (
-        // <PageHeader title={'🚧Under Construction🚧'} />
         <AuthRoute>
           <UserPending isProtected />
         </AuthRoute>
       )
     },
-    // ! Update with
-    // <AuthRoute>
-    //    <Submissions isProtected/>
-    // </AuthRoute>
     {
       path: '/dashboard/submissions/:userId',
       element: (

@@ -42,18 +42,18 @@ export function useTicketAPI() {
     }
   };
 
-  const submitTicket = async (userId, username, amount, category, comments = null) => {
+  const submitTicket = async (userId, name, amount, category, comments = null) => {
     try {
       setIsLoading(true);
       const response = await axios.post(Tickets.submitTicket, {
         userId,
-        username,
+        name,
         amount,
         category,
         comments
       });
       setIsLoading(false);
-      return response.data;
+      return response;
     } catch (error) {
       setIsLoading(false);
       return error.response ? error.response.data : 'Internal API Error';

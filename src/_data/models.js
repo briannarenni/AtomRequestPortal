@@ -14,19 +14,10 @@ export class User {
 }
 
 export class Ticket {
-  constructor(
-    ticketId,
-    submittedOn,
-    submittedBy,
-    employeeName,
-    amount,
-    category,
-    status,
-    comments
-  ) {
+  constructor(ticketId, submittedOn, userId, employeeName, amount, category, status, comments) {
     this.ticketId = ticketId;
     this.submittedOn = format(new Date(submittedOn), 'MMM dd, yyyy');
-    this.submittedBy = submittedBy;
+    this.userId = userId;
     this.employeeName = employeeName;
     this.amount = `$${Number(amount).toFixed(2)}`;
     this.category = category;

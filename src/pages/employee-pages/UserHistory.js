@@ -23,7 +23,7 @@ export default function EmpHistory() {
         new Ticket(
           ticket.ticketId,
           ticket.submittedOn,
-          ticket.submittedBy,
+          ticket.userId,
           ticket.employeeName,
           ticket.amount,
           ticket.category,

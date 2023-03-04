@@ -33,7 +33,6 @@ export function AuthProvider(props) {
     localStorage.setItem('currUser', JSON.stringify(state.currUser));
   }, [state.currUser]);
 
-  // const login = () => {}
   const logout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('currUser');

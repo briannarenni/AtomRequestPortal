@@ -28,7 +28,6 @@ export default function RegisterForm() {
 
   const handleDeptSelect = (selectedOption) => {
     setSelectedDept(selectedOption.value);
-    console.log('selectedDept:', selectedOption.value);
   };
 
   const sendRegistration = async (data) => {
