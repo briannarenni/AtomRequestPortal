@@ -3,9 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import { AuthProvider } from './useAuth';
-import { Landing, FAQ, Login, Register, Dashboard, Submissions, NotFound } from '../pages';
-import { UpdatePass, UserHistory, UserPending, SubmitRequest } from '../pages/user-pages';
-// import {} from '../pages/admin-pages';
+import { Landing, FAQ, Login, Register, NotFound } from '../pages';
+import { Dashboard, UpdatePass, Submissions } from '../pages/user-pages';
+import { UserHistory, UserPending, SubmitRequest } from '../pages/employee-pages';
+// import { RequestHistory } from '../pages/admin-pages';
+
+// * Placeholder
 import { PageHeader } from '../components/ui';
 
 export function useAuthRoute() {
@@ -87,28 +90,31 @@ export function useAuthRoute() {
       )
     },
     // ! Update with
-    // <AuthRoute isProtected>
-    //    <Submissions/>
+    // <AuthRoute>
+    //    <Submissions isProtected/>
     // </AuthRoute>
     {
       path: '/dashboard/submissions/:userId',
       element: (
         <AuthRoute>
-          <UserHistory isProtected />
-          {/* <Submissions /> */}
+          <Submissions isProtected />
         </AuthRoute>
       )
     },
     {
       path: '/dashboard/submissions/all',
-      element: <PageHeader title={'🚧Under Construction🚧'} />
+      element: (
+        <AuthRoute>
+          <Submissions isProtected />
+        </AuthRoute>
+      )
     },
     {
       path: '/dashboard/employee-roster',
       element: (
         <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute isProtected>
-        //   <EmployeeRoster />
+        // <AuthRoute>
+        //   <EmployeeRoster isProtected />
         // </AuthRoute>
       )
     },
@@ -116,8 +122,8 @@ export function useAuthRoute() {
       path: '/dashboard/process-pending',
       element: (
         <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute isProtected>
-        //   <ProcessPending />
+        // <AuthRoute >
+        //   <ProcessPending isProtected/>
         // </AuthRoute>
       )
     },
@@ -125,8 +131,8 @@ export function useAuthRoute() {
       path: '/dashboard/manage-users',
       element: (
         <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute isProtected>
-        //    <ManageUsers />
+        // <AuthRoute>
+        //    <ManageUsers isProtected/>
         // </AuthRoute>
       )
     },

@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 
-import { useAuth } from '../hooks/useAuth';
-import { PageHeader, BannerSuccess } from '../components/ui';
+import { useAuth } from '../../hooks/useAuth';
+import { PageHeader, BannerSuccess } from '../../components/ui';
 
 export default function Dashboard() {
   const { currUser, isManager } = useAuth();
