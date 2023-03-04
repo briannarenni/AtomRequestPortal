@@ -1,10 +1,10 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-import { Loading } from "../ui";
+import { Loading } from "../../ui";
 
 
-export default function SubmitBtn({ btnTxt, isLoading }) {
+export default function FormSubmitBtn({ btnTxt, isLoading }) {
   return (
     <Form.Group>
       <Button

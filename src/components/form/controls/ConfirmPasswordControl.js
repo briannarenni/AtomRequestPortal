@@ -3,8 +3,8 @@ import { Form, InputGroup, Button, Image } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 import clsx from 'clsx';
 
-import showEye from '../../assets/icons/show-eye.svg';
-import hideEye from '../../assets/icons/hide-eye.svg';
+import showEye from '../../../assets/icons/show-eye.svg';
+import hideEye from '../../../assets/icons/hide-eye.svg';
 
 export default function ConfirmPasswordControl(props) {
   const { register, name, errors, formState } = props;

@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import { AuthProvider } from './useAuth';
-import { Landing, FAQ, Login, Register, NotFound } from '../pages';
-import { Dashboard, PasswordUpdate, EmpHistory, EmpPending } from '../pages/auth-pages';
+import { Landing, FAQ, Login, Register, Dashboard, Submissions, NotFound } from '../pages';
+import { UpdatePass, UserHistory, UserPending, SubmitRequest } from '../pages/user-pages';
+// import {} from '../pages/admin-pages';
 import { PageHeader } from '../components/ui';
 
 export function useAuthRoute() {
@@ -63,7 +64,7 @@ export function useAuthRoute() {
       path: '/dashboard/update-password',
       element: (
         <AuthRoute>
-          <PasswordUpdate isProtected />
+          <UpdatePass isProtected />
         </AuthRoute>
       )
     },
@@ -81,18 +82,26 @@ export function useAuthRoute() {
       element: (
         // <PageHeader title={'🚧Under Construction🚧'} />
         <AuthRoute>
-          <EmpPending isProtected />
+          <UserPending isProtected />
         </AuthRoute>
       )
     },
+    // ! Update with
+    // <AuthRoute isProtected>
+    //    <Submissions/>
+    // </AuthRoute>
     {
       path: '/dashboard/submissions/:userId',
       element: (
         <AuthRoute>
-          <EmpHistory isProtected />
-          {/* <ShowHistory /> */}
+          <UserHistory isProtected />
+          {/* <Submissions /> */}
         </AuthRoute>
       )
+    },
+    {
+      path: '/dashboard/submissions/all',
+      element: <PageHeader title={'🚧Under Construction🚧'} />
     },
     {
       path: '/dashboard/employee-roster',
@@ -109,15 +118,6 @@ export function useAuthRoute() {
         <PageHeader title={'🚧Under Construction🚧'} />
         // <AuthRoute isProtected>
         //   <ProcessPending />
-        // </AuthRoute>
-      )
-    },
-    {
-      path: '/dashboard/submissions/all',
-      element: (
-        <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute isProtected>
-        //    <SubmissionLog />
         // </AuthRoute>
       )
     },

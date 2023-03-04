@@ -1,6 +1,4 @@
-export { FirstName, LastName } from './NameControls';
-export { default as Username } from './UsernameControl';
-export { default as Password } from './PasswordControl';
-export { default as ConfirmPassword } from './ConfirmPasswordControl';
-export { default as SubmitBtn } from './SubmitBtn';
-export { default as DeptSelect } from './DeptSelect';
+export { default as LoginForm } from './LoginForm';
+export { default as RegisterForm } from './RegisterForm';
+export { default as PwUpdateForm } from './PwUpdateForm';
+export { default as SubmitTicket } from './SubmitTicket';
