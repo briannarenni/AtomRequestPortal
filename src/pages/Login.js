@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 
-import styles from '../assets/styles/Form.module.css';
+import styles from '../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../hooks';
-import { loginSchema, loginDefaults } from '../data/schemas';
-import { User } from '../data';
+import { loginSchema, loginDefaults } from '../_data/_schemas';
+import { User } from '../_data';
 import { PageHeader, BannerNote } from '../components/ui';
 import { Username, Password, SubmitBtn } from '../components/form';
 

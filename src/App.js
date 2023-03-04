@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { AuthProvider, useAuthRoute } from './hooks';
-import { AppNav } from './components/ui';
+import { AppNav } from './components/ui/';
 
 export default function App() {
   const { getRoutes } = useAuthRoute();

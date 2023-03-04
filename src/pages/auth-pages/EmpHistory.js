@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useAuth, useTicketAPI } from '../../hooks';
-import { Ticket } from '../../data';
+import { Ticket } from '../../_data';
 import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '../../components/ui';
 
 export default function EmpHistory() {

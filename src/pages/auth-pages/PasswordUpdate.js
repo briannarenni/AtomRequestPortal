@@ -3,9 +3,9 @@ import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import styles from '../../assets/styles/Form.module.css';
+import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
-import { updatePassSchema, updatePassDefaults } from '../../data/schemas';
+import { updatePassSchema, updatePassDefaults } from '../../_data/_schemas';
 import { PageHeader } from '../../components/ui';
 import { Password, ConfirmPassword, SubmitBtn } from '../../components/form';
 

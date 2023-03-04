@@ -1,7 +1,7 @@
 import React from 'react';
 import Alert from 'react-bootstrap/Alert';
 
-import styles from '../../assets/styles/Banner.module.css';
+import styles from '../../assets/_styles/Banner.module.css';
 import { NoteIcon } from '../../components/icon';
 
 export default function BannerNote({ note }) {
