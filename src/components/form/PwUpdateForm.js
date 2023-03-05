@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
-import { updatePassSchema, updatePassDefaults } from '../../_data/_schemas';
+import { updatePassSchema, updatePassDefaults } from '../../components/form/_schemas';
 import { Password, ConfirmPassword, SubmitBtn } from '../form/controls';
 
 export default function PwUpdateForm() {

@@ -5,11 +5,10 @@ import { isEmpty } from 'lodash';
 import { AuthProvider } from './useAuth';
 import { Landing, FAQ, Login, Register, NotFound } from '../pages';
 import { Dashboard, UpdatePass, Submissions } from '../pages/user-pages';
-import { UserHistory, UserPending, SubmitRequest } from '../pages/employee-pages';
-// import { RequestHistory } from '../pages/admin-pages';
-
+import { UserPending, SubmitRequest } from '../pages/employee-pages';
 // * Placeholder
 import { PageHeader } from '../components/ui';
+// import { RequestHistory } from '../pages/admin-pages';
 
 export function useAuthRoute() {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export function useAuthRoute() {
   }
 
   const getRoutes = () => [
-    // Placeholder: <PageHeader title={'🚧Under Construction🚧'} />
     {
       path: '/',
       element: <Landing />
