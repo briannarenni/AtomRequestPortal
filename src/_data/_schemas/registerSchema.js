@@ -9,15 +9,6 @@ export const registerDefaults = {
   dept: ''
 };
 
-export const depts = [
-  { value: 'Client PR', label: 'Client PR' },
-  { value: 'Events', label: 'Events' },
-  { value: 'Digital Media', label: 'Digital Media' },
-  { value: 'Field Ops', label: 'Field Ops' },
-  { value: 'Field Marketing', label: 'Field Marketing' },
-  { value: 'Scout & Outreach', label: 'Scout and Outreach' }
-];
-
 export const registerSchema = yup.object().shape({
   firstName: yup.string().required('❌ Required'),
   lastName: yup.string().required('❌ Required'),

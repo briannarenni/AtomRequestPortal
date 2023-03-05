@@ -6,7 +6,7 @@ import { isEmpty, startCase } from 'lodash';
 
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
-import { depts, registerSchema, registerDefaults } from '../../_data/_schemas';
+import { registerSchema, registerDefaults } from '../../_data/_schemas';
 import * as Control from '../../components/form/controls';
 import { User } from '../../_data';
 
@@ -110,11 +110,9 @@ export default function RegisterForm() {
       <Control.DeptSelect
         name="dept"
         value={selectedDept}
-        options={depts}
         onChange={handleDeptSelect}
         errors={errors}
         register={register}
-        formState={{ dirtyFields }}
       />
 
       <Control.Username

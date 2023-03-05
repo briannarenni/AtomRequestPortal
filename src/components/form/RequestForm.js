@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Form, InputGroup, Row, Col } from 'react-bootstrap';
-import Select from 'react-select';
+import { Form, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { isEmpty } from 'lodash';
@@ -8,14 +7,14 @@ import { format } from 'date-fns';
 
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useTicketAPI } from '../../hooks';
+import { ReadOnlyControls, CategorySelect, CommentsControl } from './request-controls';
+import { SubmitBtn } from './controls';
 import { Ticket } from '../../_data';
-import { SubmitBtn } from '../form/controls';
 
-export default function NewRequestForm({ setSubmittedTicket }) {
+export default function RequestForm({ setSubmittedTicket }) {
   const { currUser, dispatch } = useAuth();
   const { isLoading, submitTicket } = useTicketAPI();
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [commentsLength, setCommentsLength] = useState(0);
 
   const defaults = {
     userId: currUser.userId,
@@ -24,15 +23,6 @@ export default function NewRequestForm({ setSubmittedTicket }) {
     category: '',
     comments: null
   };
-
-  const categories = [
-    { value: 'Travel', label: 'Travel' },
-    { value: 'Lodging', label: 'Lodging' },
-    { value: 'Job Supplies', label: 'Job Supplies' },
-    { value: 'Meals/Catering', label: 'Meals/Catering' },
-    { value: 'Medical', label: 'Medical' },
-    { value: 'Misc/Other', label: 'Misc/Other' }
-  ];
 
   const {
     register,
@@ -116,60 +106,15 @@ export default function NewRequestForm({ setSubmittedTicket }) {
         formNoValidate
         className={styles.formContainer}
         onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <Row>
-            <Col sm={6}>
-              <Form.Group controlId="employeeName">
-                <Form.Label className="fw-light">Employee Name</Form.Label>
-                <Form.Control
-                  disabled
-                  readOnly
-                  defaultValue={currUser.fullName}
-                  {...register('employeeName')}
-                />
-              </Form.Group>
-            </Col>
+        <ReadOnlyControls register={register} />
 
-            <Col sm={6}>
-              <Form.Group controlId="userId">
-                <Form.Label className="fw-light">Employee ID</Form.Label>
-                <Form.Control
-                  disabled
-                  readOnly
-                  defaultValue={currUser.userId}
-                  {...register('userId')}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-        </div>
-
-        <Form.Group
-          controlId={'category'}
-          className="my-2">
-          <Form.Label className="fw-light">
-            <span>Request Category</span>
-            <span className={styles.formNote}> (Required)</span>
-          </Form.Label>
-          <Select
-            placeholder="Select Category"
-            {...register('category')}
-            options={categories}
-            value={categories.find((option) => option.value === selectedCategory)}
-            onChange={(selectedOption) => {
-              handleCategorySelect(selectedOption);
-            }}
-            menuPortalTarget={document.body}
-            styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
-          />
-
-          <div className="small fst-italic my-1">
-            <ErrorMessage
-              errors={errors}
-              name={'category'}
-            />
-          </div>
-        </Form.Group>
+        <CategorySelect
+          name="category"
+          value={selectedCategory}
+          onChange={handleCategorySelect}
+          errors={errors}
+          register={register}
+        />
 
         <Form.Group controlId="amount">
           <Form.Label className="fw-light">
@@ -205,21 +150,7 @@ export default function NewRequestForm({ setSubmittedTicket }) {
           />
         </div>
 
-        <Form.Group controlId="comments">
-          <Form.Label className="fw-light">Comments (opt.)</Form.Label>
-          <Form.Control
-            as="textarea"
-            maxLength={500}
-            {...register('comments')}
-            onChange={(e) => {
-              const inputLength = e.target.value.length;
-              setCommentsLength(inputLength);
-            }}
-          />
-          <div className="small fst-italic my-1 text-end">
-            {commentsLength}/{500} characters
-          </div>
-        </Form.Group>
+        <CommentsControl register={register} />
 
         <SubmitBtn
           btnTxt="Submit Request"

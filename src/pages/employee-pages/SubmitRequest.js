@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { PageHeader, BannerNote } from '../../components/ui';
-import { NewRequestForm } from '../../components/form';
+import { RequestForm } from '../../components/form';
 import { SuccessModal } from '../../components/modal';
 
 export default function SubmitRequest() {
@@ -15,7 +15,7 @@ export default function SubmitRequest() {
           note={'Please be sure to double check all given info before clicking Submit Request'}
         />
       </header>
-      <NewRequestForm setSubmittedTicket={setSubmittedTicket} />
+      <RequestForm setSubmittedTicket={setSubmittedTicket} />
       <SuccessModal ticketObj={submittedTicket} />
     </div>
   );
