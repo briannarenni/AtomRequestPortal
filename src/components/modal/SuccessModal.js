@@ -16,22 +16,14 @@ export default function SuccessModal({ ticketObj }) {
 
   return (
     <>
-      {/* <Button
-        size="sm"
-        variant="outline-primary"
-        onClick={handleShow}>
-        Test Submit
-      </Button> */}
-
       <Modal
         centered
         size="lg"
+        backdrop="static"
         show={show}
         onHide={handleClose}
         aria-labelledby="ticket-details">
-        <Modal.Header
-          className="text-white bg-success border-bottom"
-          closeButton>
+        <Modal.Header className="text-white bg-success border-bottom">
           <ModalTitle>
             <h2 className="fst-italic">Success!</h2>
           </ModalTitle>

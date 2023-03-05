@@ -2,14 +2,14 @@ import { startCase } from 'lodash';
 import { format } from 'date-fns';
 
 export class User {
-  constructor(userId, username, firstName, lastName, role, dept, numPending, numTickets) {
+  constructor(userId, username, firstName, lastName, role, dept, pendingTickets, totalTickets) {
     this.userId = userId;
     this.username = username;
     this.fullName = `${firstName} ${lastName}`;
     this.role = role;
     this.dept = dept;
-    this.pendingTickets = numPending;
-    this.totalTickets = numTickets;
+    this.pendingTickets = pendingTickets;
+    this.totalTickets = totalTickets;
   }
 }
 

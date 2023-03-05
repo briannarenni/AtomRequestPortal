@@ -10,37 +10,28 @@ export default function CommentsModal({ ticketId, text }) {
     <>
       <Button
         size="sm"
-        variant="outline-primary"
+        variant="link"
+        className="py-1 text-secondary"
         onClick={handleShow}>
         See Comments
       </Button>
 
       <Modal
         centered
+        size="lg"
         show={show}
         onHide={handleClose}
         aria-labelledby="ticket-comments">
         <Modal.Header
-          className="border-bottom border-dark"
+          className="bg-secondary text-white border-bottom border-dark"
           closeButton>
           <ModalTitle>
-            {' '}
-            <small className="text-center fst-italic">Ticket ID: {ticketId}</small>
+            <small className="text-center lead fst-italic">Ticket #{ticketId}</small>
           </ModalTitle>
         </Modal.Header>
         <Modal.Body>
-          <div className="px-3 mx-auto">
-            <p> {text}</p>
-          </div>
+          <p className="px-3 mx-auto">Comments: {text}</p>
         </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="outline-primary"
-            className="w-75 mx-auto"
-            onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

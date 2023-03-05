@@ -18,18 +18,6 @@ export function useTicketAPI() {
     }
   };
 
-  const getAllTickets = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(Tickets.getAllTickets);
-      setIsLoading(false);
-      return response.data;
-    } catch (error) {
-      setIsLoading(false);
-      return handleAPIError(error);
-    }
-  };
-
   const getPendingTickets = async () => {
     try {
       setIsLoading(true);
@@ -57,6 +45,18 @@ export function useTicketAPI() {
     } catch (error) {
       setIsLoading(false);
       return error.response ? error.response.data : 'Internal API Error';
+    }
+  };
+
+  const getAllTickets = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(Tickets.getAllTickets);
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      setIsLoading(false);
+      return handleAPIError(error);
     }
   };
 

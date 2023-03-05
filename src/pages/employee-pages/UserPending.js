@@ -6,29 +6,29 @@ import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '..
 
 export default function EmpPending() {
   const { currUser } = useAuth();
-  const { isLoading, getUserTickets } = useTicketAPI();
+  const { isLoading, getPendingTickets } = useTicketAPI();
   const [tickets, setTickets] = useState([]);
-  const [ticketCount, setTicketCount] = useState(currUser.totalTickets);
 
   useEffect(() => {
-    if (ticketCount > 0) {
-      fetchUserTickets();
+    if (currUser.pendingTickets > 0) {
+      fetchUserPending();
     }
   }, []);
 
-  async function fetchUserTickets() {
-    const fetchedTickets = await getUserTickets(currUser.userId);
+  async function fetchUserPending() {
+    const fetchedTickets = await getPendingTickets();
+    console.log(fetchedTickets);
     const filteredTickets = filterPending(fetchedTickets);
     console.log(filteredTickets);
     setTickets(filteredTickets);
   }
 
   function filterPending(ticketsArr) {
-    const filteredTickets = ticketsArr.filter(
-      (ticket) => ticket.userId === currUser.userId && ticket.status === 'pending'
+    const filteredByUser = ticketsArr.filter(
+      (ticket) => ticket.submittedBy === currUser.userId && ticket.status === 'pending'
     );
 
-    const mappedTickets = filteredTickets.map(
+    const filteredTickets = filteredByUser.map(
       (ticket) =>
         new Ticket(
           ticket.ticketId,
@@ -42,7 +42,7 @@ export default function EmpPending() {
         )
     );
 
-    return mappedTickets;
+    return filteredTickets;
   }
 
   return (
@@ -53,7 +53,7 @@ export default function EmpPending() {
 
       <main>
         {isLoading && <Loading />}
-        {ticketCount === 0 ? (
+        {currUser.pendingTickets === 0 ? (
           <div className="mt-3">
             <BannerError content={`No pending requests found for ${currUser.fullName}`} />
           </div>

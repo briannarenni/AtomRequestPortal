@@ -8,10 +8,9 @@ export default function EmpHistory() {
   const { currUser } = useAuth();
   const { isLoading, getUserTickets } = useTicketAPI();
   const [tickets, setTickets] = useState([]);
-  const [ticketCount, setTicketCount] = useState(currUser.totalTickets);
 
   useEffect(() => {
-    if (ticketCount > 0) {
+    if (currUser.totalTickets > 0) {
       fetchUserTickets();
     }
   }, []);
@@ -42,7 +41,7 @@ export default function EmpHistory() {
 
       <main>
         {isLoading && <Loading />}
-        {ticketCount === 0 ? (
+        {currUser.totalTickets === 0 ? (
           <div className="mt-3">
             <BannerError content={`No requests found for ${currUser.fullName}`} />
           </div>
