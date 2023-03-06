@@ -24,6 +24,25 @@ export default function LoginForm() {
     defaultValues: { ...loginDefaults }
   });
 
+  const successLogin = (response) => {
+    const { userId, username, firstName, lastName, role, dept, numPending, numTickets } =
+      response.data;
+
+    const user = new User(
+      userId,
+      username,
+      firstName,
+      lastName,
+      role,
+      dept,
+      numPending,
+      numTickets
+    );
+
+    dispatch({ type: 'SET_CURR_USER', payload: user });
+    return;
+  };
+
   const onSubmit = async (data) => {
     clearErrors();
 
@@ -39,21 +58,7 @@ export default function LoginForm() {
         message: '❌ Password incorrect'
       });
     } else {
-      const { userId, username, firstName, lastName, role, dept, numPending, numTickets } =
-        response.data;
-
-      const user = new User(
-        userId,
-        username,
-        firstName,
-        lastName,
-        role,
-        dept,
-        numPending,
-        numTickets
-      );
-
-      dispatch({ type: 'SET_CURR_USER', payload: user });
+      successLogin(response);
     }
   };
 
