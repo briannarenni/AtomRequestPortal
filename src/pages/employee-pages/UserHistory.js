@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { useAuth, useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
-import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '../../components/ui';
+import { PageHeader, BannerSuccess, BannerError, Loading } from '../../components/ui';
+import { TicketTable } from '../../components/ui/tables';
 
 export default function EmpHistory() {
   const { currUser } = useAuth();

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
-import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '../../components/ui';
+import { PageHeader,  BannerError, Loading } from '../../components/ui';
+import { TicketTable } from '../../components/ui/tables';
 
 export default function FullHistory() {
   const { isLoading, getAllTickets } = useTicketAPI();

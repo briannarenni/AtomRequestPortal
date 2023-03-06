@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
 
-import { CommentsModal } from '../../components/modal';
+import { CommentsModal } from '../../modal';
 
 export default function TicketTable({ tickets }) {
   return (
