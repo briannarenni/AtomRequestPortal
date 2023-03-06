@@ -128,6 +128,7 @@ export default function RegisterForm() {
         <Col>
           <Control.Password
             name="password"
+            label={'Enter New Password'}
             errors={errors}
             register={register}
             formState={{ dirtyFields }}

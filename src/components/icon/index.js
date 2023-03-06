@@ -6,3 +6,4 @@ export { default as MessageIcon } from './MessageIcon';
 export { default as NoteIcon } from './NoteIcon';
 export { default as SigninIcon } from './SigninIcon';
 export { default as RegisterIcon } from './RegisterIcon';
+export { default as AlertIcon } from './AlertIcon';

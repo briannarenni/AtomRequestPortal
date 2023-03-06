@@ -40,7 +40,7 @@ export default function ProfileModal() {
             {currUser.dept} {startCase(currUser.role)}
           </h2>
           <div className="px-3 mx-auto">
-            <strong>User ID:</strong>
+            <strong>Employee ID:</strong>
             <p className="lead">{currUser.userId}</p>
             <strong>Username:</strong>
             <p className="lead">{currUser.username}</p>
@@ -50,14 +50,6 @@ export default function ProfileModal() {
             <p className="lead">{currUser.totalTickets}</p>
           </div>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button
-            variant="outline-primary"
-            className="w-75 mx-auto"
-            onClick={handleClose}>
-            Close Profile
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </>
   );

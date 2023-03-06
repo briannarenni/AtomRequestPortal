@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-import { useAuth, useTicketAPI } from '../../hooks';
+import { useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
-import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '../../components/ui';
+import { PageHeader, TicketTable, BannerError, Loading } from '../../components/ui';
 
-export default function EmpHistory() {
-  const { currUser } = useAuth();
-  const { isLoading, getUserTickets } = useTicketAPI();
+export default function ProcessPending() {
+  const { isLoading, getPendingTickets } = useTicketAPI();
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    if (currUser.totalTickets > 0) {
-      fetchUserTickets();
-    }
+    fetchPending();
   }, []);
 
-  async function fetchUserTickets() {
-    const fetchedTickets = await getUserTickets(currUser.userId);
-
+  async function fetchPending() {
+    const fetchedTickets = await getPendingTickets();
     const tickets = fetchedTickets.map(
       (ticket) =>
         new Ticket(
@@ -37,18 +33,17 @@ export default function EmpHistory() {
   return (
     <div className="container-xs">
       <header className="mx-auto">
-        <PageHeader title={'Submission History'} />
+        <PageHeader title={'Process Pending Requests'} />
       </header>
 
       <main>
         {isLoading && <Loading />}
-        {currUser.totalTickets === 0 ? (
+        {!isLoading && tickets.length === 0 ? (
           <div className="mt-3">
-            <BannerError content={`No requests found for ${currUser.fullName}`} />
+            <BannerError content={`No pending requests in queue`} />
           </div>
         ) : (
           <>
-            <BannerSuccess content={`Requests submitted by: ${currUser.fullName}`} />
             <TicketTable tickets={tickets} />
           </>
         )}

@@ -71,6 +71,7 @@ export default function LoginForm() {
 
       <Password
         name="password"
+        label={'Password'}
         errors={errors}
         register={register}
         formState={{ dirtyFields }}

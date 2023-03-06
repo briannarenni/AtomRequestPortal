@@ -8,13 +8,16 @@ import { useAuth, useUserAPI } from '../../hooks';
 import { updatePassSchema, updatePassDefaults } from '../../components/form/_schemas';
 import { Password, ConfirmPassword, SubmitBtn } from '../form/controls';
 
-export default function PwUpdateForm() {
+// TODO: show/hide readonly currPassword field
+
+export default function PwUpdateForm({ setSuccess, setError }) {
   const { currUser } = useAuth();
   const { isLoading, updateUserPassword } = useUserAPI();
   const {
     register,
     handleSubmit,
     clearErrors,
+    reset,
     formState: { errors, dirtyFields }
   } = useForm({
     resolver: yupResolver(updatePassSchema),
@@ -24,7 +27,13 @@ export default function PwUpdateForm() {
 
   const updatePassword = async (data) => {
     const response = await updateUserPassword(currUser.userId, data.password, data.confirm);
-    console.log(response);
+    if (response.status === 200) {
+      setSuccess(response.data);
+      reset();
+    } else {
+      setError(response.data);
+    }
+    return;
   };
 
   const onSubmit = async (data) => {
@@ -39,12 +48,11 @@ export default function PwUpdateForm() {
       onSubmit={handleSubmit(onSubmit)}>
       <Password
         name="password"
+        label={'Enter New Password'}
         errors={errors}
         register={register}
         formState={{ dirtyFields }}
       />
-
-      {/* show/hide readonly currPassword field? */}
 
       <ConfirmPassword
         name="confirm"

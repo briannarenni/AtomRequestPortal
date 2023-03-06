@@ -17,9 +17,7 @@ export default function EmpPending() {
 
   async function fetchUserPending() {
     const fetchedTickets = await getPendingTickets();
-    console.log(fetchedTickets);
     const filteredTickets = filterPending(fetchedTickets);
-    console.log(filteredTickets);
     setTickets(filteredTickets);
   }
 

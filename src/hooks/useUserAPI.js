@@ -6,6 +6,18 @@ import { Users, handleAPIError } from '../_data';
 export function useUserAPI() {
   const [isLoading, setIsLoading] = useState(false);
 
+  const getUsers = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(Users.getUsers);
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      setIsLoading(false);
+      return handleAPIError(error);
+    }
+  };
+
   const loginUser = async (username, password) => {
     try {
       setIsLoading(true);
@@ -58,7 +70,7 @@ export function useUserAPI() {
         confirmPassword
       });
       setIsLoading(false);
-      return response.status === 200 ? response.data : 'Internal API Error';
+      return response;
     } catch (error) {
       setIsLoading(false);
       return handleAPIError(error);
@@ -80,9 +92,9 @@ export function useUserAPI() {
   const getEmployees = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(Users.employees);
+      const response = await axios.get(Users.getEmployees);
       setIsLoading(false);
-      return response.status === 200 ? response.data : 'Internal API Error';
+      return response.data;
     } catch (error) {
       setIsLoading(false);
       return handleAPIError(error);
@@ -96,6 +108,7 @@ export function useUserAPI() {
     getUserDetails,
     updateUserPassword,
     updateUserRole,
+    getUsers,
     getEmployees
   };
 }

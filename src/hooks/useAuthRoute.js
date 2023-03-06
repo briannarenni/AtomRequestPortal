@@ -6,9 +6,7 @@ import { AuthProvider } from './useAuth';
 import { Landing, FAQ, Login, Register, NotFound } from '../pages';
 import { Dashboard, UpdatePass, Submissions } from '../pages/user-pages';
 import { UserPending, SubmitRequest } from '../pages/employee-pages';
-// * Placeholder
-import { PageHeader } from '../components/ui';
-// import { RequestHistory } from '../pages/admin-pages';
+import { ProcessPending, EmployeeRoster, ManageUsers } from '../pages/admin-pages';
 
 export function useAuthRoute() {
   const navigate = useNavigate();
@@ -94,7 +92,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/submissions/all',
+      path: '/dashboard/submissions',
       element: (
         <AuthRoute>
           <Submissions isProtected />
@@ -104,28 +102,25 @@ export function useAuthRoute() {
     {
       path: '/dashboard/employee-roster',
       element: (
-        <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute>
-        //   <EmployeeRoster isProtected />
-        // </AuthRoute>
+        <AuthRoute>
+          <EmployeeRoster isProtected />
+        </AuthRoute>
       )
     },
     {
-      path: '/dashboard/process-pending',
+      path: '/dashboard/view-pending/process',
       element: (
-        <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute >
-        //   <ProcessPending isProtected/>
-        // </AuthRoute>
+        <AuthRoute>
+          <ProcessPending isProtected />
+        </AuthRoute>
       )
     },
     {
       path: '/dashboard/manage-users',
       element: (
-        <PageHeader title={'🚧Under Construction🚧'} />
-        // <AuthRoute>
-        //    <ManageUsers isProtected/>
-        // </AuthRoute>
+        <AuthRoute>
+          <ManageUsers isProtected />
+        </AuthRoute>
       )
     },
     {

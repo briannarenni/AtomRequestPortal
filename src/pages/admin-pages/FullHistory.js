@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-import { useAuth, useTicketAPI } from '../../hooks';
+import { useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
 import { PageHeader, TicketTable, BannerSuccess, BannerError, Loading } from '../../components/ui';
 
-export default function EmpHistory() {
-  const { currUser } = useAuth();
-  const { isLoading, getUserTickets } = useTicketAPI();
+export default function FullHistory() {
+  const { isLoading, getAllTickets } = useTicketAPI();
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    if (currUser.totalTickets > 0) {
-      fetchUserTickets();
-    }
+    fetchAllTickets();
   }, []);
 
-  async function fetchUserTickets() {
-    const fetchedTickets = await getUserTickets(currUser.userId);
+  async function fetchAllTickets() {
+    const fetchedTickets = await getAllTickets();
 
     const tickets = fetchedTickets.map(
       (ticket) =>
@@ -37,18 +34,17 @@ export default function EmpHistory() {
   return (
     <div className="container-xs">
       <header className="mx-auto">
-        <PageHeader title={'Submission History'} />
+        <PageHeader title={'All Submitted Requests '} />
       </header>
 
       <main>
         {isLoading && <Loading />}
-        {currUser.totalTickets === 0 ? (
+        {!isLoading && tickets.length === 0 ? (
           <div className="mt-3">
-            <BannerError content={`No requests found for ${currUser.fullName}`} />
+            <BannerError content={`No requests found`} />
           </div>
         ) : (
           <>
-            <BannerSuccess content={`Requests submitted by: ${currUser.fullName}`} />
             <TicketTable tickets={tickets} />
           </>
         )}

@@ -17,12 +17,12 @@ export default function ConfirmPasswordControl(props) {
     <Form.Group
       controlId="password"
       className="my-2">
-      <Form.Label className="fw-light">Confirm Password</Form.Label>
+      <Form.Label className="fw-light">Confirm New Password</Form.Label>
       <InputGroup>
         <Form.Control
           type={showPassword ? 'text' : 'password'}
           name={name}
-          placeholder="Enter password"
+          placeholder="Confirm password"
           {...register('confirm')}
           isInvalid={hasError}
           isValid={isValid}
