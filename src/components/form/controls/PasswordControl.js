@@ -29,16 +29,15 @@ export default function PasswordControl(props) {
             isValid={isValid}
             {...props}
             className={clsx({
-              'rounded-start': true,
+              'rounded-start': true
             })}
           />
 
           <Button
             variant="none"
-            className={clsx('bg-light border', {
+            className={clsx('bg-light border-secondary', {
               'border-danger': hasError,
-              'border-success': !hasError,
-              'rounded-end': true,
+              'rounded-end': true
             })}
             onClick={() => setShowPassword(!showPassword)}
             aria-label={showPassword ? 'Hide password' : 'Show password'}

@@ -34,9 +34,8 @@ export default function ConfirmPasswordControl(props) {
 
         <Button
           variant="none"
-          className={clsx('bg-light border', {
+          className={clsx('bg-light border-secondary', {
             'border-danger': hasError,
-            'border-success': !hasError,
             'rounded-end': true
           })}
           onClick={() => setShowPassword(!showPassword)}

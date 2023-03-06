@@ -6,6 +6,7 @@ export const Users = {
   register: `${apiURL}/users/register`,
   getEmployees: `${apiURL}/users/employees`,
   userDetails: (userId) => `${apiURL}/users/${userId}`,
+  getPassword: (userId) => `${apiURL}/users/${userId}/password/view`,
   updatePassword: (userId) => `${apiURL}/users/${userId}/password`,
   updateRole: (userId) => `${apiURL}/users/${userId}/role`
 };

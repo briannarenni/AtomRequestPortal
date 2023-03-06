@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,13 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
 import { updatePassSchema, updatePassDefaults } from '../../components/form/_schemas';
-import { Password, ConfirmPassword, SubmitBtn } from '../form/controls';
-
-// TODO: show/hide readonly currPassword field
+import { ReadOnlyPassword, Password, ConfirmPassword, SubmitBtn } from '../form/controls';
 
 export default function PwUpdateForm({ setSuccess, setError }) {
+  const [currPassword, setCurrPassword] = useState('');
   const { currUser } = useAuth();
-  const { isLoading, updateUserPassword } = useUserAPI();
+  const { isLoading, getUserPassword, updateUserPassword } = useUserAPI();
   const {
     register,
     handleSubmit,
@@ -24,6 +23,14 @@ export default function PwUpdateForm({ setSuccess, setError }) {
     mode: 'onBlur',
     defaultValues: { ...updatePassDefaults }
   });
+
+  useEffect(() => {
+    const fetchPassword = async () => {
+      const userPassword = await getUserPassword(currUser.userId);
+      setCurrPassword(userPassword);
+    };
+    fetchPassword();
+  }, []);
 
   const updatePassword = async (data) => {
     const response = await updateUserPassword(currUser.userId, data.password, data.confirm);
@@ -46,6 +53,11 @@ export default function PwUpdateForm({ setSuccess, setError }) {
       formNoValidate
       className={styles.formContainer}
       onSubmit={handleSubmit(onSubmit)}>
+      <ReadOnlyPassword
+        name="readonly"
+        currPass={currPassword}
+      />
+
       <Password
         name="password"
         label={'Enter New Password'}
