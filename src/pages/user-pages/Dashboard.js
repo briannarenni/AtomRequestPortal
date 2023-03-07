@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Badge } from 'react-bootstrap';
 
-import { useAuth, useDashMenu } from '../../hooks';
+import { useAuth, useDashMenu, useTicketAPI } from '../../hooks';
 import { PageHeader, BannerSuccess } from '../../components/ui';
 
 export default function Dashboard() {
+  const [totalPending, setTotalPending] = useState(0);
   const { currUser, isManager } = useAuth();
-  const { employeeMenu, managerMenu } = useDashMenu(currUser);
+  const { getPendingTickets } = useTicketAPI();
+  const { employeeMenu, managerMenu } = useDashMenu(currUser, totalPending);
 
-  const showBadge = employeeMenu.find(
+  useEffect(() => {
+    const fetchPendingCount = async () => {
+      const pendingArr = await getPendingTickets();
+      setTotalPending(pendingArr.length);
+      console.log(totalPending);
+    };
+    fetchPendingCount();
+  }, []);
+
+  const showEmployeeBadge = employeeMenu.find(
     (menu) => menu.link === `view-pending/${currUser.userId}` && currUser.pendingTickets > 0
   );
+
+  const showManagerBadge =
+    isManager &&
+    managerMenu.find((menu) => menu.link === 'view-pending/process' && totalPending > 0);
 
   const menu = isManager ? managerMenu : employeeMenu;
 
@@ -36,7 +51,7 @@ export default function Dashboard() {
                 variant="primary"
                 className="mx-auto mt-2 p-3">
                 {btnText}
-                {showBadge && badgeCount && (
+                {(showEmployeeBadge || showManagerBadge) && badgeCount && (
                   <Badge
                     pill
                     bg="warning"

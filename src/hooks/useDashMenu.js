@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function useDashMenu(currUser) {
+export function useDashMenu(currUser, totalPending) {
   const employeeMenu = [
     {
       title: 'Submit a new reimbursement request',
@@ -34,7 +34,8 @@ export function useDashMenu(currUser) {
     {
       title: 'Process current pending requests',
       btnText: 'Process Requests',
-      link: 'view-pending/process'
+      link: 'view-pending/process',
+      badgeCount: totalPending
     },
     {
       title: 'View complete submission log',
