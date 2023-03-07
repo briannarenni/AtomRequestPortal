@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
-import { PageHeader,  BannerError, Loading } from '../../components/ui';
+import { PageHeader, BannerError, Loading } from '../../components/ui';
 import { TicketTable } from '../../components/ui/tables';
 
 export default function FullHistory() {
@@ -46,7 +46,7 @@ export default function FullHistory() {
           </div>
         ) : (
           <>
-            <TicketTable tickets={tickets} />
+            <TicketTable ticketsArr={tickets} />
           </>
         )}
       </main>

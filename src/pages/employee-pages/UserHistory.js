@@ -50,7 +50,7 @@ export default function EmpHistory() {
         ) : (
           <>
             <BannerSuccess content={`Requests submitted by: ${currUser.fullName}`} />
-            <TicketTable tickets={tickets} />
+            <TicketTable ticketsArr={tickets} />
           </>
         )}
       </main>

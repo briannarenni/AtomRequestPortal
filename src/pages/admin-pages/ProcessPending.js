@@ -45,7 +45,7 @@ export default function ProcessPending() {
           </div>
         ) : (
           <>
-            <TicketTable tickets={tickets} />
+            <TicketTable ticketsArr={tickets} />
           </>
         )}
       </main>

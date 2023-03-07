@@ -59,7 +59,7 @@ export default function EmpPending() {
         ) : (
           <>
             <BannerSuccess content={`Open requests submitted by: ${currUser.fullName}`} />
-            <TicketTable tickets={tickets} />
+            <TicketTable ticketsArr={tickets} />
           </>
         )}
       </main>

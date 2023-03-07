@@ -15,7 +15,6 @@ export default function Dashboard() {
     const fetchPendingCount = async () => {
       const pendingArr = await getPendingTickets();
       setTotalPending(pendingArr.length);
-      console.log(totalPending);
     };
     fetchPendingCount();
   }, []);
