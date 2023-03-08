@@ -1,17 +1,14 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function SortDrop({ handleSortChange }) {
-  const options = [
-    { value: 'submittedOn', label: 'Most Recent' },
-    { value: 'employeeName', label: 'Employee Name' },
-    { value: 'status', label: 'Request Status' }
-  ];
+export default function SortDrop({ name, options, handleSortChange }) {
+  const defaultPlaceholder =
+    name === 'sortTickets' ? 'Most Recent (default)' : 'Department (default)';
 
   return (
     <Select
       options={options}
-      placeholder="Most Recent (default)"
+      placeholder={defaultPlaceholder}
       onChange={(selectedOption) => handleSortChange(selectedOption.value)}
     />
   );

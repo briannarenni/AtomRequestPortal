@@ -9,6 +9,11 @@ export default function TicketTable({ ticketsArr }) {
   const [tickets, setTickets] = useState([]);
   const [filterValue, setFilterValue] = useState('none');
   const [sortValue, setSortValue] = useState('submittedOn');
+  const options = [
+    { value: 'submittedOn', label: 'Most Recent' },
+    { value: 'employeeName', label: 'Employee Name' },
+    { value: 'status', label: 'Request Status' }
+  ];
 
   useEffect(() => {
     setTickets(ticketsArr.slice());
@@ -60,7 +65,11 @@ export default function TicketTable({ ticketsArr }) {
         </div>
         <div className="d-flex flex-column">
           <Form.Label className="fw-light">Sort Requests</Form.Label>
-          <SortDrop handleSortChange={handleSortChange} />
+          <SortDrop
+            name="sortTickets"
+            options={options}
+            handleSortChange={handleSortChange}
+          />
         </div>
       </div>
 

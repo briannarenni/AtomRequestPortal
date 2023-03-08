@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form } from 'react-bootstrap';
 
-import { UserSortDrop } from '../../ui/tables';
+import { SortDrop, UserSortDrop } from '../../ui/tables';
 
 export default function EmployeeTable({ employees }) {
   const [empArr, setEmpArr] = useState([]);
   const [sortValue, setSortValue] = useState('dept');
+    const options = [
+      { value: 'dept', label: 'Sort: Department' },
+      { value: 'fullName', label: 'Sort: Full Name' }
+    ];
+
 
   useEffect(() => {
     setEmpArr(employees.slice());
@@ -39,7 +44,11 @@ export default function EmployeeTable({ employees }) {
       <div className="d-flex justify-content-end gap-2">
         <div className="d-flex flex-column">
           <Form.Label className="fw-light">Sort Users</Form.Label>
-          <UserSortDrop handleSortChange={handleSortChange} />
+          <SortDrop
+          name="sortUsers"
+            options={options}
+            handleSortChange={handleSortChange}
+          />
         </div>
       </div>
 
