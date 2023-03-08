@@ -11,7 +11,6 @@ export default function TicketTable({ ticketsArr }) {
   const [sortValue, setSortValue] = useState('submittedOn');
 
   useEffect(() => {
-    console.log(ticketsArr.slice());
     setTickets(ticketsArr.slice());
   }, [ticketsArr]);
 
@@ -31,6 +30,7 @@ export default function TicketTable({ ticketsArr }) {
   };
 
   const sortTickets = (ticketArray, sortValue) => {
+    // eslint-disable-next-line
     ticketArray.sort((a, b) => {
       if (sortValue === 'submittedOn') {
         return new Date(b.submittedOn) - new Date(a.submittedOn);
