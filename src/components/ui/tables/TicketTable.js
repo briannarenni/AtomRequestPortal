@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Table, Form } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
 
@@ -6,6 +7,8 @@ import { CommentsModal } from '../../modal';
 import { SortDrop, FilterDrop } from '../../ui/tables';
 
 export default function TicketTable({ ticketsArr }) {
+  const { pathname } = useLocation();
+  const isPendingPage = pathname.includes('pending');
   const [tickets, setTickets] = useState([]);
   const [filterValue, setFilterValue] = useState('none');
   const [sortValue, setSortValue] = useState('submittedOn');
@@ -59,10 +62,12 @@ export default function TicketTable({ ticketsArr }) {
   return (
     <>
       <div className="d-flex justify-content-end gap-2">
-        <div className="d-flex flex-column">
-          <Form.Label className="fw-light">Filter By Status</Form.Label>
-          <FilterDrop handleFilterChange={handleFilterChange} />
-        </div>
+        {isPendingPage ? null : (
+          <div className="d-flex flex-column">
+            <Form.Label className="fw-light">Filter By Status</Form.Label>
+            <FilterDrop handleFilterChange={handleFilterChange} />
+          </div>
+        )}
         <div className="d-flex flex-column">
           <Form.Label className="fw-light">Sort Requests</Form.Label>
           <SortDrop
