@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 import styles from '../../assets/_styles/NavBtn.module.css';
-import { LogoutIcon } from '../icon';
+import { LogoutIcon } from './icon';
 
 export default function LogoutBtn({ handler }) {
   return (

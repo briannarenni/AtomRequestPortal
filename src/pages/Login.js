@@ -3,7 +3,8 @@ import { isEmpty } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../hooks';
-import { PageHeader, BannerNote } from '../components/ui';
+import { BannerNote } from '../components/ux';
+import { PageHeader} from '../components/ui';
 import { LoginForm } from '../components/form';
 
 export default function Login() {

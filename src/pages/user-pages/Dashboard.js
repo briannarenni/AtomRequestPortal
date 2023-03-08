@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Button, Card, Badge } from 'react-bootstrap';
 
 import { useAuth, useDashMenu, useTicketAPI } from '../../hooks';
-import { PageHeader, BannerSuccess } from '../../components/ui';
+import { BannerSuccess } from '../../components/ux';
+import { PageHeader } from '../../components/ui';
 
 export default function Dashboard() {
   const [totalPending, setTotalPending] = useState(0);

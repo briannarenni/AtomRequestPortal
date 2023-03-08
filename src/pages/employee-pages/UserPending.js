@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { useAuth, useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
-import { PageHeader, BannerSuccess, BannerError, Loading } from '../../components/ui';
+import { BannerSuccess, BannerError, LoadingComp } from '../../components/ux';
+import { PageHeader } from '../../components/ui';
 import { TicketTable } from '../../components/ui/tables';
 
 export default function EmpPending() {
@@ -51,7 +52,7 @@ export default function EmpPending() {
       </header>
 
       <main>
-        {isLoading && <Loading />}
+        {isLoading && <LoadingComp />}
         {currUser.pendingTickets === 0 ? (
           <div className="mt-3">
             <BannerError content={`No pending requests found for ${currUser.fullName}`} />

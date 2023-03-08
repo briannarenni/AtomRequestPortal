@@ -4,7 +4,7 @@ import { startCase } from 'lodash';
 
 import styles from '../../assets/_styles/NavBtn.module.css';
 import { useAuth } from '../../hooks/useAuth';
-import { UserIcon } from '../icon';
+import { UserIcon } from '../btn/icon';
 
 export default function ProfileModal() {
   const { currUser } = useAuth();

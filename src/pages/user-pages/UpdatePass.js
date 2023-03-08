@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { PageHeader, BannerSuccess, BannerError } from '../../components/ui';
+import { BannerSuccess, BannerError } from '../../components/ux';
+import { PageHeader } from '../../components/ui';
 import { PwUpdateForm } from '../../components/form';
 
 export default function UpdatePassword() {

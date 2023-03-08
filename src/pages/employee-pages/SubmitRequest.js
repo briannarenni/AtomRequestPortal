@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import { PageHeader, BannerNote } from '../../components/ui';
+import { PageHeader } from '../../components/ui';
+import { BannerNote } from '../../components/ux';
 import { RequestForm } from '../../components/form';
 import { SuccessModal } from '../../components/modal';
 

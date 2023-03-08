@@ -1,8 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-import { Loading } from "../../ui";
-
+import { LoadingComp } from '../../ux';
 
 export default function FormSubmitBtn({ btnTxt, isLoading }) {
   return (
@@ -12,7 +11,7 @@ export default function FormSubmitBtn({ btnTxt, isLoading }) {
         className="w-100 my-3"
         disabled={isLoading}>
         {isLoading ? (
-          <Loading
+          <LoadingComp
             animation="border"
             size="sm"
             className="me-2"

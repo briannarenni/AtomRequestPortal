@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 import styles from '../../assets/_styles/NavBtn.module.css';
-import { SigninIcon } from '../icon';
+import { SigninIcon } from './icon';
 
 export default function LoginBtn() {
   return (

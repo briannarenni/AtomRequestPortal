@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-import { BackIcon } from '../icon';
+import { BackIcon } from './icon';
 
 export default function BackBtn() {
   const location = useLocation();

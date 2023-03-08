@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { useUserAPI } from '../../hooks';
 import { User } from '../../_data';
-import { PageHeader, BannerError, Loading } from '../../components/ui';
+import { BannerError, LoadingComp } from '../../components/ux';
+import { PageHeader } from '../../components/ui';
 import { UserTable } from '../../components/ui/tables';
 
 export default function ManageUsers() {
@@ -40,7 +41,7 @@ export default function ManageUsers() {
       </header>
 
       <main>
-        {isLoading && <Loading />}
+        {isLoading && <LoadingComp />}
         {!isLoading && users.length === 0 ? (
           <div className="mt-3">
             <BannerError content={`No users found`} />

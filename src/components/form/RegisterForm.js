@@ -6,7 +6,7 @@ import { isEmpty, startCase } from 'lodash';
 
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
-import { registerSchema, registerDefaults } from '../../components/form/_schemas';
+import { registerSchema, registerDefaults } from '../../_data/schemas';
 import * as Control from '../../components/form/controls';
 import { User } from '../../_data';
 
