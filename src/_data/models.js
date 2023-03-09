@@ -19,7 +19,7 @@ export class Ticket {
     this.submittedOn = format(new Date(submittedOn), 'M-dd-yyyy');
     this.userId = userId;
     this.employeeName = employeeName;
-    this.amount = `$${Number(amount).toFixed(2)}`;
+    this.amount = `$${Number(Number(amount).toFixed(2))}`;
     this.category = category;
     this.status = startCase(status);
     this.comments = comments;

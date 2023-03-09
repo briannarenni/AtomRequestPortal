@@ -43,7 +43,7 @@ export default function EmployeeTable({ employees }) {
       </div>
 
       <Table
-        className="w-75 mx-auto mt-4"
+        className="w-75 mx-auto mt-3"
         responsive
         striped
         bordered

@@ -28,13 +28,14 @@ export default function ProfileModal() {
         size="lg"
         show={show}
         onHide={handleClose}
+        className="bg-primary bg-opacity-25"
         aria-labelledby="user-profile">
         <Modal.Header
-          className="bg-info border-bottom border-dark"
+          className="bg-primary bg-opacity-75 border-bottom border-dark"
           closeButton>
           <ModalTitle></ModalTitle>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bg-light">
           <h1 className="display-6 text-center">{currUser.fullName}</h1>
           <h2 className="lead text-center">
             {currUser.dept} {startCase(currUser.role)}
@@ -50,6 +51,7 @@ export default function ProfileModal() {
             <p className="lead">{currUser.totalTickets}</p>
           </div>
         </Modal.Body>
+        <Modal.Footer className="bg-primary bg-opacity-75"></Modal.Footer>
       </Modal>
     </>
   );

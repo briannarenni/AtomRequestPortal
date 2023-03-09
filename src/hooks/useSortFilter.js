@@ -1,12 +1,10 @@
 export function useSortFilter() {
   const filterBy = (ticketsArr, filter, sort) => {
     let filteredTickets = ticketsArr.slice();
-    if (filter === 'none') {
-      return filteredTickets;
-    } else {
+    if (filter !== 'none') {
       filteredTickets = ticketsArr.filter((ticket) => ticket.status === filter);
-      return sortTickets(filteredTickets, sort);
     }
+    return sortTickets(filteredTickets, sort);
   };
 
   const sortTickets = (ticketsArr, sortValue) => {
@@ -19,6 +17,8 @@ export function useSortFilter() {
         return a.employeeName.localeCompare(b.employeeName);
       } else if (sortValue === 'status') {
         return a.status.localeCompare(b.status);
+      } else if (sortValue === 'amount') {
+        return b.amount - a.amount;
       }
     });
   };

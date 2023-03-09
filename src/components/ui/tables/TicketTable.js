@@ -29,12 +29,14 @@ export default function TicketTable({ ticketsArr }) {
 
   const options = [
     { value: 'submittedOn', label: 'Most Recent' },
-    { value: 'employeeName', label: 'Employee Name' },
-    { value: 'status', label: 'Request Status' }
+    { value: 'status', label: 'Request Status' },
+    { value: 'amount', label: 'Requested Amount' },
+    { value: 'employeeName', label: 'Employee Name' }
   ];
 
   useEffect(() => {
     setTickets(ticketsArr.slice());
+    console.log(tickets);
   }, [ticketsArr]);
 
   useEffect(() => {
@@ -86,21 +88,20 @@ export default function TicketTable({ ticketsArr }) {
       <Table
         className="text-center align-middle mt-3"
         responsive
-        bordered
-        hover>
+        bordered>
         <thead>
           <tr>
-            <th>Request ID</th>
-            <th>Date</th>
+            <th>ID #</th>
+            <th>Request Date</th>
             <th>Status</th>
             <th>Employee</th>
-            <th>Amount Requested</th>
-            <th>Expense Type</th>
-            <th>Comments</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th></th>
             {onProcessPending ? <th></th> : null}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="small">
           {tickets.map((ticket) => (
             <tr
               key={ticket.ticketId}
@@ -115,6 +116,7 @@ export default function TicketTable({ ticketsArr }) {
                 {!isEmpty(ticket.comments) && (
                   <CommentsModal
                     ticketId={ticket.ticketId}
+                    submittedBy={ticket.employeeName}
                     text={ticket.comments}
                   />
                 )}

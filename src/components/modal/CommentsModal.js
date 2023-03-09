@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, ModalTitle } from 'react-bootstrap';
 
-export default function CommentsModal({ ticketId, text }) {
+export default function CommentsModal({ ticketId, submittedBy, text }) {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -10,10 +10,10 @@ export default function CommentsModal({ ticketId, text }) {
     <>
       <Button
         size="sm"
-        variant="link"
-        className="table-btn"
+        variant="outline-primary"
+        className="table-btn w-75"
         onClick={handleShow}>
-        View
+        Comments
       </Button>
 
       <Modal
@@ -21,17 +21,19 @@ export default function CommentsModal({ ticketId, text }) {
         size="lg"
         show={show}
         onHide={handleClose}
+        className="bg-primary bg-opacity-25"
         aria-labelledby="ticket-comments">
         <Modal.Header
-          className="bg-secondary text-white border-bottom border-dark"
+          className="bg-primary bg-opacity-75 text-white border-bottom border-dark"
           closeButton>
-          <ModalTitle>
-            <small className="text-center lead fst-italic">Ticket #{ticketId}</small>
+          <ModalTitle className="text-center lead fst-italic">
+            Comments from {submittedBy}
           </ModalTitle>
         </Modal.Header>
-        <Modal.Body>
-          <p className="px-3 mx-auto">Comments: {text}</p>
-        </Modal.Body>
+        <Modal.Body className="bg-light px-3">{text}</Modal.Body>
+        <Modal.Footer className="bg-light fst-italic">
+          <sub>Ticket #{ticketId}</sub>
+        </Modal.Footer>
       </Modal>
     </>
   );
