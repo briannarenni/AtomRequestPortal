@@ -3,7 +3,7 @@ import Select from 'react-select';
 
 export default function SortDrop({ name, options, handleSortChange }) {
   const defaultPlaceholder =
-    name === 'sortTickets' ? 'Most Recent (default)' : 'Department (default)';
+    name === 'sortTickets' ? 'Default (Most Recent)' : 'Default (Department)';
 
   return (
     <Select

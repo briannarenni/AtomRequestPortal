@@ -3,16 +3,16 @@ import Select from 'react-select';
 
 export default function FilterDrop({ handleFilterChange }) {
   const options = [
-    { value: 'none', label: 'None selected' },
-    { value: 'Pending', label: 'Status: Pending' },
-    { value: 'Approved', label: 'Status: Approved' },
-    { value: 'Denied', label: 'Status: Denied' }
+    { value: 'none', label: 'Show All' },
+    { value: 'Pending', label: 'Pending' },
+    { value: 'Approved', label: 'Approved' },
+    { value: 'Denied', label: 'Denied' }
   ];
 
   return (
     <Select
       options={options}
-      placeholder="None Selected"
+      placeholder="Show All"
       onChange={(selectedOption) => handleFilterChange(selectedOption.value)}
     />
   );
