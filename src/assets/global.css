@@ -43,6 +43,18 @@ body {
 
 }
 
+.form-control:focus {
+  box-shadow: 0 0 0 .15rem rgba(13, 110, 253, .25);
+}
+
+.form-control.is-invalid:focus {
+  box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25);
+}
+
+.form-control::placeholder {
+  font-size: .9em !important;
+}
+
 .btn-primary {
   background-color: var(--blue);
   border-color: var(--blue);
@@ -70,16 +82,4 @@ body {
   color: var(--light) !important;
   background-color: var(--blue-new) !important;
   border-color: var(--blue--text) !important;
-}
-
-.form-control:focus {
-  box-shadow: 0 0 0 .15rem rgba(13, 110, 253, .25);
-}
-
-.form-control.is-invalid:focus {
-  box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25);
-}
-
-.form-control::placeholder {
-  font-size: .9em !important;
 }
