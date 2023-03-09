@@ -80,7 +80,7 @@ export function useTicketAPI() {
         status
       });
       setIsLoading(false);
-      return response;
+      return response.data;
     } catch (error) {
       setIsLoading(false);
       return error.response ? error.response.data : 'Internal API Error';

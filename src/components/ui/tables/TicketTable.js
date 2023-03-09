@@ -33,6 +33,20 @@ export default function TicketTable({ ticketsArr }) {
     setTickets(filtered);
   }, [filterValue, sortValue]);
 
+  const updateTicketStatus = (ticketId, newStatus) => {
+    setTickets((prevTickets) => {
+      return prevTickets.map((ticket) => {
+        if (ticket.ticketId === ticketId) {
+          return {
+            ...ticket,
+            status: newStatus
+          };
+        }
+        return ticket;
+      });
+    });
+  };
+
   const handleSortChange = (value) => {
     setSortValue(value);
   };
@@ -40,6 +54,7 @@ export default function TicketTable({ ticketsArr }) {
   const handleFilterChange = (value) => {
     setFilterValue(value);
   };
+
 
   return (
     <>
@@ -97,7 +112,10 @@ export default function TicketTable({ ticketsArr }) {
               </td>
               {onProcessPending ? (
                 <td>
-                  <ProcessBtns ticketId={ticket.ticketId} />
+                  <ProcessBtns
+                    ticketId={ticket.ticketId}
+                    updateStatus={updateTicketStatus}
+                  />
                 </td>
               ) : null}
             </tr>
