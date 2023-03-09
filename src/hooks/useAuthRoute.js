@@ -115,14 +115,15 @@ export function useAuthRoute() {
         </AuthRoute>
       )
     },
-    {
-      path: '/dashboard/manage-users',
-      element: (
-        <AuthRoute>
-          <ManageUsers isProtected />
-        </AuthRoute>
-      )
-    },
+    // ! disabled
+    // {
+    //   path: '/dashboard/manage-users',
+    //   element: (
+    //     <AuthRoute>
+    //       <ManageUsers isProtected />
+    //     </AuthRoute>
+    //   )
+    // },
     {
       path: '*',
       element: <NotFound />

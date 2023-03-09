@@ -42,11 +42,12 @@ export function useDashMenu(currUser, totalPending) {
       btnText: 'Submission Log',
       link: 'submissions'
     },
-    {
-      title: 'Manage all registered users',
-      btnText: 'Manage Users',
-      link: 'manage-users'
-    },
+    // ! disabled
+    // {
+    //   title: 'Manage all registered users',
+    //   btnText: 'Manage Users',
+    //   link: 'manage-users'
+    // },
     {
       title: 'Update your account password',
       btnText: 'Update Password',
