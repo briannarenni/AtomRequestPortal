@@ -2,11 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Table, Form } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
+import clsx from 'clsx';
 
 import { useSortFilter } from '../../../hooks';
 import { CommentsModal } from '../../modal';
 import { SortDrop, FilterDrop } from '../../ui/tables';
 import { ProcessBtns } from '../../btn';
+
+const getStatusClass = (status) => {
+  return clsx({
+    'table-light': status === 'Pending',
+    'table-success': status === 'Approved',
+    'table-danger': status === 'Denied'
+  });
+};
 
 export default function TicketTable({ ticketsArr }) {
   const { pathname } = useLocation();
@@ -55,7 +64,6 @@ export default function TicketTable({ ticketsArr }) {
     setFilterValue(value);
   };
 
-
   return (
     <>
       <div className="d-flex justify-content-between gap-2">
@@ -78,7 +86,6 @@ export default function TicketTable({ ticketsArr }) {
       <Table
         className="text-center align-middle mt-3"
         responsive
-        striped
         bordered
         hover>
         <thead>
@@ -95,7 +102,9 @@ export default function TicketTable({ ticketsArr }) {
         </thead>
         <tbody>
           {tickets.map((ticket) => (
-            <tr key={ticket.ticketId}>
+            <tr
+              key={ticket.ticketId}
+              className={getStatusClass(ticket.status)}>
               <td>{ticket.ticketId}</td>
               <td>{ticket.submittedOn}</td>
               <td>{ticket.status}</td>
