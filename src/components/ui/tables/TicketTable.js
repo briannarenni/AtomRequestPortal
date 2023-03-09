@@ -3,17 +3,21 @@ import { useLocation } from 'react-router-dom';
 import { Table, Form } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
 
+import { useSortFilter } from '../../../hooks';
 import { CommentsModal } from '../../modal';
 import { SortDrop, FilterDrop } from '../../ui/tables';
 import { ProcessBtns } from '../../btn';
 
 export default function TicketTable({ ticketsArr }) {
   const { pathname } = useLocation();
+  const { filterBy } = useSortFilter();
   const onPendingPage = pathname.includes('view-pending');
   const onProcessPending = pathname.includes('view-pending/process');
+
   const [tickets, setTickets] = useState([]);
   const [filterValue, setFilterValue] = useState('none');
   const [sortValue, setSortValue] = useState('submittedOn');
+
   const options = [
     { value: 'submittedOn', label: 'Most Recent' },
     { value: 'employeeName', label: 'Employee Name' },
@@ -25,32 +29,9 @@ export default function TicketTable({ ticketsArr }) {
   }, [ticketsArr]);
 
   useEffect(() => {
-    filterBy(filterValue, sortValue);
+    const filtered = filterBy(ticketsArr, filterValue, sortValue);
+    setTickets(filtered);
   }, [filterValue, sortValue]);
-
-  const filterBy = (filter, sort) => {
-    let filteredTickets = [];
-    if (filter === 'none') {
-      filteredTickets = ticketsArr.slice();
-    } else {
-      filteredTickets = ticketsArr.filter((ticket) => ticket.status === filter);
-    }
-    sortTickets(filteredTickets, sort);
-  };
-
-  const sortTickets = (ticketArray, sortValue) => {
-    // eslint-disable-next-line
-    ticketArray.sort((a, b) => {
-      if (sortValue === 'submittedOn') {
-        return new Date(b.submittedOn) - new Date(a.submittedOn);
-      } else if (sortValue === 'employeeName') {
-        return a.employeeName.localeCompare(b.employeeName);
-      } else if (sortValue === 'status') {
-        return a.status.localeCompare(b.status);
-      }
-    });
-    setTickets(ticketArray);
-  };
 
   const handleSortChange = (value) => {
     setSortValue(value);
@@ -116,9 +97,7 @@ export default function TicketTable({ ticketsArr }) {
               </td>
               {onProcessPending ? (
                 <td>
-                  <ProcessBtns
-                    ticketId={ticket.ticketId}
-                  />
+                  <ProcessBtns ticketId={ticket.ticketId} />
                 </td>
               ) : null}
             </tr>

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form } from 'react-bootstrap';
 
-import { SortDrop, UserSortDrop } from '../../ui/tables';
+import { useSortFilter } from '../../../hooks';
+import { SortDrop } from '../../ui/tables';
 
 export default function EmployeeTable({ employees }) {
+  const { sortUsers } = useSortFilter();
+
   const [empArr, setEmpArr] = useState([]);
   const [sortValue, setSortValue] = useState('dept');
-    const options = [
-      { value: 'dept', label: 'Department' },
-      { value: 'fullName', label: 'Employee Name' }
-    ];
 
+  const options = [
+    { value: 'dept', label: 'Department' },
+    { value: 'fullName', label: 'Employee Name' }
+  ];
 
   useEffect(() => {
     setEmpArr(employees.slice());
@@ -19,19 +22,6 @@ export default function EmployeeTable({ employees }) {
   useEffect(() => {
     console.log('emp arr changed');
   }, [empArr]);
-
-  const sortUsers = (usersArr, sortValue) => {
-    let sortedUsers = usersArr.slice();
-    // eslint-disable-next-line
-    sortedUsers.sort((a, b) => {
-      if (sortValue === 'dept') {
-        return a.dept.localeCompare(b.dept);
-      } else if (sortValue === 'fullName') {
-        return a.fullName.localeCompare(b.fullName);
-      }
-    });
-    return sortedUsers;
-  };
 
   const handleSortChange = (value) => {
     setSortValue(value);
@@ -45,7 +35,7 @@ export default function EmployeeTable({ employees }) {
         <div className="d-flex flex-column">
           <Form.Label className="fw-light">Sort Users</Form.Label>
           <SortDrop
-          name="sortUsers"
+            name="sortUsers"
             options={options}
             handleSortChange={handleSortChange}
           />
