@@ -7,8 +7,8 @@ export default function EmployeeTable({ employees }) {
   const [empArr, setEmpArr] = useState([]);
   const [sortValue, setSortValue] = useState('dept');
     const options = [
-      { value: 'dept', label: 'Sort: Department' },
-      { value: 'fullName', label: 'Sort: Full Name' }
+      { value: 'dept', label: 'Department' },
+      { value: 'fullName', label: 'Employee Name' }
     ];
 
 

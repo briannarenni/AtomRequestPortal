@@ -72,15 +72,15 @@ export function useTicketAPI() {
     }
   };
 
-  const updateTicket = async (ticketId, newStatus) => {
+  const updateTicket = async (ticketId, status) => {
     try {
       setIsLoading(true);
-      const response = await axios.post(Tickets.updateTicket(ticketId), {
+      const response = await axios.patch(Tickets.updateTicket(ticketId), {
         ticketId,
-        newStatus
+        status
       });
       setIsLoading(false);
-      return response.data;
+      return response;
     } catch (error) {
       setIsLoading(false);
       return error.response ? error.response.data : 'Internal API Error';

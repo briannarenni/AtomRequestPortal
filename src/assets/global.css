@@ -26,15 +26,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.btn {
-  padding: 10px 20px;
-}
-
 .logoName {
   font-family: 'Chakra Petch', sans-serif;
   font-size: 1.1em;
   margin-left: 10px;
   letter-spacing: .6px;
+}
+
+.btn {
+  padding: 10px 20px;
+}
+
+.table-btn {
+  width: 100%;
+  padding: 5px 15px;
+
 }
 
 .btn-primary {

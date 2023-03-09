@@ -7,3 +7,5 @@ export { default as NoteIcon } from './NoteIcon';
 export { default as SigninIcon } from './SigninIcon';
 export { default as RegisterIcon } from './RegisterIcon';
 export { default as AlertIcon } from './AlertIcon';
+export { default as XIcon } from './XIcon';
+export { default as CheckIcon } from './CheckIcon';

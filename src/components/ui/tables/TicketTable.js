@@ -5,10 +5,12 @@ import { isEmpty } from 'lodash';
 
 import { CommentsModal } from '../../modal';
 import { SortDrop, FilterDrop } from '../../ui/tables';
+import { ProcessBtns } from '../../btn';
 
 export default function TicketTable({ ticketsArr }) {
   const { pathname } = useLocation();
-  const isPendingPage = pathname.includes('pending');
+  const onPendingPage = pathname.includes('view-pending');
+  const onProcessPending = pathname.includes('view-pending/process');
   const [tickets, setTickets] = useState([]);
   const [filterValue, setFilterValue] = useState('none');
   const [sortValue, setSortValue] = useState('submittedOn');
@@ -23,7 +25,6 @@ export default function TicketTable({ ticketsArr }) {
   }, [ticketsArr]);
 
   useEffect(() => {
-    console.log(filterValue, sortValue);
     filterBy(filterValue, sortValue);
   }, [filterValue, sortValue]);
 
@@ -61,38 +62,39 @@ export default function TicketTable({ ticketsArr }) {
 
   return (
     <>
-      <div className="d-flex justify-content-end gap-2">
-        {isPendingPage ? null : (
-          <div className="d-flex flex-column">
-            <Form.Label className="fw-light">Filter By Status</Form.Label>
-            <FilterDrop handleFilterChange={handleFilterChange} />
-          </div>
-        )}
-        <div className="d-flex flex-column">
-          <Form.Label className="fw-light">Sort Requests</Form.Label>
+      <div className="d-flex justify-content-between gap-2">
+        <div className="d-flex flex-column mx-1">
+          <Form.Label className="fw-light small mb-1">Sort Requests</Form.Label>
           <SortDrop
             name="sortTickets"
             options={options}
             handleSortChange={handleSortChange}
           />
         </div>
+        {onPendingPage ? null : (
+          <div className="d-flex flex-column mx-1">
+            <Form.Label className="fw-light small mb-1">Filter Status</Form.Label>
+            <FilterDrop handleFilterChange={handleFilterChange} />
+          </div>
+        )}
       </div>
 
       <Table
-        className="text-center mt-4"
+        className="text-center align-middle mt-3"
         responsive
         striped
         bordered
         hover>
         <thead>
           <tr>
-            <th>Ticket ID</th>
-            <th>Submission Date</th>
-            <th>Submitted By</th>
-            <th>Ticket Status</th>
-            <th>Requested Amount</th>
+            <th>Request ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Employee</th>
+            <th>Amount Requested</th>
             <th>Expense Type</th>
             <th>Comments</th>
+            {onProcessPending ? <th></th> : null}
           </tr>
         </thead>
         <tbody>
@@ -100,8 +102,8 @@ export default function TicketTable({ ticketsArr }) {
             <tr key={ticket.ticketId}>
               <td>{ticket.ticketId}</td>
               <td>{ticket.submittedOn}</td>
-              <td>{ticket.employeeName}</td>
               <td>{ticket.status}</td>
+              <td>{ticket.employeeName}</td>
               <td>{ticket.amount}</td>
               <td>{ticket.category}</td>
               <td>
@@ -112,6 +114,13 @@ export default function TicketTable({ ticketsArr }) {
                   />
                 )}
               </td>
+              {onProcessPending ? (
+                <td>
+                  <ProcessBtns
+                    ticketId={ticket.ticketId}
+                  />
+                </td>
+              ) : null}
             </tr>
           ))}
         </tbody>

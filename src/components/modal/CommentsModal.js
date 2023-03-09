@@ -11,7 +11,7 @@ export default function CommentsModal({ ticketId, text }) {
       <Button
         size="sm"
         variant="link"
-        className="py-1"
+        className="table-btn"
         onClick={handleShow}>
         View
       </Button>
