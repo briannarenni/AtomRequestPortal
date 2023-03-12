@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/AtomRequestPortal/static/css/main.d06bb273.css",
+    "main.js": "/AtomRequestPortal/static/js/main.54b090db.js",
+    "static/media/logo.svg": "/AtomRequestPortal/static/media/logo.ec8b0404c5b7ce1ffcf3d8381301ed80.svg",
+    "index.html": "/AtomRequestPortal/index.html",
+    "static/media/hide-eye.svg": "/AtomRequestPortal/static/media/hide-eye.9b252ac3c64df27e39dcfd7066115c87.svg",
+    "static/media/show-eye.svg": "/AtomRequestPortal/static/media/show-eye.b1238fb7eda76106bcfacd66eeefcaa7.svg",
+    "main.d06bb273.css.map": "/AtomRequestPortal/static/css/main.d06bb273.css.map",
+    "main.54b090db.js.map": "/AtomRequestPortal/static/js/main.54b090db.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d06bb273.css",
+    "static/js/main.54b090db.js"
+  ]
+}
