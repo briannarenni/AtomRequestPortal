@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, FloatingLabel } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 
-export default function UsernameControl(props) {
+export function Username(props) {
   const { register, name, errors, formState } = props;
 
   const hasError = errors && errors[name];
@@ -14,17 +14,21 @@ export default function UsernameControl(props) {
       <Form.Group
         controlId={name}
         className="my-2">
-        <Form.Label className="fw-light">Username</Form.Label>
-        <Form.Control
-          type="text"
-          name={name}
-          placeholder="Enter username"
-          {...register('username')}
-          isInvalid={hasError}
-          isValid={isValid}
-          {...props}
-        />
-        <div className="small fst-italic my-1">
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Username">
+          <Form.Control
+            type="text"
+            name={name}
+            placeholder=""
+            {...register('username')}
+            isInvalid={hasError}
+            isValid={isValid}
+            {...props}
+          />
+        </FloatingLabel>
+
+        <div className="small text-danger fst-italic m-1">
           <ErrorMessage
             errors={errors}
             name={name}

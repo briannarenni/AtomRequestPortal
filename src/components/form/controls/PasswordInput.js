@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Form, InputGroup, Button, Image } from 'react-bootstrap';
+import { Form, FloatingLabel, InputGroup, Button, Image } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 import clsx from 'clsx';
 
 import showEye from '../../../assets/icons/show-eye.svg';
 import hideEye from '../../../assets/icons/hide-eye.svg';
 
-export default function PasswordControl(props) {
-  const { register, name, label, errors, formState} = props;
+export function PasswordInput(props) {
+  const { register, name, label, errors, formState } = props;
   const hasError = errors && errors[name];
   const isDirty = formState.dirtyFields.hasOwnProperty(name);
   const isValid = !hasError && isDirty;
@@ -18,23 +18,27 @@ export default function PasswordControl(props) {
       <Form.Group
         controlId="password"
         className="my-2">
-        <Form.Label className="fw-light">{label}</Form.Label>
         <InputGroup>
-          <Form.Control
-            type={showPassword ? 'text' : 'password'}
-            name={name}
-            placeholder="Enter password"
-            {...register('password')}
-            isInvalid={hasError}
-            isValid={isValid}
-            {...props}
-            className={clsx({
-              'rounded-start': true
-            })}
-          />
+          <FloatingLabel
+            controlId="floatingPassword"
+            label={label}>
+            <Form.Control
+              type={showPassword ? 'text' : 'password'}
+              name={name}
+              placeholder="Enter password"
+              {...register('password')}
+              isInvalid={hasError}
+              isValid={isValid}
+              {...props}
+              className={clsx({
+                'rounded-start': true
+              })}
+            />
+          </FloatingLabel>
 
           <Button
             variant="none"
+            size="sm"
             className={clsx('bg-light border-secondary', {
               'border-danger': hasError,
               'rounded-end': true
@@ -49,7 +53,7 @@ export default function PasswordControl(props) {
           </Button>
         </InputGroup>
 
-        <div className=" small fst-italic my-1">
+        <div className="small text-danger fst-italic m-1">
           <ErrorMessage
             errors={errors}
             name={name}

@@ -1,7 +1,7 @@
-export { default as Username } from './UsernameControl';
-export { default as Password } from './PasswordControl';
-export { default as ConfirmPassword } from './ConfirmPasswordControl';
+export { Username } from './Username';
+export { PasswordInput } from './PasswordInput';
+export { ConfirmPassword } from './ConfirmPassword';
 export { FirstName, LastName } from './NameControls';
-export { default as DeptSelect } from './DeptSelect';
-export { default as SubmitBtn } from './FormSubmitBtn';
-export { default as ReadOnlyPassword } from './ReadOnlyPassword';
+export { DeptSelect } from './DeptSelect';
+export { SubmitBtn } from './SubmitBtn';
+export { ReadOnlyPassword } from './ReadOnlyPassword';

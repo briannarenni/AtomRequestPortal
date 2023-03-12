@@ -21,6 +21,7 @@ body {
   box-sizing: border-box;
   margin: 2px;
   padding: 5px 15px;
+  font-size: .9rem;
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

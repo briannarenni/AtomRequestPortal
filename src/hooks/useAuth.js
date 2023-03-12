@@ -38,7 +38,7 @@ export function AuthProvider(props) {
     localStorage.removeItem('currUser');
     dispatch({ type: 'SET_IS_LOGGED_IN', payload: false });
     dispatch({ type: 'SET_CURR_USER', payload: {} });
-    navigate('/');
+    navigate('/AtomRequestPortal');
   };
 
   return (

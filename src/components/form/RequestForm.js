@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
 import { isEmpty } from 'lodash';
 import { format } from 'date-fns';
 
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useTicketAPI } from '../../hooks';
-import { ReadOnlyControls, CategorySelect, CommentsControl } from './request-controls';
+import * as Control from './request-controls';
+import { CategorySelect } from './dropdowns';
 import { SubmitBtn } from './controls';
 import { Ticket } from '../../_data';
 
@@ -37,6 +37,7 @@ export default function RequestForm({ setSubmittedTicket }) {
   });
 
   const handleCategorySelect = (selectedOption) => {
+    console.log(selectedOption.value);
     setSelectedCategory(selectedOption.value);
   };
 
@@ -106,8 +107,14 @@ export default function RequestForm({ setSubmittedTicket }) {
         formNoValidate
         className={styles.formContainer}
         onSubmit={handleSubmit(onSubmit)}>
-        <ReadOnlyControls register={register} />
+        <Control.ReadOnlyControls register={register} />
 
+        <Control.AmountControl
+          name="amount"
+          errors={errors}
+          watch={watch}
+          register={register}
+        />
         <CategorySelect
           name="category"
           value={selectedCategory}
@@ -116,41 +123,7 @@ export default function RequestForm({ setSubmittedTicket }) {
           register={register}
         />
 
-        <Form.Group controlId="amount">
-          <Form.Label className="fw-light">
-            <span>Expense Amount</span>
-            <span className={styles.formNote}> (Format: $0.00)</span>
-          </Form.Label>
-          <InputGroup>
-            <InputGroup.Text>$</InputGroup.Text>
-            <Form.Control
-              name="amount"
-              step="0.01"
-              isInvalid={errors && errors['amount']}
-              isValid={!errors.amount && watch('amount')}
-              {...register('amount', {
-                required: '❌ Amount is required',
-                min: {
-                  value: 0.01,
-                  message: '❌ Amount must be greater than 0.00'
-                },
-                pattern: {
-                  value: /^\d+(\.\d{1,2})?$/,
-                  message: '❌ Incorrect format'
-                }
-              })}
-            />
-          </InputGroup>
-        </Form.Group>
-
-        <div className="small fst-italic my-1">
-          <ErrorMessage
-            errors={errors}
-            name="amount"
-          />
-        </div>
-
-        <CommentsControl register={register} />
+        <Control.CommentsControl register={register} />
 
         <SubmitBtn
           btnTxt="Submit Request"

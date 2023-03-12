@@ -21,7 +21,8 @@ export default function UpdatePassword() {
 
   return (
     <>
-      <header>
+      <header className="mb-3">
+        {' '}
         <PageHeader title="Update User Password" />
       </header>
 

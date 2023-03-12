@@ -14,20 +14,20 @@ export default function Landing() {
         id="landing-container"
         className="p-5 d-flex justify-content-center align-content-center">
         <div className="mx-auto">
-          <Link to="/login">
+          <Link to={`/AtomRequestPortal/login`}>
             <Button
               size="lg"
               className="landing-btn m-3 p-4">
               <SigninIcon />
-              Login Existing Account
+              Login - Existing Accounts
             </Button>
           </Link>
-          <Link to="/register">
+          <Link to={`/AtomRequestPortal/register`}>
             <Button
               size="lg"
               className="landing-btn m-3 p-4">
               <RegisterIcon />
-              Register Employee Account
+              Register - New Employees
             </Button>
           </Link>
         </div>

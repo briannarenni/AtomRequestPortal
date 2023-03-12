@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
+import { Divider } from 'primereact/divider';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { isEmpty, startCase } from 'lodash';
@@ -8,6 +9,7 @@ import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
 import { registerSchema, registerDefaults } from '../../_data/schemas';
 import * as Control from '../../components/form/controls';
+import { DeptSelect } from './dropdowns';
 import { User } from '../../_data';
 
 export default function RegisterForm() {
@@ -87,6 +89,12 @@ export default function RegisterForm() {
       className={styles.formContainer}
       onSubmit={handleSubmit(onSubmit)}>
       <div>
+        <Divider
+          align="left"
+          className="mb-0">
+          <span className="fw-bold small">Enter Employee Details</span>
+        </Divider>
+
         <Row>
           <Col>
             <Control.FirstName
@@ -96,6 +104,7 @@ export default function RegisterForm() {
               formState={{ dirtyFields }}
             />
           </Col>
+
           <Col>
             <Control.LastName
               name="lastName"
@@ -107,13 +116,19 @@ export default function RegisterForm() {
         </Row>
       </div>
 
-      <Control.DeptSelect
+      <DeptSelect
         name="dept"
         value={selectedDept}
         onChange={handleDeptSelect}
         errors={errors}
         register={register}
       />
+
+      <Divider
+        align="left"
+        className="mb-0">
+        <span className="fw-bold small">Create Account Info</span>
+      </Divider>
 
       <Control.Username
         name="username"
@@ -126,9 +141,9 @@ export default function RegisterForm() {
 
       <Row>
         <Col>
-          <Control.Password
+          <Control.PasswordInput
             name="password"
-            label={'Enter New Password'}
+            label={'New Password'}
             errors={errors}
             register={register}
             formState={{ dirtyFields }}

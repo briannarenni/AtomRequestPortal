@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
 import { updatePassSchema, updatePassDefaults } from '../../_data/schemas';
-import { ReadOnlyPassword, Password, ConfirmPassword, SubmitBtn } from '../form/controls';
+import { ReadOnlyPassword, PasswordInput, ConfirmPassword, SubmitBtn } from '../form/controls';
 
 export default function PwUpdateForm({ setSuccess, setError }) {
   const [currPassword, setCurrPassword] = useState('');
@@ -58,9 +58,9 @@ export default function PwUpdateForm({ setSuccess, setError }) {
         currPass={currPassword}
       />
 
-      <Password
+      <PasswordInput
         name="password"
-        label={'Enter New Password'}
+        label={'New Password'}
         errors={errors}
         register={register}
         formState={{ dirtyFields }}

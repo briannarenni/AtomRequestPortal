@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, ModalTitle } from 'react-bootstrap';
 
+import { useAuthRoute } from '../../hooks';
+
 export default function SuccessModal({ ticketObj }) {
   const navigate = useNavigate();
+  const { baseURL } = useAuthRoute();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -48,7 +51,7 @@ export default function SuccessModal({ ticketObj }) {
             className="w-50 mx-auto"
             onClick={() => {
               handleClose();
-              navigate('/dashboard');
+              navigate(`${baseURL}/dashboard`);
             }}>
             Done
           </Button>

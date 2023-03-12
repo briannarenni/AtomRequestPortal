@@ -1,4 +1,4 @@
-const apiURL = 'https://atomrequestapi.azurewebsites.net/';
+const apiURL = 'https://atomrequestapi.azurewebsites.net';
 
 export const Users = {
   getUsers: `${apiURL}/users`,

@@ -1,3 +1,4 @@
-export { default as CategorySelect } from './CategorySelect';
-export { default as ReadOnlyControls } from './ReadOnlyControls';
-export { default as CommentsControl } from './CommentsControl';
+export { CategorySelect } from './CategorySelect';
+export { ReadOnlyControls } from './ReadOnlyControls';
+export { CommentsControl } from './CommentsControl';
+export { AmountControl } from './AmountControl';

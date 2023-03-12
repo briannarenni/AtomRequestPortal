@@ -8,7 +8,7 @@ export default function BackBtn() {
   const location = useLocation();
   const path = location.pathname;
 
-  if (path === '/' || path === '/dashboard') {
+  if (path === '/AtomRequestPortal/' || path === '/AtomRequestPortal/dashboard') {
     return null;
   }
 

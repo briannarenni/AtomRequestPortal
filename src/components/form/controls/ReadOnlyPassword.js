@@ -4,7 +4,7 @@ import { Form, InputGroup, Button, Image } from 'react-bootstrap';
 import showEye from '../../../assets/icons/show-eye.svg';
 import hideEye from '../../../assets/icons/hide-eye.svg';
 
-export default function ReadOnlyPassword(props) {
+export function ReadOnlyPassword(props) {
   const { name, currPass } = props;
   const [showPassword, setShowPassword] = useState(false);
 

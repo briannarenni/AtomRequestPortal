@@ -12,9 +12,7 @@ export default function SubmitRequest() {
     <div className="container-xs">
       <header className="mx-auto">
         <PageHeader title={'Submit New Request'} />
-        <BannerNote
-          note={'Please be sure to double check all given info before clicking Submit Request'}
-        />
+        <BannerNote note={'Please be sure to double check all fields before submitting'} />
       </header>
       <RequestForm setSubmittedTicket={setSubmittedTicket} />
       <SuccessModal ticketObj={submittedTicket} />

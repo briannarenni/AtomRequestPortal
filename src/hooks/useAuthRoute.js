@@ -6,19 +6,20 @@ import { AuthProvider } from './useAuth';
 import { Landing, FAQ, Login, Register, NotFound } from '../pages';
 import { Dashboard, UpdatePass, Submissions } from '../pages/user-pages';
 import { UserPending, SubmitRequest } from '../pages/employee-pages';
-import { ProcessPending, EmployeeRoster, ManageUsers } from '../pages/admin-pages';
+import { ProcessPending, EmployeeRoster } from '../pages/admin-pages';
 
 export function useAuthRoute() {
   const navigate = useNavigate();
   const { currUser } = AuthProvider;
+  const baseURL = '/AtomRequestPortal';
 
   function AuthRoute({ isProtected = false, children }) {
     useEffect(() => {
       if (isProtected && isEmpty(currUser)) {
-        navigate('/');
+        navigate(`${baseURL}`);
         return;
       } else if (!isProtected && !isEmpty(currUser)) {
-        navigate('/dashboard');
+        navigate(`${baseURL}/dashboard`);
         return;
       }
     }, [currUser, navigate, isProtected]);
@@ -28,15 +29,15 @@ export function useAuthRoute() {
 
   const getRoutes = () => [
     {
-      path: '/',
+      path: `${baseURL}`,
       element: <Landing />
     },
     {
-      path: '/faq',
+      path: `${baseURL}/faq`,
       element: <FAQ />
     },
     {
-      path: '/login',
+      path: `${baseURL}/login`,
       element: (
         <AuthRoute>
           <Login />
@@ -44,7 +45,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/register',
+      path: `${baseURL}/register`,
       element: (
         <AuthRoute>
           <Register />
@@ -52,7 +53,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard',
+      path: `${baseURL}/dashboard`,
       element: (
         <AuthRoute>
           <Dashboard isProtected />
@@ -60,7 +61,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/update-password',
+      path: `${baseURL}/dashboard/update-password`,
       element: (
         <AuthRoute>
           <UpdatePass isProtected />
@@ -68,7 +69,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/submit-request',
+      path: `${baseURL}/dashboard/submit-request`,
       element: (
         <AuthRoute>
           <SubmitRequest isProtected />
@@ -76,7 +77,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/view-pending/:userId',
+      path: `${baseURL}/dashboard/view-pending/:userId`,
       element: (
         <AuthRoute>
           <UserPending isProtected />
@@ -84,7 +85,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/submissions/:userId',
+      path: `${baseURL}/dashboard/submissions/:userId`,
       element: (
         <AuthRoute>
           <Submissions isProtected />
@@ -92,7 +93,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/submissions',
+      path: `${baseURL}/dashboard/submissions`,
       element: (
         <AuthRoute>
           <Submissions isProtected />
@@ -100,7 +101,7 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/employee-roster',
+      path: `${baseURL}/dashboard/employee-roster`,
       element: (
         <AuthRoute>
           <EmployeeRoster isProtected />
@@ -108,22 +109,13 @@ export function useAuthRoute() {
       )
     },
     {
-      path: '/dashboard/view-pending/process',
+      path: `${baseURL}/dashboard/view-pending/process`,
       element: (
         <AuthRoute>
           <ProcessPending isProtected />
         </AuthRoute>
       )
     },
-    // ! disabled
-    // {
-    //   path: '/dashboard/manage-users',
-    //   element: (
-    //     <AuthRoute>
-    //       <ManageUsers isProtected />
-    //     </AuthRoute>
-    //   )
-    // },
     {
       path: '*',
       element: <NotFound />
@@ -132,6 +124,7 @@ export function useAuthRoute() {
 
   return {
     AuthRoute,
+    baseURL,
     getRoutes
   };
 }

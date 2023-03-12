@@ -1,13 +1,15 @@
 import React from 'react';
 import { Navbar, Nav, Image } from 'react-bootstrap';
 
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth, useAuthRoute } from '../../hooks';
+
 import { FAQBtn, LoginBtn, LogoutBtn } from '../btn';
 import { ProfileModal } from '../modal';
 import logo from '../../assets/logo.svg';
 
 export default function AppNav() {
   const { isLoggedIn, isManager, logout } = useAuth();
+  const { baseURL } = useAuthRoute();
 
   const handleLogout = async (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ export default function AppNav() {
       expand="md"
       className="d-flex justify-content-between mx-1 mb-1 border-bottom border-bottom-secondary">
       <Navbar.Brand
-        href="/dashboard"
+        href={isLoggedIn ? ` ${baseURL}/dashboard` : `${baseURL}`}
         className="fst-italic fw-bold fs-6">
         <Image
           src={logo}
