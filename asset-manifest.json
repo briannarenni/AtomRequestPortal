@@ -1,16 +1,21 @@
 {
   "files": {
-    "main.css": "/AtomRequestPortal/static/css/main.d06bb273.css",
-    "main.js": "/AtomRequestPortal/static/js/main.b8785bd0.js",
+    "main.css": "/AtomRequestPortal/static/css/main.3ba1ef6e.css",
+    "main.js": "/AtomRequestPortal/static/js/main.246979fc.js",
+    "static/media/primeicons.svg": "/AtomRequestPortal/static/media/primeicons.e1441b135b3ca9ad643c.svg",
+    "static/media/primeicons.eot": "/AtomRequestPortal/static/media/primeicons.d44157bdfa026dc877af.eot",
+    "static/media/primeicons.woff": "/AtomRequestPortal/static/media/primeicons.10d3152104f2208ac82a.woff",
+    "static/media/primeicons.ttf": "/AtomRequestPortal/static/media/primeicons.ea5358601d0a3fd6670b.ttf",
+    "static/media/primeicons.woff2": "/AtomRequestPortal/static/media/primeicons.78172950b335ccdb94e2.woff2",
     "static/media/logo.svg": "/AtomRequestPortal/static/media/logo.ec8b0404c5b7ce1ffcf3d8381301ed80.svg",
     "index.html": "/AtomRequestPortal/index.html",
     "static/media/hide-eye.svg": "/AtomRequestPortal/static/media/hide-eye.9b252ac3c64df27e39dcfd7066115c87.svg",
     "static/media/show-eye.svg": "/AtomRequestPortal/static/media/show-eye.b1238fb7eda76106bcfacd66eeefcaa7.svg",
-    "main.d06bb273.css.map": "/AtomRequestPortal/static/css/main.d06bb273.css.map",
-    "main.b8785bd0.js.map": "/AtomRequestPortal/static/js/main.b8785bd0.js.map"
+    "main.3ba1ef6e.css.map": "/AtomRequestPortal/static/css/main.3ba1ef6e.css.map",
+    "main.246979fc.js.map": "/AtomRequestPortal/static/js/main.246979fc.js.map"
   },
   "entrypoints": [
-    "static/css/main.d06bb273.css",
-    "static/js/main.b8785bd0.js"
+    "static/css/main.3ba1ef6e.css",
+    "static/js/main.246979fc.js"
   ]
 }
