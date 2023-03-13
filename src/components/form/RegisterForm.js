@@ -8,8 +8,8 @@ import { isEmpty, startCase } from 'lodash';
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
 import { registerSchema, registerDefaults } from '../../_data/schemas';
-import * as Control from '../../components/form/controls';
-import { DeptSelect } from './dropdowns';
+import * as Control from '../form-control';
+import { DeptSelect } from '../form-control/dropdowns';
 import { User } from '../../_data';
 
 export default function RegisterForm() {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, FloatingLabel } from 'react-bootstrap';
 import { Divider } from 'primereact/divider';
 
-import styles from '../../../assets/_styles/Form.module.css';
+import styles from '../../assets/_styles/Form.module.css';
 
 export function CommentsControl(props) {
   const { register } = props;

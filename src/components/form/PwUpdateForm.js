@@ -6,7 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
 import { updatePassSchema, updatePassDefaults } from '../../_data/schemas';
-import { ReadOnlyPassword, PasswordInput, ConfirmPassword, SubmitBtn } from '../form/controls';
+import { ReadOnlyPassword } from '../form-control/readonlys';
+import { PasswordInput, ConfirmPassword, SubmitBtn } from '../form-control';
 
 export default function PwUpdateForm({ setSuccess, setError }) {
   const [currPassword, setCurrPassword] = useState('');

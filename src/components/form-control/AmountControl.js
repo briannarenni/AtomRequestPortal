@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { ErrorMessage } from '@hookform/error-message';
 
-import styles from '../../../assets/_styles/Form.module.css';
+import styles from '../../assets/_styles/Form.module.css';
 
 export function AmountControl(props) {
   const { register, name, errors, watch } = props;

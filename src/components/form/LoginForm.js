@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useUserAPI } from '../../hooks';
 import { loginSchema, loginDefaults } from '../../_data/schemas';
-import { Username, PasswordInput, SubmitBtn } from '../../components/form/controls';
+import { Username, PasswordInput, SubmitBtn } from '../form-control';
 import { User } from '../../_data';
 
 export default function LoginForm() {

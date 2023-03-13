@@ -6,9 +6,10 @@ import { format } from 'date-fns';
 
 import styles from '../../assets/_styles/Form.module.css';
 import { useAuth, useTicketAPI } from '../../hooks';
-import * as Control from './request-controls';
-import { CategorySelect } from './dropdowns';
-import { SubmitBtn } from './controls';
+import { ReadOnlyControls } from '../form-control/readonlys';
+import { AmountControl, CommentsControl } from '../form-control';
+import { CategorySelect } from '../form-control/dropdowns';
+import { SubmitBtn } from '../form-control';
 import { Ticket } from '../../_data';
 
 export default function RequestForm({ setSubmittedTicket }) {
@@ -107,9 +108,9 @@ export default function RequestForm({ setSubmittedTicket }) {
         formNoValidate
         className={styles.formContainer}
         onSubmit={handleSubmit(onSubmit)}>
-        <Control.ReadOnlyControls register={register} />
+        <ReadOnlyControls register={register} />
 
-        <Control.AmountControl
+        <AmountControl
           name="amount"
           errors={errors}
           watch={watch}
@@ -123,7 +124,7 @@ export default function RequestForm({ setSubmittedTicket }) {
           register={register}
         />
 
-        <Control.CommentsControl register={register} />
+        <CommentsControl register={register} />
 
         <SubmitBtn
           btnTxt="Submit Request"

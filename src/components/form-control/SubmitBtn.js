@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-import { LoadingComp } from '../../ux';
-import { CheckIcon } from '../../btn/icon';
+import { LoadingComp } from '../ux';
+import { CheckIcon } from '../btn/icon';
 
 export function SubmitBtn({ btnTxt, isLoading }) {
   return (
