@@ -4,7 +4,7 @@ import { useUserAPI } from '../../hooks';
 import { User } from '../../_data';
 import { BannerError, LoadingComp } from '../../components/ux';
 import { PageHeader } from '../../components/ui';
-import { UserTable } from '../../components/ui/tables';
+import { UserTable } from '../../components/ui/table';
 
 export default function ManageUsers() {
   const { isLoading, getUsers } = useUserAPI();

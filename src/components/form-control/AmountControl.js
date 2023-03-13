@@ -20,6 +20,7 @@ export function AmountControl(props) {
         <Form.Control
           name="amount"
           step="0.01"
+          placeholder="0.00"
           isInvalid={errors && errors['amount']}
           isValid={!errors.amount && watch('amount')}
           {...register('amount', {

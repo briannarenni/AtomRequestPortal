@@ -16,7 +16,7 @@ export class User {
 export class Ticket {
   constructor(ticketId, submittedOn, userId, employeeName, amount, category, status, comments) {
     this.ticketId = ticketId;
-    this.submittedOn = format(new Date(submittedOn), 'M-dd-yyyy');
+    this.submittedOn = format(new Date(Date.parse(submittedOn)), 'M-dd-yyyy', { timeZone: 'UTC' });
     this.userId = userId;
     this.employeeName = employeeName;
     this.amount = `$${Number(Number(amount).toFixed(2))}`;

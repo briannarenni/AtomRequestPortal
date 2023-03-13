@@ -4,7 +4,7 @@ import { useUserAPI } from '../../hooks';
 import { User } from '../../_data';
 import { BannerError, LoadingComp } from '../../components/ux';
 import { PageHeader } from '../../components/ui';
-import { EmployeeTable } from '../../components/ui/tables';
+import { EmployeeTable } from '../../components/ui/table';
 
 export default function EmployeeRoster() {
   const { isLoading, getEmployees } = useUserAPI();

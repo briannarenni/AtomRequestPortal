@@ -5,8 +5,8 @@ import { isEmpty } from 'lodash';
 import clsx from 'clsx';
 
 import { useSortFilter } from '../../../hooks';
-import { CommentsModal } from '../../modal';
-import { SortDrop, FilterDrop } from '../../ui/tables';
+import { CommentsModal } from '../../ui/modal';
+import { SortDrop, FilterDrop } from '../../ui/table';
 import { ProcessBtns } from '../../btn';
 
 const getStatusClass = (status) => {

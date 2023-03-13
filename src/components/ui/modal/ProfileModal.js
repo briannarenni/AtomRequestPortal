@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Modal, Button, ModalTitle } from 'react-bootstrap';
 import { startCase } from 'lodash';
 
-import styles from '../../assets/_styles/NavBtn.module.css';
-import { useAuth } from '../../hooks/useAuth';
-import { UserIcon } from '../btn/icon';
+import styles from '../../../assets/_styles/NavBtn.module.css';
+import { useAuth } from '../../../hooks/useAuth';
+import { UserIcon } from '../../btn/icon';
 
 export default function ProfileModal() {
   const { currUser } = useAuth();

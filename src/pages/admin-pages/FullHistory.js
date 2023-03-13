@@ -4,7 +4,7 @@ import { useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
 import { BannerError, LoadingComp } from '../../components/ux';
 import { PageHeader } from '../../components/ui';
-import { TicketTable } from '../../components/ui/tables';
+import { TicketTable } from '../../components/ui/table';
 
 export default function FullHistory() {
   const { isLoading, getAllTickets } = useTicketAPI();

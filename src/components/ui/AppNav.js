@@ -4,7 +4,7 @@ import { Navbar, Nav, Image } from 'react-bootstrap';
 import { useAuth, useAuthRoute } from '../../hooks';
 
 import { FAQBtn, LoginBtn, LogoutBtn } from '../btn';
-import { ProfileModal } from '../modal';
+import { ProfileModal } from '../ui/modal';
 import logo from '../../assets/logo.svg';
 
 export default function AppNav() {

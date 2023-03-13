@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Modal, Button, ModalTitle } from 'react-bootstrap';
 
-import { useAuthRoute } from '../../hooks';
+import { useAuthRoute } from '../../../hooks';
 
 export default function SuccessModal({ ticketObj }) {
   const navigate = useNavigate();

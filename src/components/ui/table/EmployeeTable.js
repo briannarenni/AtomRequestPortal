@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Form } from 'react-bootstrap';
 
 import { useSortFilter } from '../../../hooks';
-import { SortDrop } from '../../ui/tables';
+import { SortDrop } from '../../ui/table';
 
 export default function EmployeeTable({ employees }) {
   const { sortUsers } = useSortFilter();

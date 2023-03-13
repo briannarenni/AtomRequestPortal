@@ -4,7 +4,7 @@ import { useAuth, useTicketAPI } from '../../hooks';
 import { Ticket } from '../../_data';
 import { BannerSuccess, BannerError, LoadingComp } from '../../components/ux';
 import { PageHeader } from '../../components/ui';
-import { TicketTable } from '../../components/ui/tables';
+import { TicketTable } from '../../components/ui/table';
 
 export default function EmpHistory() {
   const { currUser } = useAuth();

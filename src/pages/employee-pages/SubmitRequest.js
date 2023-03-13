@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { PageHeader } from '../../components/ui';
 import { BannerNote } from '../../components/ux';
 import { RequestForm } from '../../components/form';
-import { SuccessModal } from '../../components/modal';
+import { SuccessModal } from '../../components/ui/modal';
 
 export default function SubmitRequest() {
   const [submittedTicket, setSubmittedTicket] = useState({});

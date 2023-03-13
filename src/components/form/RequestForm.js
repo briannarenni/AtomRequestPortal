@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
+import { Divider } from 'primereact/divider';
 import { useForm } from 'react-hook-form';
 import { isEmpty } from 'lodash';
 import { format } from 'date-fns';
@@ -20,7 +21,7 @@ export default function RequestForm({ setSubmittedTicket }) {
   const defaults = {
     userId: currUser.userId,
     employeeName: currUser.fullName,
-    amount: 0.0,
+    amount: null,
     category: '',
     comments: null
   };
@@ -108,7 +109,19 @@ export default function RequestForm({ setSubmittedTicket }) {
         formNoValidate
         className={styles.formContainer}
         onSubmit={handleSubmit(onSubmit)}>
+        <Divider
+          align="left"
+          className="my-2">
+          <span className="fw-bold small">User Details</span>
+        </Divider>
+
         <ReadOnlyControls register={register} />
+
+        <Divider
+          align="left"
+          className="my-2">
+          <span className="fw-bold small">Expense Details</span>
+        </Divider>
 
         <AmountControl
           name="amount"
@@ -116,6 +129,7 @@ export default function RequestForm({ setSubmittedTicket }) {
           watch={watch}
           register={register}
         />
+
         <CategorySelect
           name="category"
           value={selectedCategory}
